@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CI Automation - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>CI Automation with AI Agents</h2>
+
+    <p>Integrating AI agents with continuous integration workflows.</p>
+
+    <h3>Core Patterns</h3>
+
+    <h4>Pattern: Looping on CI</h4>
+    <p>Let agents iterate until tests pass, with clear halting conditions.</p>
+    <pre><code># Good halting condition
+"Keep iterating until lint and tests pass"
+
+# Bad halting condition
+"Keep iterating until it's done"</code></pre>
+
+    <h4>Pattern: Fix-CI Workflow</h4>
+    <p>When CI fails, provide structured context for the agent to fix.</p>
+    <pre><code>1. Agent receives: failed test output + relevant file paths
+2. Agent diagnoses: root cause analysis
+3. Agent proposes: fix with explanation
+4. Agent verifies: run tests locally before push
+5. Human reviews: if complex changes</code></pre>
+
+    <h4>Pattern: Review-and-Ship</h4>
+    <p>For PRs that need minor fixes before merge.</p>
+    <pre><code>1. Agent reads PR comments
+2. Agent identifies required changes
+3. Agent makes minimal fixes
+4. Agent runs verification (tests, lint)
+5. Agent updates PR summary if needed</code></pre>
+
+    <h3>Halting Conditions</h3>
+    <p>Long-running agent loops need real halting conditions:</p>
+
+    <table>
+      <thead>
+        <tr><th>Good Halting Conditions</th><th>Bad Halting Conditions</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Lint/tests pass</td><td>"Until it's done"</td></tr>
+        <tr><td>PR summary matches contract</td><td>"Until it looks good"</td></tr>
+        <tr><td>All review comments addressed</td><td>"Until you're satisfied"</td></tr>
+        <tr><td>Typecheck passes</td><td>"Until it works"</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Oracles for Verification</h3>
+    <p>Upgrade your oracles for effective grind-mode:</p>
+    <ul>
+      <li><strong>Baseline</strong>: Typecheck and unit tests</li>
+      <li><strong>Better</strong>: Property-based tests for invariants</li>
+      <li><strong>Best</strong>: E2E + visual regression for UI changes</li>
+    </ul>
+
+    <h3>Subagent Patterns for CI</h3>
+
+    <h4>CI-Watcher Subagent</h4>
+    <p>A background subagent that monitors CI status and reports back.</p>
+    <pre><code>---
+name: ci-watcher
+description: Monitor CI status and report failures
+is_background: true
+model: fast
+---
+
+Watch the CI status for the current branch. When it completes:
+- If passed: Report success
+- If failed: Extract failure details and suggest fixes</code></pre>
+
+    <h4>Test-Runner Subagent</h4>
+    <p>A focused subagent for running and debugging tests.</p>
+    <pre><code>---
+name: test-runner
+description: Run tests and diagnose failures
+readonly: true
+model: inherit
+---
+
+Run the specified tests. For failures:
+1. Show the failure output
+2. Identify likely root cause
+3. Suggest minimal fix</code></pre>
+
+    <h3>Integration Points</h3>
+
+    <h4>GitHub Actions</h4>
+    <p>Cursor can interact with GitHub Actions through:</p>
+    <ul>
+      <li><code>gh run list</code> - List recent runs</li>
+      <li><code>gh run view</code> - View run details</li>
+      <li><code>gh run watch</code> - Watch live run</li>
+      <li><code>gh api</code> - Direct API access</li>
+    </ul>
+
+    <h4>Bugbot Integration</h4>
+    <p>Cursor's Bugbot provides automated PR review:</p>
+    <ul>
+      <li>Treat findings as triage queues, not auto-fix mandates</li>
+      <li>Dismiss only with explicit rationale</li>
+      <li>Use "Fix in Web" for quick patches</li>
+      <li>Rerun after risky edits or rebases</li>
+    </ul>
+
+    <h3>Anti-Patterns</h3>
+    <ul>
+      <li><strong>Infinite loops</strong>: No halting condition leads to wasted compute</li>
+      <li><strong>Over-trusting</strong>: Agents can produce plausible-but-wrong fixes</li>
+      <li><strong>Missing verification</strong>: Skipping test runs before push</li>
+      <li><strong>Context pollution</strong>: Including entire CI logs instead of failures</li>
+    </ul>
+
+    <h3>Related Research</h3>
+    <ul>
+      <li><a href="/research/formal-verification-agents/">Formal Verification with Agents</a> - Property-based testing</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

@@ -1,0 +1,199 @@
+/* O'Reilly technical documentation style */
+:root {
+  --bg: #fff;
+  --text: #333;
+  --muted: #666;
+  --border: #ddd;
+  --link: #0066cc;
+  --link-hover: #004499;
+  --code-bg: #f5f5f5;
+  --header-bg: #1a1a2e;
+  --header-text: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1a;
+    --text: #e0e0e0;
+    --muted: #999;
+    --border: #333;
+    --link: #66b3ff;
+    --link-hover: #99ccff;
+    --code-bg: #2a2a2a;
+    --header-bg: #0f0f23;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* Header */
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+}
+
+header p {
+  margin-top: 0.5rem;
+  opacity: 0.7;
+  font-size: 0.875rem;
+}
+
+/* Navigation */
+nav {
+  background: var(--code-bg);
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+
+nav a {
+  margin-right: 1.5rem;
+  color: var(--text);
+}
+
+nav a:hover {
+  color: var(--link);
+}
+
+/* Main content */
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+main h2 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+main h3 {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+main p {
+  margin-bottom: 1rem;
+}
+
+main ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+main li {
+  margin-bottom: 0.5rem;
+}
+
+/* Article list */
+.article-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+.article-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-list li:last-child {
+  border-bottom: none;
+}
+
+.article-list .date {
+  font-size: 0.75rem;
+  color: var(--muted);
+  display: block;
+}
+
+.article-list .title {
+  font-weight: normal;
+}
+
+/* Code blocks */
+code, pre {
+  font-family: "SF Mono", Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  background: var(--code-bg);
+}
+
+code {
+  padding: 0.125rem 0.375rem;
+  border-radius: 2px;
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+/* Footer */
+footer {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+footer a {
+  color: var(--muted);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+
+th, td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-weight: normal;
+  color: var(--muted);
+}

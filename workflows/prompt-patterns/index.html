@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Patterns - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>Prompt Patterns</h2>
+
+    <p>Common prompt structures for reliable agent behavior.</p>
+
+    <h3>The Core Principle</h3>
+    <blockquote><p>More instructions does not equal better outcomes.</p></blockquote>
+    <p>Research shows that additional requirements increase cognitive load and reasoning tokens (14-22% more) without improving results. The best prompts are minimal, specific, and task-focused.</p>
+
+    <h3>Pattern: Single Objective</h3>
+    <p>Each prompt should have one clear objective. If you need multiple things, use multiple prompts.</p>
+    <pre><code># Bad: Multiple objectives
+Refactor the authentication module, add rate limiting, update the docs,
+and write tests for the new behavior.
+
+# Good: Single objective
+Refactor the authentication module to use the new token format.
+Then, in a separate prompt, add rate limiting.</code></pre>
+
+    <h3>Pattern: Constraints Over Instructions</h3>
+    <p>Tell the agent what NOT to do rather than trying to enumerate what TO do.</p>
+    <pre><code># Instead of listing every acceptable pattern
+Only use functional components. Use TypeScript. Follow existing patterns.
+Use named exports. Handle errors. Add types. etc.
+
+# Use constraints
+Do not use class components. Do not add new dependencies.
+Do not modify files outside the auth module.</code></pre>
+
+    <h3>Pattern: The Step-3 Trick</h3>
+    <p>If an agent struggles with step 2, tell it to do step 3. The agent often completes step 2 in the process.</p>
+    <pre><code># If agent fails to write tests
+Instead of: "Write tests for this function"
+Try: "Deploy this to production"
+
+# The agent will often write tests as part of deployment prep</code></pre>
+
+    <h3>Pattern: Evidence-Based Review</h3>
+    <p>Request specific evidence rather than general assessments.</p>
+    <pre><code># Bad: General assessment
+Review this code for quality.
+
+# Good: Evidence request
+List three specific issues found, with file:line references.
+For each, explain the risk and propose a fix.</code></pre>
+
+    <h3>Pattern: Iterative Refinement</h3>
+    <p>Use short feedback loops rather than long initial prompts.</p>
+    <pre><code>1. "Implement X minimally"
+2. Run tests
+3. "Add error handling for case Y"
+4. Run tests
+5. "Refactor for readability"</code></pre>
+
+    <h3>Anti-Patterns</h3>
+
+    <h4>Over-specification</h4>
+    <p>Long prompts with many requirements increase token cost and cognitive load without proportionate benefit.</p>
+
+    <h4>Vague Objectives</h4>
+    <p>"Make it better" or "improve the code" without specific criteria leads to unpredictable changes.</p>
+
+    <h4>Conflicting Instructions</h4>
+    <p>"Be concise but thorough" or "simple but enterprise-grade" creates confusion.</p>
+
+    <h4>Redundant Context</h4>
+    <p>Repeating information the model already knows (style guides, conventions) wastes tokens and can cause the model to ignore important instructions.</p>
+
+    <h3>Related Research</h3>
+    <ul>
+      <li><a href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a> - Why context files often underperform</li>
+      <li><a href="/research/persona-anchors/">Persona Anchors</a> - Using style references to shape output</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

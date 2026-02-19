@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Psychology - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>Agent Psychology</h2>
+
+    <p>Understanding how agents reason and respond to instructions.</p>
+
+    <h3>Core Insight</h3>
+    <p>Agents reason forward from instructions. They don't reason backward from outcomes. This means:</p>
+    <ul>
+      <li>Changing the target reframes the problem</li>
+      <li>Surprising behavior reveals architectural friction in the codebase</li>
+      <li>Controlled misdirection ("lies") can produce better outcomes</li>
+    </ul>
+
+    <h3>The "Surprising Behavior" Pattern</h3>
+    <p>When agents encounter something unexpected, that's signal—not noise.</p>
+    <blockquote><p>When agents fail, fix the code, not the prompt. Surprising behavior reveals architectural friction.</p></blockquote>
+
+    <p>Instead of adding more instructions, consider:</p>
+    <ol>
+      <li><strong>Is the codebase structure confusing?</strong> Rename, reorganize, add comments</li>
+      <li><strong>Are conventions unclear?</strong> Add type hints, improve names, add docstrings</li>
+      <li><strong>Is the task underspecified?</strong> Improve the issue description, not the context file</li>
+    </ol>
+
+    <h3>The Step-3 Trick</h3>
+    <p>Counterintuitive but effective: if an agent struggles with step 2, tell it to do step 3. The agent often completes step 2 in the process.</p>
+
+    <h4>Example</h4>
+    <table>
+      <thead>
+        <tr><th>If Agent Struggles With</th><th>Try Asking For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Writing tests</td><td>Deploy to production</td></tr>
+        <tr><td>Adding error handling</td><td>Ship the feature</td></tr>
+        <tr><td>Documentation</td><td>Onboard a new engineer</td></tr>
+        <tr><td>Refactoring</td><td>Prepare for code review</td></tr>
+      </tbody>
+    </table>
+
+    <p>This works because:</p>
+    <ul>
+      <li>Agents reason forward from instructions</li>
+      <li>Changing the target reframes the problem</li>
+      <li>The "lie" is the feature—controlled misdirection for better outcomes</li>
+    </ul>
+
+    <h3>Greenfield Optimization</h3>
+    <p>Agents perform best on greenfield projects where they can establish patterns from scratch. In existing codebases:</p>
+    <ul>
+      <li>Agents try to match existing patterns (even bad ones)</li>
+      <li>Context pollution from large codebases degrades reasoning</li>
+      <li>Explicit style anchors help (see Persona Anchors)</li>
+    </ul>
+
+    <h3>Instruction Following vs. Helpfulness</h3>
+    <p>Agents follow instructions reliably. The problem isn't compliance—it's that the instructions often don't help.</p>
+
+    <p>Evidence:</p>
+    <ul>
+      <li>If a tool is mentioned in context, agents use it (1.6x-2.5x more)</li>
+      <li>More instructions increase reasoning tokens (14-22%) without improving outcomes</li>
+      <li>Agents explore more broadly with context files but don't find relevant files faster</li>
+    </ul>
+
+    <h3>Token Economics</h3>
+    <p>Context files consume tokens in every request. For a 600-word context file:</p>
+    <ul>
+      <li>~800 tokens per request</li>
+      <li>Multiplied by every step in every task</li>
+      <li>Compounds in long-running sessions</li>
+    </ul>
+
+    <p>The question: Is that token budget better spent on task-specific context or generic repository context?</p>
+    <p>Research suggests: task-specific context wins.</p>
+
+    <h3>Related Research</h3>
+    <ul>
+      <li><a href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a> - Empirical findings on context files</li>
+      <li><a href="/research/persona-anchors/">Persona Anchors</a> - Using style references to shape behavior</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

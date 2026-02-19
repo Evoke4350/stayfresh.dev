@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Agent Design - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>BCG Enterprise Agent Design Patterns (2025)</h2>
+
+    <p><strong>Reference:</strong> <a href="https://www.bcg.com/assets/2025/building-effective-enterprise-agents.pdf">Building Effective Enterprise Agents</a> (BCG, November 2025)</p>
+
+    <p>BCG's AI Platforms Group published a comprehensive framework for building production-grade enterprise agents.</p>
+
+    <h3>Agent Design Cards (ADCs)</h3>
+    <p>Agent Design Cards are BCG's standardized blueprint for documenting agent requirements. An effective ADC should:</p>
+    <ol>
+      <li><strong>Define purpose</strong> - Clearly describe what the agent is designed to achieve</li>
+      <li><strong>Clarify boundaries</strong> - Specify the agent's role, scope, and points of human oversight</li>
+      <li><strong>Detail inputs and outputs</strong> - Make data sources, dependencies, and deliverables explicit</li>
+      <li><strong>Describe capabilities</strong> - Outline tools and capabilities needed for the agent's success</li>
+      <li><strong>Anticipate failure</strong> - Define fallback behavior, escalation paths, and guardrails</li>
+    </ol>
+
+    <h4>Example Agent Design Card</h4>
+    <pre><code>Agent Goal: Reduce processing time for loan applications
+
+Metrics:
+  - 30% reduction in manual exception handling time
+
+Skills, Tools &amp; Capabilities:
+  - Document parsing and field validation
+  - Cross-system data reconciliation (CRM, Credit Bureau)
+  - Policy-based reasoning for exception routing
+
+Agent Trigger: System-led
+
+Input(s) &amp; Output(s):
+  - Inputs: Loan application data, validation rules from policy database
+  - Outputs: Audit log of actions and corrections performed, exceptions
+
+Fallback:
+  - Notify loan officer via workflow system for manual intervention
+
+Priority: 1</code></pre>
+
+    <h3>Agent Suitability Framework</h3>
+    <p>Not every problem needs an agent. Use this framework to decide:</p>
+    <table>
+      <thead>
+        <tr><th></th><th>Low Risk/Governance</th><th>High Risk/Governance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>High Complexity</strong></td><td>Agent-led with Human Oversight</td><td>Human-led with Agent Support</td></tr>
+        <tr><td><strong>Low Complexity</strong></td><td>Agent-led (full autonomy)</td><td>Traditional Automation</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Key insight:</strong> If clear rules and basic automation deliver the desired outcome, avoid building agents for agents' sake.</p>
+
+    <h3>Agent Maturity Horizons</h3>
+    <table>
+      <thead>
+        <tr><th>Horizon</th><th>Type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0</td><td>Constrained agents</td><td>Predefined rules, single repetitive task</td></tr>
+        <tr><td>1</td><td>Single agents</td><td>Multi-step tasks in set environment, plans and acts alone</td></tr>
+        <tr><td>2</td><td>Deep agents</td><td>Orchestrator splits tasks for specialist agents</td></tr>
+        <tr><td>3</td><td>Role-based agents</td><td>Team of agents collaborate, distinct roles, handoffs</td></tr>
+        <tr><td>4</td><td>Agent mesh</td><td>Network of autonomous agents that self-organize</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Recommendation:</strong> Build toward Horizon 2 (deep agents) today. Fully autonomous mesh agents require mature reasoning and evaluation systems.</p>
+
+    <h3>Human Oversight Patterns</h3>
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Agent-assisted</td><td>Agent provides output to normal user workflow</td></tr>
+        <tr><td>Human-in-the-loop</td><td>Agent makes decision, awaits human approval</td></tr>
+        <tr><td>Human-on-the-loop</td><td>User observes outputs, can intervene if issues flagged</td></tr>
+        <tr><td>Human-out-of-the-loop</td><td>Agent acts without explicit human oversight</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Design Principles</h3>
+
+    <h4>Start Simple, Iterate with Evals</h4>
+    <ol>
+      <li>Begin with a single observe-reason-act loop</li>
+      <li>Introduce sub-flows only when complexity causes brittleness</li>
+      <li>Add specialized agents only when domain-specific tasks require them</li>
+    </ol>
+
+    <h4>Outcome-First Design</h4>
+    <p>Start with business outcomes ("What are we trying to achieve?"), then decompose:</p>
+    <pre><code>Outcome: 30% faster loan approvals
+  -&gt; Dependencies: document verification, exception handling, fewer manual handoffs
+  -&gt; Agent opportunities: automated resolutions, remediation suggestions</code></pre>
+
+    <h4>Context Engineering</h4>
+    <p>Prevent context pollution with these strategies:</p>
+    <table>
+      <thead>
+        <tr><th>Strategy</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Compression</td><td>Summarize context as window nears limit</td></tr>
+        <tr><td>Pruning</td><td>Remove old or irrelevant content</td></tr>
+        <tr><td>Ranking</td><td>Ensure most relevant information is visible</td></tr>
+        <tr><td>Isolation</td><td>Split task/context across sub-agents</td></tr>
+        <tr><td>Notes</td><td>Let agents take structured notes during sessions</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Memory Architecture</h3>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Description</th><th>Duration</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Short-term (STM)</td><td>Context window: instructions, knowledge, tools</td><td>Single session</td></tr>
+        <tr><td>Semantic (LTM)</td><td>Abstract, factual, domain-specific knowledge</td><td>Persistent</td></tr>
+        <tr><td>Procedural (LTM)</td><td>How to perform tasks or skills</td><td>Persistent</td></tr>
+        <tr><td>Episodic (LTM)</td><td>Past events as example behaviors</td><td>Persistent</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Failure Modes</h3>
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Examples</th><th>Mitigations</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Identity/Auth</td><td>Agent impersonated, unintended actions</td><td>Unique identifiers, granular permissions, audit trails</td></tr>
+        <tr><td>Data supply-chain</td><td>Prompt injection, harmful content</td><td>Input validation, XPIA protection, monitor data flows</td></tr>
+        <tr><td>Orchestration</td><td>Tool failures, agent deadlocks</td><td>Control flow guardrails, scoped environments</td></tr>
+        <tr><td>Reasoning</td><td>Hallucinations, task drift</td><td>Monitor reasoning patterns, granular roles</td></tr>
+        <tr><td>Operations</td><td>Resource overuse, cost explosion</td><td>Rate limits, timeouts, isolation</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Takeaways</h3>
+    <ol>
+      <li><strong>Design for outcomes, not outputs</strong> - Anchor on measurable business outcomes</li>
+      <li><strong>Start simple and iterate</strong> - Single observe-reason-act loop first</li>
+      <li><strong>Build on shared foundations</strong> - Standardize runtimes, gateways, guardrails</li>
+      <li><strong>Choose the right platform</strong> - Based on data gravity, governance, differentiation</li>
+      <li><strong>Engineer trust by default</strong> - Identity, access control, monitoring, evaluation</li>
+    </ol>
+  </main>
+
+  <footer>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

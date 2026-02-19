@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persona Anchors - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>Persona Anchors for Agent Styling</h2>
+
+    <p><strong>Pattern:</strong> Direct agents to emulate specific engineering styles and values by anchoring to recognized names in the field.</p>
+
+    <h3>The Core Insight</h3>
+    <p>LLMs have absorbed the public writing, talks, and code of well-known engineers. This knowledge can be probed and leveraged—without web access—to shape agent behavior toward specific styles and quality standards.</p>
+
+    <h3>How It Works</h3>
+    <ol>
+      <li><strong>Name a practitioner</strong> whose style matches the desired output</li>
+      <li><strong>Tell the agent to emulate their values and craft</strong></li>
+      <li><strong>The agent draws on training data</strong> to approximate that style</li>
+    </ol>
+    <p>This works because LLMs encode patterns from public artifacts—blog posts, conference talks, open-source contributions—associated with named individuals.</p>
+
+    <h3>Pattern: Domain-Specific Anchors</h3>
+
+    <h4>React Native Projects</h4>
+    <pre><code>Emulate the craft and values of React Native product engineers like
+Evan Bacon and Fernando Rojo. Prioritize developer experience,
+practical abstractions, and polished user interactions.</code></pre>
+
+    <h4>Generic React Native (No Specific Product)</h4>
+    <pre><code>Emulate the taste and architectural decisions of the Callstack crew.
+Focus on maintainability, clear module boundaries, and patterns that
+scale across teams.</code></pre>
+
+    <h4>Backend Systems</h4>
+    <pre><code>Emulate the operational discipline of engineers like Kelsey Hightower.
+Infrastructure as code, explicit configuration, no snowflakes.</code></pre>
+
+    <h4>Distributed Systems</h4>
+    <pre><code>Emulate the rigor of the FoundationDB or CockroachDB teams. Correctness
+first, performance second, explicit handling of edge cases.</code></pre>
+
+    <h3>Probing for Recognition</h3>
+    <p>To discover which names an agent recognizes without web access:</p>
+    <pre><code>Without using web search, describe the engineering values and style
+associated with [Name]. What patterns would you expect in their work?</code></pre>
+    <p>If the agent produces a coherent description, that name is usable as an anchor. If the response is vague or generic, choose a different anchor.</p>
+
+    <h3>When to Use Persona Anchors</h3>
+    <table>
+      <thead>
+        <tr><th>Situation</th><th>Effectiveness</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Greenfield project, no established patterns</td><td>High - provides default direction</td></tr>
+        <tr><td>Codebase with strong existing conventions</td><td>Low - existing patterns dominate</td></tr>
+        <tr><td>Team with shared style idols</td><td>High - aligns agent with team taste</td></tr>
+        <tr><td>Generic/scaffold code</td><td>Medium - adds polish without over-engineering</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Anti-Patterns</h3>
+    <ul>
+      <li><strong>Over-specifying</strong> - Listing too many names creates confusion</li>
+      <li><strong>Contradictory anchors</strong> - "Like [minimalist] and [enterprise architect]" fights itself</li>
+      <li><strong>Unknown names</strong> - If the model doesn't know them, the anchor is noise</li>
+      <li><strong>Using for factual questions</strong> - Anchors shape style, not correctness</li>
+    </ul>
+
+    <h3>The "Lie" Is the Feature</h3>
+    <p>Persona anchors are a controlled hallucination. The model isn't actually those engineers—but it produces better output when directed toward a coherent style.</p>
+    <p>This is the same principle as "act as a senior engineer"—except specific names carry more signal because they encode real patterns from training data.</p>
+
+    <h3>Practical Template</h3>
+    <pre><code>## Style Anchor
+
+For this project, emulate the values and craft of [Domain] practitioners
+like [Name 1] and [Name 2].
+
+Key characteristics:
+- [Value 1]
+- [Value 2]
+- [Value 3]
+
+When in doubt, ask: "Would [Name] approach it this way?"</code></pre>
+  </main>
+
+  <footer>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

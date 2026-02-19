@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGENTS.md Effectiveness - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>AGENTS.md Effectiveness: What the Research Says</h2>
+
+    <p><strong>Reference:</strong> <a href="https://arxiv.org/pdf/2602.11988">Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?</a> (Gloaguen et al., ETH Zurich / LogicStar.ai, February 2026)</p>
+
+    <h3>The Surprising Finding</h3>
+    <p>Context files like <code>AGENTS.md</code> and <code>CLAUDE.md</code> are widely recommended. Over 60,000 repositories include them. But rigorous evaluation reveals:</p>
+
+    <table>
+      <thead>
+        <tr><th>Context Type</th><th>Success Rate Change</th><th>Cost Change</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>None</td><td>Baseline</td><td>Baseline</td></tr>
+        <tr><td>LLM-generated</td><td>-3%</td><td>+20%</td></tr>
+        <tr><td>Developer-written</td><td>+4%</td><td>+19%</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>LLM-generated context files make agents worse and more expensive.</strong></p>
+
+    <h3>Why Context Files Underperform</h3>
+
+    <h4>1. Redundant Documentation</h4>
+    <p>When researchers removed all existing documentation (READMEs, docs folders), LLM-generated context files suddenly became useful (+2.7% improvement). This suggests:</p>
+    <blockquote><p>Context files are mostly redundant with what's already in the repository.</p></blockquote>
+
+    <h4>2. No Effective Overview</h4>
+    <p>One recommended use of context files is providing a codebase overview. But agents with context files don't find relevant files faster—they often take more steps because they:</p>
+    <ol>
+      <li>Issue multiple commands to find the context file</li>
+      <li>Read it multiple times despite it being in context</li>
+      <li>Explore more broadly without better targeting</li>
+    </ol>
+
+    <h4>3. Unnecessary Requirements Make Tasks Harder</h4>
+    <p>Context files add instructions. Agents follow them. But additional requirements—even well-intentioned ones—increase cognitive load and reasoning tokens (14-22% more reasoning with context files).</p>
+    <p><strong>More instructions does not equal better outcomes.</strong></p>
+
+    <h3>What Context Files Do Well</h3>
+
+    <h4>Agents Follow Instructions</h4>
+    <p>If a tool is mentioned in the context file, agents use it:</p>
+    <ul>
+      <li><code>uv</code>: 1.6 uses/instance when mentioned vs. &lt;0.01 when not</li>
+      <li>Repository-specific tools: 2.5 uses/instance when mentioned vs. &lt;0.05 when not</li>
+    </ul>
+    <p>This isn't an instruction-following problem. Agents comply—they're just not being helped by what they're told.</p>
+
+    <h4>More Exploration, More Testing</h4>
+    <p>Context files increase:</p>
+    <ul>
+      <li>Test execution frequency</li>
+      <li>File traversal (grep, read, glob)</li>
+      <li>Repository-specific tool usage</li>
+    </ul>
+    <p>This is the "thoroughness" that drives up costs without improving outcomes.</p>
+
+    <h3>Practical Recommendations</h3>
+
+    <h4>When to Skip AGENTS.md</h4>
+    <ul>
+      <li>Well-documented repositories with README, docs, examples</li>
+      <li>Popular repositories with strong conventions (models already know them)</li>
+      <li>Simple tasks that don't require context</li>
+    </ul>
+
+    <h4>When AGENTS.md Helps</h4>
+    <ul>
+      <li>Niche repositories with no documentation</li>
+      <li>Custom tooling that differs from standard conventions</li>
+      <li>Team-specific patterns that aren't discoverable</li>
+    </ul>
+
+    <h4>What to Include (If You Write One)</h4>
+    <p>Based on the research, context files should contain <strong>only minimal requirements</strong>:</p>
+    <pre><code># Build &amp; Test
+- Run tests: `pytest tests/`
+- Lint: `ruff check .`
+
+# Conventions
+- Use `uv` for dependency management
+- Follow existing module patterns</code></pre>
+
+    <p><strong>Not:</strong></p>
+    <ul>
+      <li>Long codebase overviews</li>
+      <li>Redundant information from READMEs</li>
+      <li>Style guides the model already knows</li>
+    </ul>
+
+    <h3>The "Surprising Behavior" Pattern</h3>
+    <p>When agents encounter something unexpected, that's signal—not noise.</p>
+    <blockquote><p>When agents fail, fix the code, not the prompt. Surprising behavior reveals architectural friction.</p></blockquote>
+    <p>Instead of adding more instructions to <code>AGENTS.md</code>, consider:</p>
+    <ol>
+      <li><strong>Is the codebase structure confusing?</strong> Rename, reorganize, add comments</li>
+      <li><strong>Are conventions unclear?</strong> Add type hints, improve names, add docstrings</li>
+      <li><strong>Is the task underspecified?</strong> Improve the issue description, not the context file</li>
+    </ol>
+
+    <h3>Agent Psychology: The Step-3 Trick</h3>
+    <p>Counterintuitive but effective: if an agent struggles with step 2, tell it to do step 3. The agent often completes step 2 in the process.</p>
+    <p>This works because:</p>
+    <ul>
+      <li>Agents reason forward from instructions</li>
+      <li>Changing the target reframes the problem</li>
+      <li>"Lie" is the feature—controlled misdirection for better outcomes</li>
+    </ul>
+
+    <h3>Token Economics</h3>
+    <p>Context files consume tokens in every request. For a 600-word <code>AGENTS.md</code>:</p>
+    <ul>
+      <li>~800 tokens of context per request</li>
+      <li>Multiplied by every step in every task</li>
+      <li>Compounds quickly in long-running sessions</li>
+    </ul>
+    <p><strong>Question:</strong> Is that token budget better spent on task-specific context (the actual code being modified) or on generic repository context?</p>
+    <p>The research suggests: task-specific context wins.</p>
+
+    <h3>Further Reading</h3>
+    <ul>
+      <li><a href="https://github.com/eth-sri/agentbench">AgentBench Harness</a> - Benchmark for evaluating context files</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

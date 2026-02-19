@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formal Verification with Agents - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>Formal Verification and Property-Based Testing with AI Agents</h2>
+
+    <p><strong>References:</strong></p>
+    <ul>
+      <li><a href="https://martin.kleppmann.com/2025/12/08/ai-formal-verification.html">AI and the Future of Formal Verification</a> (Martin Kleppmann, December 2025)</li>
+      <li><a href="https://red.anthropic.com/2026/property-based-testing/">Property-Based Testing</a> (Anthropic Red, 2026)</li>
+      <li><a href="https://kiro.dev/blog/property-based-testing/">Property-Based Testing in Practice</a> (Kiro)</li>
+    </ul>
+
+    <h3>The Core Thesis</h3>
+    <p>Martin Kleppmann's argument is simple but profound:</p>
+    <blockquote><p><strong>LLMs are bad at formal verification, but they're excellent at writing specifications that humans can verify.</strong></p></blockquote>
+
+    <p>The economics of formal verification have always been brutal:</p>
+    <ul>
+      <li>seL4: ~23 lines of proof per line of code</li>
+      <li>CompCert: ~10+ years of effort for a verified C compiler</li>
+      <li>Most teams can't afford this</li>
+    </ul>
+
+    <p>But LLMs change the equation in a different way. They can:</p>
+    <ol>
+      <li><strong>Generate specifications</strong> - Natural language or semi-formal descriptions of intended behavior</li>
+      <li><strong>Suggest invariants</strong> - Properties that should always hold</li>
+      <li><strong>Write property tests</strong> - Executable checks that verify behavior</li>
+      <li><strong>Translate between levels</strong> - Informal to formal, code to spec, spec to test</li>
+    </ol>
+
+    <h3>Property-Based Testing: The Practical Middle Ground</h3>
+    <p>Formal verification proves correctness. Property-based testing (PBT) <em>finds incorrectness</em>.</p>
+
+    <h4>How PBT Works</h4>
+    <pre><code>// Example: fast-check property test
+fc.assert(
+  fc.property(
+    fc.string(),                    // Any string as input
+    (s) => {
+      const encoded = base64Encode(s);
+      const decoded = base64Decode(encoded);
+      return decoded === s;         // Round-trip invariant
+    }
+  )
+)</code></pre>
+    <p>The framework generates hundreds or thousands of random inputs automatically. You define <em>properties</em> (invariants), not specific test cases.</p>
+
+    <h4>Common Property Shapes</h4>
+    <table>
+      <thead>
+        <tr><th>Property Type</th><th>Description</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Round-trip</td><td>Encode/decode returns original</td><td>JSON.parse(JSON.stringify(x))</td></tr>
+        <tr><td>Idempotence</td><td>f(f(x)) == f(x)</td><td>Math.abs(Math.abs(x))</td></tr>
+        <tr><td>Commutativity</td><td>f(a, b) == f(b, a)</td><td>a + b</td></tr>
+        <tr><td>Associativity</td><td>f(f(a, b), c) == f(a, f(b, c))</td><td>(a + b) + c</td></tr>
+        <tr><td>Identity</td><td>f(x, identity) == x</td><td>x + 0</td></tr>
+        <tr><td>Invariance</td><td>Property P holds before and after</td><td>List length after sort equals before</td></tr>
+        <tr><td>No exceptions</td><td>Never crashes on valid input</td><td>Parser handles any input</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Agent Patterns for Verification</h3>
+
+    <h4>Pattern 1: Specification Generation</h4>
+    <pre><code>Agent Task: Given this code, generate a specification
+
+Input: Source code
+Output: Natural-language specification of behavior
+
+Use when: Code exists but documentation is missing</code></pre>
+
+    <h4>Pattern 2: Invariant Discovery</h4>
+    <pre><code>Agent Task: Identify invariants that should hold for this system
+
+Input: Code + specification
+Output: List of properties that should always be true
+
+Use when: You need to understand what to test</code></pre>
+
+    <h4>Pattern 3: Property Test Generation</h4>
+    <pre><code>Agent Task: Generate property-based tests from this specification
+
+Input: Specification
+Output: Executable property tests (fast-check, Hypothesis, etc.)
+
+Use when: You have a spec but no tests</code></pre>
+
+    <h3>The "Vericoding" Workflow</h3>
+    <p>Traditional development: Write code, write tests, hope it works.</p>
+    <p><strong>Vericoding</strong>: Write spec, generate properties, generate tests, write code, verify.</p>
+    <pre><code>Intention (What should this do?)
+    |
+    v
+Spec (Formal or semi-formal description)
+    |
+    v
+Properties (Invariants that should hold)
+    |
+    v
+Tests (PBT or example-based)
+    |
+    v
+Code (Implementation)
+    |
+    v
+Verify (Run tests, check properties)</code></pre>
+
+    <h3>Tools and Frameworks</h3>
+
+    <h4>Property-Based Testing</h4>
+    <table>
+      <thead>
+        <tr><th>Language</th><th>Framework</th><th>Link</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>JavaScript/TypeScript</td><td>fast-check</td><td>github.com/dubzzz/fast-check</td></tr>
+        <tr><td>Python</td><td>Hypothesis</td><td>hypothesis.works</td></tr>
+        <tr><td>Rust</td><td>proptest</td><td>github.com/AltSysrq/proptest</td></tr>
+        <tr><td>Go</td><td>gopter</td><td>github.com/leanovate/gopter</td></tr>
+        <tr><td>Java</td><td>jqwik</td><td>jqwik.net</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Practical Recommendations</h3>
+    <ol>
+      <li><strong>Start with PBT, not formal verification</strong> - The ROI is much higher</li>
+      <li><strong>Use agents for spec generation, not proof</strong> - They're better at writing than proving</li>
+      <li><strong>Human review of specs is mandatory</strong> - Agents can produce plausible-but-wrong specifications</li>
+      <li><strong>Properties over examples</strong> - One well-chosen property is worth 100 example tests</li>
+      <li><strong>Round-trip tests are your friend</strong> - They catch an enormous class of bugs</li>
+    </ol>
+
+    <h3>The Ceiling</h3>
+    <p>Current AI agents cannot:</p>
+    <ul>
+      <li>Reliably prove mathematical theorems</li>
+      <li>Verify concurrent systems without human guidance</li>
+      <li>Replace formal methods for safety-critical systems</li>
+    </ul>
+    <p>But they <em>can</em>:</p>
+    <ul>
+      <li>Generate specifications that humans can verify</li>
+      <li>Write property tests that catch real bugs</li>
+      <li>Explore state spaces faster than manual testing</li>
+      <li>Act as semantic oracles for non-deterministic output</li>
+    </ul>
+    <p>The sweet spot is <strong>human + agent + property testing</strong>. Not agent alone. Not formal verification alone. The combination.</p>
+  </main>
+
+  <footer>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>
