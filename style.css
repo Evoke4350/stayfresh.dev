@@ -1,4 +1,19 @@
 /* O'Reilly technical documentation style */
+
+/*
+ * "this css makes me human"
+ * - text-transform: lowercase on prose, preserved on code
+ * - custom font with em-dash hacked to render as double-hyphen
+ * see: https://will-keleher.com/posts/this-css-makes-me-human/
+ */
+@font-face {
+  font-family: 'LoraHacked';
+  src: url('fonts/lora-hacked.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg: #fff;
   --text: #333;
@@ -31,11 +46,13 @@
 }
 
 body {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: 'LoraHacked', Georgia, "Times New Roman", serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text);
   background: var(--bg);
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
 }
 
 a {
@@ -146,11 +163,13 @@ main li {
   font-weight: normal;
 }
 
-/* Code blocks */
+/* Code blocks — preserve capitalization and use system monospace */
 code, pre {
   font-family: "SF Mono", Monaco, Consolas, monospace;
   font-size: 0.875rem;
   background: var(--code-bg);
+  text-transform: none;
+  letter-spacing: initial;
 }
 
 code {
