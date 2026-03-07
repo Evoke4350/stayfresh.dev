@@ -5,6 +5,12 @@ The browser still sees '—' in the HTML/DOM, but the font renders it
 as '--' visually. Copy-paste gives you the real em-dash back.
 
 Inspired by https://will-keleher.com/posts/this-css-makes-me-human/
+
+Usage:
+  1. Download Lora-Regular.ttf from https://fonts.google.com/specimen/Lora
+  2. pip install fonttools brotli
+  3. python hack_emdash.py
+  -> outputs lora-hacked.woff2
 """
 from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import GlyphComponent
@@ -38,8 +44,11 @@ for x_offset in (0, hyphen_width + gap):
     c.flags = 0x0001 | 0x0002  # ARGS_ARE_XY | ARGS_ARE_WORDS
     g.components.append(c)
 
-font.save("Lora-Hacked.ttf", reorderTables=False)
+# Save as woff2 directly for web delivery
+font.flavor = "woff2"
+font.save("lora-hacked.woff2")
 print(f"Done. Em-dash now renders as two hyphens.")
 print(f"  hyphen width: {hyphen_width}")
 print(f"  gap: {gap}")
 print(f"  new em-dash width: {new_width}")
+print(f"  output: lora-hacked.woff2")
