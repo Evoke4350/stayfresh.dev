@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reward Rubric DSL - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">February 2026</p>
+    <h2>Reward Rubric DSL</h2>
+
+    <p>Agents behave more predictably when success criteria are explicit and machine-readable.</p>
+    <p>A small rubric DSL is often enough. No fancy RL stack required.</p>
+
+    <h3>The DSL</h3>
+    <p>The goal is to define evaluation criteria in a format that both agents and automation can parse.</p>
+
+    <pre><code>reward_rubric {
+  criterion correctness weight=5
+  criterion tests weight=5
+  criterion edge_cases weight=5
+  criterion readability weight=5
+  criterion naming weight=5
+  criterion architecture weight=5
+  criterion docs weight=5
+}</code></pre>
+
+    <p>This is intentionally small.</p>
+    <p>The useful part is not syntax purity. It is that the evaluation surface becomes visible, stable, and reusable.</p>
+
+    <h3>Why It Helps</h3>
+    <p>Plain-language prompts drift. Rubrics do not.</p>
+    <p>If the agent can read the criteria before writing code, it can aim for the right target on the first attempt.</p>
+    <p>If the evaluator can read the same criteria after the attempt, scoring becomes consistent across runs.</p>
+
+    <h3>Typical Loop</h3>
+    <pre><code>task
+&rarr; agent attempt
+&rarr; rubric evaluation
+&rarr; critique
+&rarr; revision
+&rarr; rescore</code></pre>
+
+    <p>This loop is simple enough to run in a shell script, CI job, or agent harness.</p>
+
+    <h3>Use Cases</h3>
+
+    <h4>Autonomous Coding Agents</h4>
+    <p>The rubric gives the agent a fixed target instead of a vague quality request.</p>
+
+    <h4>CI Evaluation Pipelines</h4>
+    <p>The same rubric can drive test gates, lint thresholds, reviewer prompts, and release checks.</p>
+
+    <h4>Agent Self-Grading</h4>
+    <p>An agent can score its own patch criterion by criterion, explain the weak points, then revise.</p>
+
+    <h4>Review Automation</h4>
+    <p>Review bots are less noisy when they have named criteria instead of free-form opinions.</p>
+
+    <h4>Multi-Agent Critique Loops</h4>
+    <p>One agent writes. Another scores. A third summarizes deltas between revisions. The rubric keeps the whole thing from turning into abstract nonsense.</p>
+
+    <h3>Example Evaluation Pass</h3>
+    <pre><code>reward_rubric {
+  criterion correctness weight=5
+  criterion tests weight=5
+  criterion error_handling weight=5
+  criterion architecture weight=5
+}
+
+score {
+  correctness 4 "behavior matches task, one edge path missing"
+  tests 5 "new tests cover primary branch and regression case"
+  error_handling 2 "invalid input path still throws raw exception"
+  architecture 4 "fits existing module boundaries"
+}</code></pre>
+
+    <p>The critique step now has something concrete to act on. It can target the <code>error_handling</code> gap instead of waving its hands about code quality.</p>
+
+    <h3>Real Workflow Example</h3>
+    <p>A common use case is a small bug fix with one visible failing test and several likely hidden edge cases.</p>
+
+    <pre><code>task {
+  title "fix retry logic in api client"
+  objective "retry 429 and 503 responses with backoff"
+  constraints "do not add dependencies"
+}</code></pre>
+
+    <pre><code>reward_rubric {
+  criterion correctness weight=5
+  criterion tests weight=5
+  criterion edge_cases weight=5
+  criterion readability weight=5
+  criterion error_handling weight=5
+  criterion architecture weight=5
+}</code></pre>
+
+    <p>The first agent attempt usually fixes the happy path and adds one regression test.</p>
+
+    <pre><code>score {
+  correctness 4 "429 retry works, 503 path incomplete"
+  tests 3 "covers retry once, no max-retry test"
+  edge_cases 2 "timeout and retry exhaustion not handled"
+  readability 4 "patch is easy to follow"
+  error_handling 2 "last failure reason is discarded"
+  architecture 5 "fits existing client abstraction"
+}</code></pre>
+
+    <p>That score gives the critique loop something specific to do.</p>
+
+    <pre><code>critique {
+  revise edge_cases "handle retry exhaustion and timeout path"
+  revise tests "add max-retry and 503 coverage"
+  revise error_handling "preserve final upstream failure"
+}</code></pre>
+
+    <p>The second attempt is narrower. It is not "improve the patch." It is "raise the weak criteria."</p>
+
+    <pre><code>rescore {
+  correctness 5
+  tests 5
+  edge_cases 4
+  readability 4
+  error_handling 4
+  architecture 5
+}</code></pre>
+
+    <p>At that point the pipeline can accept the patch with a simple rule.</p>
+
+    <pre><code>accept_if {
+  total_gte 27
+  minimum correctness 4
+  minimum tests 4
+  minimum architecture 4
+}</code></pre>
+
+    <p>This is the practical advantage of the DSL. The loop is inspectable.</p>
+    <p>You can see why a patch passed, why it failed, and which criteria drove the next revision.</p>
+
+    <h3>When the Agent Sees the Reward</h3>
+    <p>The timing matters.</p>
+    <p>Direct coding-agent studies that compare "rubric shown up front" versus "revealed mid-task" versus "revealed only at the end" are still thin.</p>
+    <p>But adjacent evidence points in one direction: earlier reward visibility usually produces less backtracking and more stable behavior.</p>
+
+    <h4>Reward Up Front</h4>
+    <p>If the agent sees the rubric before it starts, it can plan around the real target instead of reverse-engineering it from failures.</p>
+    <p>This matches OpenAI's deliberative alignment results: models that read an explicit specification before acting referenced those principles in reasoning, and out-of-distribution scheming rates dropped sharply after that training setup.</p>
+    <p>For coding workflows, the practical implication is simple. Show the rubric before generation if you want first-pass behavior to track the evaluation surface.</p>
+
+    <h4>Reward Mid-Task</h4>
+    <p>Mid-task rubric feedback is usually the next best option.</p>
+    <p>It lets the agent redirect before the whole attempt hardens into a bad patch.</p>
+    <p>This pattern shows up in anticipatory and proactive reflection work. DEVIL'S ADVOCATE reports better efficiency by reflecting before each action instead of after a full trial. PASR reports that proactive refinement during generation improved accuracy while reducing token use by 41.6 percent on Qwen3-8B.</p>
+    <p>The inference for coding agents is straightforward: if a criterion becomes visible halfway through the task, the agent can still salvage the run, but it will usually pay in backtracking.</p>
+
+    <h4>Reward Only at the End</h4>
+    <p>End-only feedback still helps. It is just more expensive.</p>
+    <p>Self-Refine improved performance by about 20 percent absolute on average over one-step generation, and Reflexion improved coding pass@1 on HumanEval from 80 percent to 91 percent by learning from trial feedback.</p>
+    <p>But this is reactive. The agent has already spent tokens on a full attempt before learning what mattered.</p>
+
+    <h4>A Practical Take</h4>
+    <p>If you want the cleanest first draft, show the rubric up front.</p>
+    <p>If you want the cheapest repair path, surface low-scoring criteria as soon as they are detectable.</p>
+    <p>If you wait until the end, expect more revision loops and more opportunities for the agent to optimize appearances instead of intent.</p>
+    <p>There is also a catch: end-only self-grading can amplify self-bias. Separate work on self-refinement found that models tend to favor their own outputs, and that external feedback with accurate assessment reduces that bias.</p>
+
+    <h3>Why This Is Usually Cheaper Than Full RL</h3>
+    <p>Most coding-agent teams do not need full reinforcement learning infrastructure.</p>
+    <p>They need repeatable evaluation.</p>
+    <p>A rubric DSL is cheaper because it uses components most teams already have: prompts, scripts, tests, and CI.</p>
+    <p>It also fails more transparently. When the rubric is wrong, you can read the damn thing and fix it.</p>
+
+    <h3>Design Notes</h3>
+    <p>Keep criteria operational. "Good code" is useless. "Error handling" is testable.</p>
+    <p>Keep weights small and roughly balanced. Large single weights invite reward hacking.</p>
+    <p>Keep the rubric short enough to survive repeated use. If scoring it is annoying, nobody will keep using it.</p>
+
+    <h3>Connection to Reward Engineering</h3>
+    <p>This DSL is just a serialization of reward engineering principles.</p>
+    <p>The research point is simple: prompts shape language, but rubrics shape incentives.</p>
+    <p>A machine-readable rubric makes those incentives explicit, which is why it works well for self-grading, critique loops, and CI evaluation.</p>
+
+    <h3>Minimal Implementation Pattern</h3>
+    <pre><code>1. define rubric
+2. generate attempt
+3. score each criterion
+4. revise lowest scores
+5. accept only if total and critical criteria pass</code></pre>
+
+    <p>This is enough to get most of the value.</p>
+
+    <h3>Related Research</h3>
+    <ul>
+      <li><a href="/research/reward-engineering/">Reward Engineering for Coding Agents</a> - Why the rubric is the real control surface</li>
+      <li><a href="/research/reward-hacking/">Reward Hacking in Coding Agents</a> - How narrow metrics get exploited</li>
+      <li><a href="https://arxiv.org/abs/2303.17651">Self-Refine</a> - Post-hoc iterative feedback improves over one-shot generation</li>
+      <li><a href="https://arxiv.org/abs/2303.11366">Reflexion</a> - Trial feedback improves coding-agent performance</li>
+      <li><a href="https://arxiv.org/abs/2508.12903">PASR</a> - Proactive refinement during generation improves accuracy and token efficiency</li>
+      <li><a href="https://arxiv.org/pdf/2405.16334">DEVIL'S ADVOCATE</a> - Reflection before action can reduce backtracking</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>
