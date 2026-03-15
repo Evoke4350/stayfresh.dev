@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preference TOML - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">March 2026</p>
+    <h2>Preference TOML</h2>
+
+    <p>Use a config format the model already knows.</p>
+    <p>More importantly, use semantics the model has already seen in alignment, evaluation, and critique papers.</p>
+
+    <h3>The Basic Idea</h3>
+    <p>TOML is not magical. It is just readable.</p>
+    <p>The useful part is that keys like <code>reward</code>, <code>criterion</code>, <code>preference</code>, <code>critique</code>, <code>revision</code>, and <code>accept_if</code> map onto concepts that recur in RLHF, RLAIF, rubric judging, and self-refinement work.</p>
+    <p>I am making one inference here: models likely respond well to these names because they appear throughout pretraining and post-training corpora. The direct ablation on field names is still missing.</p>
+
+    <h3>Why This Works Better Than Random DSL Flavor</h3>
+    <p>Do not invent cute nouns when standard ones exist.</p>
+    <p>If you call a score bucket <code>vibes</code>, the model has to infer what you mean. If you call it <code>criterion</code> with a <code>weight</code>, it already knows the shape of the task.</p>
+    <p>That matters because empirical work keeps landing on the same pattern: explicit principles, rubrics, critique steps, and structured scoring improve control.</p>
+
+    <h3>TOML Example</h3>
+    <pre><code>task = "add retry support to api client"
+objective = "retry 429 and 503 with bounded exponential backoff"
+
+[reward]
+style = "weighted_rubric"
+
+[[criterion]]
+name = "correctness"
+weight = 5
+required = true
+
+[[criterion]]
+name = "tests"
+weight = 5
+required = true
+
+[[criterion]]
+name = "edge_cases"
+weight = 5
+
+[[criterion]]
+name = "error_handling"
+weight = 5
+
+[[criterion]]
+name = "readability"
+weight = 5
+
+[[criterion]]
+name = "architecture_fit"
+weight = 5
+
+[feedback]
+mode = "critique_then_revision"
+evidence_required = true
+focus_low_scores_only = true
+
+[accept_if]
+total_gte = 24
+correctness_gte = 4
+tests_gte = 4
+architecture_fit_gte = 4
+
+[reject_on]
+silent_failure = true
+hardcoded_fixture_logic = true
+new_dependency = true</code></pre>
+
+    <p>This gives the agent a familiar contract.</p>
+    <p>It can fill the criteria, explain failures, revise weak spots, and check acceptance conditions without guessing what success means.</p>
+
+    <h3>Real Workflow</h3>
+    <p>The loop below is the practical version.</p>
+
+    <pre><code>1. load toml spec
+2. generate patch against the stated objective
+3. score each criterion
+4. emit critique for scores below threshold
+5. revise only weak criteria
+6. rescore
+7. accept or reject via explicit gates</code></pre>
+
+    <p>The first pass can return a structured result like this.</p>
+
+    <pre><code>[score]
+correctness = 4
+tests = 3
+edge_cases = 2
+error_handling = 2
+readability = 4
+architecture_fit = 5
+
+[critique]
+tests = "missing max-retry coverage"
+edge_cases = "503 exhaustion path not covered"
+error_handling = "final upstream exception is swallowed"</code></pre>
+
+    <p>That output is already actionable. No prose detective work required.</p>
+
+    <h3>Why the Semantics Matter</h3>
+    <p>The names should match concepts from real alignment and evaluation workflows.</p>
+
+    <table>
+      <thead>
+        <tr><th>DSL Term</th><th>Empirical Concept</th><th>Why It Helps</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>criterion</code></td><td>rubric dimension</td><td>breaks one fuzzy target into scoreable axes</td></tr>
+        <tr><td><code>weight</code></td><td>reward shaping</td><td>makes tradeoffs explicit</td></tr>
+        <tr><td><code>feedback</code></td><td>verbal reinforcement</td><td>turns scores into revision targets</td></tr>
+        <tr><td><code>preference</code></td><td>pairwise comparison</td><td>lets the agent rank alternatives when scalar scoring is weak</td></tr>
+        <tr><td><code>accept_if</code></td><td>policy gate</td><td>prevents high total scores from masking critical failures</td></tr>
+        <tr><td><code>reject_on</code></td><td>hard constraint</td><td>blocks known reward-hacking patterns</td></tr>
+        <tr><td><code>evidence_required</code></td><td>evidence-anchored judging</td><td>forces the model to point at code or tests</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Preference Mode</h3>
+    <p>Sometimes scalar scoring is not enough.</p>
+    <p>If two patches are both plausible, a pairwise preference block can work better because RLHF systems are often trained from ranked comparisons.</p>
+
+    <pre><code>[preference]
+mode = "pairwise"
+prompt = "choose the patch that better satisfies the rubric"
+require_rationale = true
+
+[choose_if]
+correctness = "higher"
+architecture_fit = "higher"
+readability = "higher"
+new_complexity = "lower"</code></pre>
+
+    <p>This is especially useful when the agent has two candidate implementations and the better one is more obvious in comparison than in isolation.</p>
+
+    <h3>Alternative Syntaxes</h3>
+    <p>The semantics matter more than the wrapper.</p>
+
+    <h4>JSON</h4>
+    <pre><code>{
+  "reward": { "style": "weighted_rubric" },
+  "criterion": [
+    { "name": "correctness", "weight": 5, "required": true },
+    { "name": "tests", "weight": 5, "required": true }
+  ],
+  "accept_if": { "total_gte": 10, "correctness_gte": 4 }
+}</code></pre>
+
+    <h4>XML</h4>
+    <pre><code>&lt;reward style="weighted_rubric"&gt;
+  &lt;criterion name="correctness" weight="5" required="true" /&gt;
+  &lt;criterion name="tests" weight="5" required="true" /&gt;
+  &lt;accept_if total_gte="10" correctness_gte="4" /&gt;
+&lt;/reward&gt;</code></pre>
+
+    <h4>Ruby-ish DSL</h4>
+    <pre><code>reward do
+  criterion :correctness, weight: 5, required: true
+  criterion :tests, weight: 5, required: true
+  accept_if total_gte: 10, correctness_gte: 4
+end</code></pre>
+
+    <p>TOML tends to be the least annoying of the bunch for human editing.</p>
+
+    <h3>Empirical Mapping</h3>
+    <p>Several primary results line up with this pattern.</p>
+    <ul>
+      <li><strong>Constitutional AI</strong> showed that a list of explicit principles can drive critique, revision, and preference modeling with far fewer human labels.</li>
+      <li><strong>G-Eval</strong> improved evaluator alignment with chain-of-thought and a form-filling rubric.</li>
+      <li><strong>Reflexion</strong> showed that verbal feedback can materially improve coding performance.</li>
+      <li><strong>Self-Refine</strong> showed that iterative self-feedback improves outputs without extra training.</li>
+      <li><strong>RULERS</strong> argues that executable rubrics, evidence anchoring, and calibrated scales beat loose prompt phrasing for reliable judging.</li>
+    </ul>
+    <p>The common thread is boring and useful: explicit criteria plus explicit feedback loops.</p>
+
+    <h3>Practical Notes</h3>
+    <p>Keep the vocabulary plain.</p>
+    <p>Keep the schema small enough that the agent can hold the whole thing in working memory.</p>
+    <p>Use hard constraints for known failure modes. Use weighted criteria for everything else.</p>
+    <p>If you want the model to check all the boxes, make the boxes literal.</p>
+
+    <h3>Empirical Findings (Starfish Method)</h3>
+
+    <h4>START</h4>
+    <p>Start naming fields after concepts the model has probably already seen: <code>criterion</code>, <code>weight</code>, <code>preference</code>, <code>critique</code>, <code>revision</code>.</p>
+    <p>Start using explicit acceptance gates for critical dimensions like correctness and architecture fit.</p>
+    <p>Start requiring evidence in critique output when the workflow feeds into review automation.</p>
+
+    <h4>STOP</h4>
+    <p>Stop inventing cute schema names that obscure the semantics. Novel wording is mostly friction.</p>
+    <p>Stop collapsing everything into one score. That just recreates the reward-hacking problem in a prettier file format.</p>
+    <p>Stop writing config files that are longer than the patch they evaluate. At that point the process is eating itself.</p>
+
+    <h4>CONTINUE</h4>
+    <p>Continue using TOML for hand-edited workflows. It is readable and does not fight back.</p>
+    <p>Continue separating weighted criteria from hard rejections. The distinction matters operationally.</p>
+    <p>Continue using pairwise preference blocks when two candidate patches are easier to compare than to score independently.</p>
+
+    <h4>INVESTIGATE</h4>
+    <p>Investigate whether criterion names taken directly from benchmark rubrics improve first-pass compliance further.</p>
+    <p>Investigate schema-specific drift across models. Some models may parse XML more rigidly and TOML more flexibly.</p>
+    <p>Investigate whether preference-mode evaluation beats scalar scoring on refactors where correctness is similar but architecture fit differs.</p>
+
+    <h4>AMPLIFY</h4>
+    <p>Amplify hard constraints for known bad behaviors like silent failure and fixture-specific logic. They eliminate a lot of junk early.</p>
+    <p>Amplify explicit critique and revision sections. Those fields turned static specs into actual working loops.</p>
+    <p>Amplify simple semantics over fancy syntax. The useful part is the contract, not the DSL cosplay.</p>
+
+    <h3>Related Research</h3>
+    <ul>
+      <li><a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a> - A smaller rubric-first version of the same idea</li>
+      <li><a href="https://arxiv.org/abs/2212.08073">Constitutional AI: Harmlessness from AI Feedback</a> - Explicit principles driving critique and preference modeling</li>
+      <li><a href="https://arxiv.org/abs/2303.16634">G-Eval</a> - Form-filling rubric evaluation with chain-of-thought</li>
+      <li><a href="https://arxiv.org/abs/2303.11366">Reflexion</a> - Verbal reinforcement for agents, including coding</li>
+      <li><a href="https://arxiv.org/abs/2303.17651">Self-Refine</a> - Iterative feedback and revision at inference time</li>
+      <li><a href="https://arxiv.org/abs/2601.08654">RULERS</a> - Executable rubrics and evidence-anchored scoring</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>
