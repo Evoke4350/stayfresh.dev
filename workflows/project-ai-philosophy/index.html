@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project AI Philosophy - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">March 2026</p>
+    <h2>Project AI Philosophy</h2>
+
+    <p>Every project using generative systems needs a written position.</p>
+    <p>Absent policy, default governance collapses into novelty pressure, convenience, and untracked risk.</p>
+
+    <h3>Position</h3>
+    <p>AI belongs inside bounded workflows.</p>
+    <p>Acceptable roles: drafting, summarization, retrieval, code scaffolding, critique, evaluation, and repetitive local automation.</p>
+    <p>Unacceptable roles: hidden authority, unsupervised publication, irreversible state changes, invented expertise, and persuasion without evidence.</p>
+
+    <h3>Control Surface</h3>
+    <ul>
+      <li><strong>explicit scope</strong> - named task, named inputs, named completion condition</li>
+      <li><strong>evidence required</strong> - sources, tests, diffs, logs, screenshots, or reproducible traces</li>
+      <li><strong>human gate on irreversible actions</strong> - merge, deploy, publish, delete, charge, notify, or mutate production data</li>
+      <li><strong>reversibility first</strong> - rollback path before automation depth</li>
+      <li><strong>failure legibility</strong> - uncertainty, missing context, blocked tools, and assumption drift surfaced in plain language</li>
+      <li><strong>cost discipline</strong> - token spend, latency, and review burden treated as engineering costs</li>
+      <li><strong>local fit</strong> - repository conventions outrank model preferences</li>
+    </ul>
+
+    <h3>Operational Standard</h3>
+    <p>Best use cases share five properties: bounded context, available verification, low blast radius, clear ownership, and reversible outcome.</p>
+    <p>Worst use cases share the opposite pattern: vague goals, hidden dependencies, weak review, social pressure, and no rollback.</p>
+
+    <h3>Required Questions</h3>
+    <ol>
+      <li>task class</li>
+      <li>evidence source</li>
+      <li>approval gate</li>
+      <li>rollback method</li>
+      <li>maximum acceptable failure</li>
+    </ol>
+
+    <h3>Anti-Patterns</h3>
+    <ul>
+      <li><strong>ai-first as strategy</strong> - slogan in place of a user problem</li>
+      <li><strong>assistant prose as evidence</strong> - polished language mistaken for verified fact</li>
+      <li><strong>autonomy by boredom</strong> - dangerous delegation justified by repetitive work</li>
+      <li><strong>evaluation theater</strong> - quality claims with no tests, no rubric, and no citations</li>
+      <li><strong>interface cosplay</strong> - chat wrapper added where a form, script, or search box would work better</li>
+    </ul>
+
+    <h3>Minimum Spec</h3>
+    <pre><code>[ai]
+role = "bounded assistant"
+allowed = ["drafting", "retrieval", "summarization", "critique", "code_scaffolding"]
+forbidden = ["unreviewed_publish", "unreviewed_deploy", "production_mutation", "invented_citation"]
+required = ["task_scope", "evidence", "owner", "approval_gate", "rollback_path"]
+success = ["correctness", "traceability", "reversibility", "review_cost"]</code></pre>
+
+    <h3>Reference Pattern</h3>
+    <ul>
+      <li><a href="https://help.kagi.com/kagi/why-kagi/ai-philosophy.html">Kagi AI Philosophy</a> - Product-level boundary setting with clear scope and limits</li>
+    </ul>
+
+    <h3>Bottom Line</h3>
+    <p>Good AI policy reduces ambiguity, not labor.</p>
+    <p>Good AI policy preserves judgment, surfaces evidence, and narrows blast radius.</p>
+    <p>Remaining variants reduce to marketing attached to tooling.</p>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>
