@@ -14,6 +14,7 @@
 
   <nav>
     <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
     <a href="/workflows/">Workflows</a>
     <a href="/research/">Research</a>
     <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
@@ -26,6 +27,22 @@
       AI-assisted development. Content is organized into workflows
       (practical patterns) and research (empirical findings).
     </p>
+
+    <section class="i2p-note" id="i2p-note" hidden>
+      <h2>I2P Note</h2>
+      <p>
+        I2P traffic implies unusual taste or poor life choices. Either way,
+        AI advice is available.
+      </p>
+      <p>
+        For help with agents, local model workflows, prompt systems, evals,
+        or practical deployment messes, contact
+        <a href="mailto:nathanib@pm.me?subject=I2P%20AI%20Advice">nathanib@pm.me</a>.
+      </p>
+    </section>
+
+    <h2>Thesis</h2>
+    <p><a href="/thesis/">StayFresh Thesis</a> is the site's center of gravity: the hard position, the named frameworks, and the shortest path through the archive.</p>
 
     <h2>Workflows</h2>
     <p>Practical patterns for AI-assisted development.</p>
@@ -96,5 +113,15 @@
     <br>
     <a href="https://native-land.ca/listings/territories/puyallup">The author of this blog acknowledges that they are on the traditional territory of spuyaləpabš (Puyallup) Tribe.</a>
   </footer>
+  <script>
+    (function () {
+      var host = window.location.hostname.toLowerCase();
+      var isI2P = host.endsWith('.i2p');
+      if (!isI2P) return;
+
+      var note = document.getElementById('i2p-note');
+      if (note) note.hidden = false;
+    }());
+  </script>
 </body>
 </html>

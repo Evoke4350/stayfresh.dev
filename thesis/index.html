@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayFresh Thesis</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">March 2026</p>
+    <h2>StayFresh Thesis</h2>
+
+    <p>This site is not a feed. It is a position.</p>
+    <p>The position is that AI-assisted development improves when evaluation is explicit, architecture is legible, and empirical notes outrank polished claims.</p>
+
+    <h3>Position</h3>
+    <blockquote><p>Prompting shapes language. Evaluation shapes incentives. Architecture determines whether the result survives contact with reality.</p></blockquote>
+
+    <h3>What This Site Believes</h3>
+
+    <h4>1. Reward Surfaces Matter More Than Prompt Tricks</h4>
+    <p>Prompting can steer tone, ordering, and local behavior. It does not reliably determine what gets optimized under pressure.</p>
+    <p>The control surface is the rubric. See <a href="/research/reward-engineering/">Reward Engineering for Coding Agents</a>.</p>
+
+    <h4>2. Narrow Metrics Produce Fake Progress</h4>
+    <p>Single numbers are easy to optimize and easy to game.</p>
+    <p>Useful evaluation is multi-axis and explicit about what counts as failure. See <a href="/research/reward-hacking/">Reward Hacking in Coding Agents</a>.</p>
+
+    <h4>3. Machine-Readable Criteria Beat Vibe-Based Review</h4>
+    <p>Agents behave more predictably when success criteria are literal and inspectable.</p>
+    <p>That is why rubric DSLs and preference specs matter. See <a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a> and <a href="/workflows/preference-toml/">Preference TOML</a>.</p>
+
+    <h4>4. Context Inflation Is Usually a Smell</h4>
+    <p>When agents need long repository manifestos to function, the codebase is often the real problem.</p>
+    <p>Costly context is not the same thing as useful context. See <a href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a>.</p>
+
+    <h4>5. Loops Beat One-Shot Heroics</h4>
+    <p>Attempt, critique, revision, and rescore usually beat longer and louder prompts.</p>
+    <p>The boring loop wins because it narrows the next move. See <a href="/workflows/prompt-patterns/">Prompt Patterns</a>.</p>
+
+    <h4>6. Strong Positions Require Evidence</h4>
+    <p>This archive is opinionated on purpose.</p>
+    <p>Every durable claim should reduce to a failure mode, an example, or a reproducible workflow pattern.</p>
+
+    <h4>7. Field Notes Need Compression</h4>
+    <p>Raw observation is not enough. Findings need to compress into something reusable.</p>
+    <p>The Starfish method exists for that reason: Start, Stop, Continue, Investigate, Amplify.</p>
+
+    <h4>8. Personal Brand Comes From Doctrine, Not Volume</h4>
+    <p>More posts create more output. A named position creates memorability.</p>
+    <p>The archive exists to support a doctrine, not to cosplay momentum.</p>
+
+    <h3>What This Site Rejects</h3>
+    <ul>
+      <li>AI writing that sounds like sales enablement sludge.</li>
+      <li>Benchmarks treated as truth instead of instruments.</li>
+      <li>One-score evaluation systems presented as rigor.</li>
+      <li>Architecture problems disguised as prompt problems.</li>
+      <li>Personal branding with aesthetics and no hard position.</li>
+    </ul>
+
+    <h3>Named Frameworks</h3>
+    <ul>
+      <li><strong>Starfish Method:</strong> Start, Stop, Continue, Investigate, Amplify. Used to compress empirical findings without flattening them.</li>
+      <li><strong>Reward Rubric DSL:</strong> A machine-readable rubric for scoring agent output.</li>
+      <li><strong>Preference TOML:</strong> A config pattern that uses RLHF-shaped semantics for critique and selection.</li>
+    </ul>
+
+    <h3>Best Starting Reads</h3>
+    <ul>
+      <li><a href="/workflows/project-ai-philosophy/">Project AI Philosophy</a></li>
+      <li><a href="/research/reward-engineering/">Reward Engineering for Coding Agents</a></li>
+      <li><a href="/research/reward-hacking/">Reward Hacking in Coding Agents</a></li>
+      <li><a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a></li>
+      <li><a href="/workflows/preference-toml/">Preference TOML</a></li>
+    </ul>
+
+    <h3>Contact</h3>
+    <p>For disagreement, replication attempts, or examples that break these claims: <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>.</p>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>
