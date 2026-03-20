@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instant Project Sync - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">March 2026</p>
+    <h2>Instant Project Sync</h2>
+
+    <p>Objective: instantaneous project management by synchronizing ticket queues against agentic file search of consulting documentation and contract dates.</p>
+    <p>When documentation is missing, requirements are decomposed from code, user tickets, and available manuals.</p>
+
+    <h3>Why This Workflow Exists</h3>
+    <p>Most project drift is not execution failure. It is evidence mismatch: ticket claims, contract obligations, and real implementation state diverge.</p>
+    <p>This loop collapses that gap by forcing every active ticket to map to source evidence and date-bound obligations.</p>
+
+    <h3>Core Inputs</h3>
+    <ul>
+      <li><strong>ticket feed</strong> - juror/jira/linear task stream with status, owner, and due date</li>
+      <li><strong>contract surface</strong> - msa, sow, amendment, renewal, sla, and milestone dates</li>
+      <li><strong>delivery evidence</strong> - repository code, changelogs, runbooks, support manuals</li>
+      <li><strong>user signal</strong> - incidents, support tickets, and acceptance feedback</li>
+    </ul>
+
+    <h3>Execution Loop (Daily)</h3>
+    <pre><code>1. ingest open tickets
+2. run agentic file search for each ticket:
+   - matching requirement text
+   - matching contract clause or milestone
+   - matching code path or manual section
+3. score evidence confidence (high/medium/low)
+4. detect date conflicts:
+   - ticket due > contract milestone
+   - missing owner for date-critical work
+   - unresolved dependency blocking contracted delivery
+5. produce sync board:
+   - now: must ship in current window
+   - next: scheduled and contract-aligned
+   - risk: misaligned, under-specified, or date-broken
+6. open remediation tickets automatically for all risk items</code></pre>
+
+    <h3>No-Documentation Fallback</h3>
+    <p>If formal documentation is absent, the workflow does not stop.</p>
+    <p>Reconstruct requirements from implementation and user intent:</p>
+    <pre><code>1. extract feature surfaces from code:
+   rg -n "TODO|FIXME|feature|flag|endpoint|workflow" .
+2. parse user tickets for expected outcomes and acceptance hints
+3. mine manuals/help docs for promised behavior
+4. infer provisional requirements:
+   - actor
+   - action
+   - expected result
+   - failure boundary
+5. mark each inferred requirement as provisional until reviewed
+6. attach inferred requirement ids back to tickets</code></pre>
+
+    <h3>Contract Date Reconciliation Rules</h3>
+    <ul>
+      <li><strong>rule 1</strong> - contract milestone outranks ticket due date</li>
+      <li><strong>rule 2</strong> - unlinked ticket cannot be marked delivery-ready</li>
+      <li><strong>rule 3</strong> - low-confidence evidence requires owner sign-off</li>
+      <li><strong>rule 4</strong> - no owner means no schedule commitment</li>
+    </ul>
+
+    <h3>Minimal Data Contract</h3>
+    <pre><code>{
+  "ticket_id": "J-142",
+  "requirement_ref": "REQ-09",
+  "contract_ref": "SOW-2.4",
+  "contract_date": "2026-04-15",
+  "evidence_paths": ["src/billing/renewal.ts", "manuals/billing.md"],
+  "confidence": "medium",
+  "status": "risk",
+  "owner": "pm@company"
+}</code></pre>
+
+    <h3>Output Artifacts</h3>
+    <ul>
+      <li><strong>sync report</strong> - ticket-to-contract alignment matrix</li>
+      <li><strong>risk queue</strong> - date violations and missing evidence</li>
+      <li><strong>reconstruction log</strong> - inferred requirements created from code/tickets/manuals</li>
+      <li><strong>next-action brief</strong> - top 5 actions that reduce contractual risk fastest</li>
+    </ul>
+
+    <h3>Fast Start Prompt</h3>
+    <pre><code>Synchronize open tickets against repository evidence and contract dates.
+For each ticket:
+- map requirement_ref and contract_ref
+- extract evidence paths
+- classify confidence
+- flag date conflicts
+If documentation is missing, infer provisional requirements from code, user tickets, and manuals.
+Return now/next/risk board plus remediation tickets.</code></pre>
+
+    <h3>Bottom Line</h3>
+    <p>Instant project management is a synchronization problem, not a dashboard problem.</p>
+    <p>Evidence-linked tickets plus contract-date reconciliation produce the shortest path to predictable delivery.</p>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>
