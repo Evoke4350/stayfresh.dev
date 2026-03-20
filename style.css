@@ -163,6 +163,25 @@ main li {
   font-weight: normal;
 }
 
+.telegram-cta {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.telegram-cta h2 {
+  margin-top: 0;
+}
+
+.telegram-cta .cta-link {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
 /* Code blocks — preserve capitalization and use system monospace */
 code, pre {
   font-family: "SF Mono", Monaco, Consolas, monospace;

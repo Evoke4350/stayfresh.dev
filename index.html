@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StayFresh</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="/telegram-cta.js"></script>
 </head>
 <body>
   <header>
@@ -28,17 +29,19 @@
       (practical patterns) and research (empirical findings).
     </p>
 
-    <section class="i2p-note" id="i2p-note" hidden>
-      <h2>I2P Note</h2>
-      <p>
-        I2P traffic implies unusual taste or poor life choices. Either way,
-        AI advice is available.
-      </p>
-      <p>
-        For help with agents, local model workflows, prompt systems, evals,
-        or practical deployment messes, contact
-        <a href="mailto:nathanib@pm.me?subject=I2P%20AI%20Advice">nathanib@pm.me</a>.
-      </p>
+    <section class="telegram-cta">
+      <h2>Telegram Support</h2>
+      <p>businesses win faster when ai philosophy is explicit, scoped, and enforced in workflows.</p>
+      <p>help is available through this cta: free 15-minute private encrypted calls by request, low friction, no form maze.</p>
+      <p>evoke86 sets up systems that automatically capture, respond to, and convert leads 24/7. imagine having a technical cofounder in your pocket.</p>
+      <p>direct advisory channel: <a href="tel:+16058126680">605-812-6680</a>. private cellular service with encrypted voicemail on a grapheneos phone for principal advisory channels.</p>
+      <a
+        class="cta-link"
+        data-telegram-cta="1"
+        data-telegram-handle="Evoke86"
+        data-telegram-text="hi evoke86 -- request for a free 15-minute private encrypted consult from stayfresh ({url})"
+        href="https://t.me/Evoke86"
+      >message on telegram</a>
     </section>
 
     <h2>Thesis</h2>
@@ -118,15 +121,5 @@
     <br>
     <a href="https://native-land.ca/listings/territories/puyallup">The author of this blog acknowledges that they are on the traditional territory of spuyaləpabš (Puyallup) Tribe.</a>
   </footer>
-  <script>
-    (function () {
-      var host = window.location.hostname.toLowerCase();
-      var isI2P = host.endsWith('.i2p');
-      if (!isI2P) return;
-
-      var note = document.getElementById('i2p-note');
-      if (note) note.hidden = false;
-    }());
-  </script>
 </body>
 </html>
