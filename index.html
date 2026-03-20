@@ -103,6 +103,53 @@
       <p class="stress-test-result" data-ai-stress-output hidden></p>
     </section>
 
+    <section class="value-calc">
+      <h2>Value Capture Calculator</h2>
+      <p>directional $$$ model for value-based pricing. no hourly framing, only captured business value.</p>
+      <form data-value-calc data-telegram-handle="Evoke86">
+        <div class="value-calc-grid">
+          <label>
+            lead volume per month
+            <input type="number" name="lead_volume" min="0" step="1" value="200" required>
+          </label>
+          <label>
+            currently missed lead rate (%)
+            <input type="number" name="missed_lead_rate" min="0" max="100" step="0.1" value="25" required>
+          </label>
+          <label>
+            response lift from automation (%)
+            <input type="number" name="response_lift" min="0" max="100" step="0.1" value="40" required>
+          </label>
+          <label>
+            close rate on recovered leads (%)
+            <input type="number" name="close_rate" min="0" max="100" step="0.1" value="20" required>
+          </label>
+          <label>
+            average deal value ($)
+            <input type="number" name="avg_deal_value" min="0" step="1" value="2500" required>
+          </label>
+          <label>
+            hours saved per week
+            <input type="number" name="hours_saved_week" min="0" step="0.5" value="8" required>
+          </label>
+          <label>
+            loaded labor cost ($/hour)
+            <input type="number" name="loaded_hourly_cost" min="0" step="1" value="95" required>
+          </label>
+          <label>
+            contract penalty risk avoided per year ($)
+            <input type="number" name="contract_penalty_risk" min="0" step="1" value="15000" required>
+          </label>
+          <label>
+            churn risk reduction per year ($)
+            <input type="number" name="churn_risk_reduction" min="0" step="1" value="30000" required>
+          </label>
+        </div>
+        <button type="submit" class="cta-link">calculate value and send to telegram</button>
+      </form>
+      <p class="value-calc-result" data-value-calc-output hidden></p>
+    </section>
+
     <section class="telegram-cta">
       <h2>Telegram Support</h2>
       <p>businesses win faster when ai philosophy is explicit, scoped, and enforced in workflows.</p>

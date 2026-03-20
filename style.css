@@ -205,6 +205,60 @@ main li {
   color: var(--muted);
 }
 
+.value-calc {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.value-calc h2 {
+  margin-top: 0;
+}
+
+.value-calc form {
+  margin-top: 1rem;
+}
+
+.value-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.value-calc label {
+  display: block;
+}
+
+.value-calc input {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  text-transform: lowercase;
+  letter-spacing: inherit;
+}
+
+.value-calc .cta-link {
+  cursor: pointer;
+}
+
+.value-calc-result {
+  margin-top: 0.85rem;
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .value-calc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .telegram-cta {
   margin: 1.5rem 0 2rem;
   padding: 1rem 1.25rem;

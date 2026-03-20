@@ -30,6 +30,24 @@
     return "critical";
   }
 
+  function num(value) {
+    var parsed = Number(value);
+    if (!Number.isFinite(parsed)) return 0;
+    return parsed;
+  }
+
+  function percent(value) {
+    var n = num(value);
+    if (n < 0) return 0;
+    if (n > 100) return 1;
+    return n / 100;
+  }
+
+  function usd(value) {
+    var amount = Math.max(0, Math.round(num(value)));
+    return "$" + amount.toLocaleString("en-US");
+  }
+
   function wireStressTests() {
     var forms = document.querySelectorAll("form[data-ai-stress-test]");
     for (var i = 0; i < forms.length; i += 1) {
@@ -96,6 +114,71 @@
     }
   }
 
+  function wireValueCalculators() {
+    var forms = document.querySelectorAll("form[data-value-calc]");
+    for (var i = 0; i < forms.length; i += 1) {
+      forms[i].addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var form = event.currentTarget;
+        var handle = form.getAttribute("data-telegram-handle") || "Evoke86";
+        var leadVolume = num(form.elements.lead_volume.value);
+        var missedLeadRate = percent(form.elements.missed_lead_rate.value);
+        var responseLift = percent(form.elements.response_lift.value);
+        var closeRate = percent(form.elements.close_rate.value);
+        var avgDealValue = num(form.elements.avg_deal_value.value);
+        var hoursSavedWeek = num(form.elements.hours_saved_week.value);
+        var loadedHourlyCost = num(form.elements.loaded_hourly_cost.value);
+        var contractPenaltyRisk = num(form.elements.contract_penalty_risk.value);
+        var churnRiskReduction = num(form.elements.churn_risk_reduction.value);
+
+        var recoveredRevenue = leadVolume * missedLeadRate * responseLift * closeRate * avgDealValue * 12;
+        var costSavings = hoursSavedWeek * loadedHourlyCost * 52;
+        var riskAvoidance = contractPenaltyRisk + churnRiskReduction;
+        var annualValue = recoveredRevenue + costSavings + riskAvoidance;
+        var lowAnchor = annualValue * 0.1;
+        var highAnchor = annualValue * 0.2;
+
+        var output = form.parentNode.querySelector("[data-value-calc-output]");
+        if (output) {
+          output.hidden = false;
+          output.textContent =
+            "annual value estimate " + usd(annualValue) +
+            ". value-based engagement band " + usd(lowAnchor) + " to " + usd(highAnchor) +
+            " (10-20% of captured annual value).";
+        }
+
+        var message = [
+          "value capture calculator submission",
+          "annual_value: " + usd(annualValue),
+          "recovered_revenue: " + usd(recoveredRevenue),
+          "cost_savings: " + usd(costSavings),
+          "risk_avoidance: " + usd(riskAvoidance),
+          "value_based_pricing_band: " + usd(lowAnchor) + " to " + usd(highAnchor),
+          "pricing_model: value-based, not hourly",
+          "inputs:",
+          "- lead_volume_per_month=" + leadVolume,
+          "- missed_lead_rate_percent=" + Math.round(missedLeadRate * 1000) / 10,
+          "- response_lift_percent=" + Math.round(responseLift * 1000) / 10,
+          "- close_rate_percent=" + Math.round(closeRate * 1000) / 10,
+          "- avg_deal_value=" + usd(avgDealValue),
+          "- hours_saved_per_week=" + hoursSavedWeek,
+          "- loaded_hourly_cost=" + usd(loadedHourlyCost),
+          "- contract_penalty_risk=" + usd(contractPenaltyRisk),
+          "- churn_risk_reduction=" + usd(churnRiskReduction),
+          "source: " + window.location.href
+        ].join("\n");
+
+        var url = buildTelegramUrl(handle, message);
+        var popup = window.open(url, "_blank", "noopener,noreferrer");
+        if (!popup) {
+          window.location.href = url;
+        }
+      });
+    }
+  }
+
   hydrateTelegramLinks();
   wireStressTests();
+  wireValueCalculators();
 }());
