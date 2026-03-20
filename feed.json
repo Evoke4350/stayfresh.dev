@@ -1,0 +1,143 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "StayFresh",
+  "home_page_url": "https://stayfresh.dev/",
+  "feed_url": "https://stayfresh.dev/feed.json",
+  "description": "Static archive of workflow research and patterns for AI-assisted development.",
+  "language": "en-US",
+  "authors": [
+    {
+      "name": "StayFresh"
+    }
+  ],
+  "items": [
+    {
+      "id": "https://stayfresh.dev/thesis/",
+      "url": "https://stayfresh.dev/thesis/",
+      "title": "StayFresh Thesis",
+      "summary": "The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.",
+      "date_published": "2026-03-19T00:00:00Z",
+      "date_modified": "2026-03-19T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/puyallup-consulting-pipeline/",
+      "url": "https://stayfresh.dev/workflows/puyallup-consulting-pipeline/",
+      "title": "Puyallup Consulting Lead Pipeline",
+      "summary": "A consultant-first hyper-local pipeline for capturing, qualifying, and routing small-business leads around Puyallup.",
+      "date_published": "2026-03-19T00:00:00Z",
+      "date_modified": "2026-03-19T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/instant-project-sync/",
+      "url": "https://stayfresh.dev/workflows/instant-project-sync/",
+      "title": "Instant Project Sync",
+      "summary": "Synchronize ticket queues against contract dates and repository evidence, with requirement reconstruction when docs are missing.",
+      "date_published": "2026-03-19T00:00:00Z",
+      "date_modified": "2026-03-19T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/psay-agent-notify/",
+      "url": "https://stayfresh.dev/workflows/psay-agent-notify/",
+      "title": "psay Agent Notifications",
+      "summary": "Local voice and Notification Center loops for agent completion, handoff, and operator recall.",
+      "date_published": "2026-03-19T00:00:00Z",
+      "date_modified": "2026-03-19T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/project-ai-philosophy/",
+      "url": "https://stayfresh.dev/workflows/project-ai-philosophy/",
+      "title": "Project AI Philosophy",
+      "summary": "A written position for bounded, evidence-backed AI use in delivery.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/preference-toml/",
+      "url": "https://stayfresh.dev/workflows/preference-toml/",
+      "title": "Preference TOML",
+      "summary": "Use RLHF-shaped semantics in a simple config DSL for agent evaluation loops.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/reward-rubric-dsl/",
+      "url": "https://stayfresh.dev/workflows/reward-rubric-dsl/",
+      "title": "Reward Rubric DSL",
+      "summary": "A small machine-readable format for scoring coding agent output.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/prompt-patterns/",
+      "url": "https://stayfresh.dev/workflows/prompt-patterns/",
+      "title": "Prompt Patterns",
+      "summary": "Common prompt structures for reliable agent behavior.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/agent-psychology/",
+      "url": "https://stayfresh.dev/workflows/agent-psychology/",
+      "title": "Agent Psychology",
+      "summary": "Understanding how agents reason and respond to instructions.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/ci-automation/",
+      "url": "https://stayfresh.dev/workflows/ci-automation/",
+      "title": "CI Automation with AI Agents",
+      "summary": "Integrating AI agents with continuous integration workflows.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/reward-engineering/",
+      "url": "https://stayfresh.dev/research/reward-engineering/",
+      "title": "Reward Engineering for Coding Agents",
+      "summary": "Why coding agents optimize the rubric more than the prompt.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/reward-hacking/",
+      "url": "https://stayfresh.dev/research/reward-hacking/",
+      "title": "Reward Hacking in Coding Agents",
+      "summary": "How poorly designed metrics produce plausible but unstable code.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/agents-md-effectiveness/",
+      "url": "https://stayfresh.dev/research/agents-md-effectiveness/",
+      "title": "AGENTS.md Effectiveness",
+      "summary": "Evaluating repository-level context files for coding agents.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/formal-verification-agents/",
+      "url": "https://stayfresh.dev/research/formal-verification-agents/",
+      "title": "Formal Verification with Agents",
+      "summary": "Property-based testing and specification generation.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/enterprise-agent-design/",
+      "url": "https://stayfresh.dev/research/enterprise-agent-design/",
+      "title": "Enterprise Agent Design",
+      "summary": "BCG framework for production-grade agents.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/persona-anchors/",
+      "url": "https://stayfresh.dev/research/persona-anchors/",
+      "title": "Persona Anchors",
+      "summary": "Character-based instruction patterns for consistent agent behavior.",
+      "date_published": "2026-03-18T00:00:00Z",
+      "date_modified": "2026-03-18T00:00:00Z"
+    }
+  ]
+}

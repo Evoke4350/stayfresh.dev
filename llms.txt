@@ -1,0 +1,44 @@
+# StayFresh
+
+> Static archive of workflow research and patterns for AI-assisted development, with a consultant-first operating track for hyper-local business systems around Puyallup.
+
+Use the thesis first for doctrine, then workflows for implementation patterns, then research for supporting evidence. Canonical HTML pages are listed below. Markdown mirrors are not published yet.
+
+## Start Here
+
+- [StayFresh](https://stayfresh.dev/): Homepage with thesis, consulting intake, workflow index, survey, and contact routes.
+- [StayFresh Thesis](https://stayfresh.dev/thesis/): Best single starting point. Explains the site's position on reward surfaces, architecture, and comprehension debt.
+- [Workflows](https://stayfresh.dev/workflows/): Index of practical workflow patterns.
+- [Research](https://stayfresh.dev/research/): Index of supporting research notes.
+
+## Consulting and Operations
+
+- [Puyallup Consulting Lead Pipeline](https://stayfresh.dev/workflows/puyallup-consulting-pipeline/): Consultant-first hyper-local lead pipeline for small businesses in and around Puyallup.
+- [Instant Project Sync](https://stayfresh.dev/workflows/instant-project-sync/): Ticket-to-contract evidence sync for consulting and delivery operations.
+- [psay Agent Notifications](https://stayfresh.dev/workflows/psay-agent-notify/): Operator alerts via local voice and notifications for long-running agent work.
+- [Project AI Philosophy](https://stayfresh.dev/workflows/project-ai-philosophy/): How client AI policy gets translated into bounded operating rules.
+
+## Agent Workflow Patterns
+
+- [Preference TOML](https://stayfresh.dev/workflows/preference-toml/): Simple config shape for critique, selection, and evaluation loops.
+- [Reward Rubric DSL](https://stayfresh.dev/workflows/reward-rubric-dsl/): Machine-readable rubric pattern for scoring agent output.
+- [Prompt Patterns](https://stayfresh.dev/workflows/prompt-patterns/): Prompt structures that reduce token waste and instruction bloat.
+- [Agent Psychology](https://stayfresh.dev/workflows/agent-psychology/): Observed behavior patterns for coding agents and how to use them.
+- [CI Automation with AI Agents](https://stayfresh.dev/workflows/ci-automation/): Continuous integration patterns for agent loops, halting, and review.
+
+## Research
+
+- [Reward Engineering for Coding Agents](https://stayfresh.dev/research/reward-engineering/): Why rubrics shape agent behavior more than prompts.
+- [Reward Hacking in Coding Agents](https://stayfresh.dev/research/reward-hacking/): Failure modes caused by narrow or gameable evaluation.
+- [AGENTS.md Effectiveness](https://stayfresh.dev/research/agents-md-effectiveness/): Evidence on repository instruction files and why they often add cost without helping.
+- [Formal Verification with Agents](https://stayfresh.dev/research/formal-verification-agents/): Property-based testing and specification generation with agents.
+- [Enterprise Agent Design](https://stayfresh.dev/research/enterprise-agent-design/): Enterprise design patterns for production-grade agents.
+- [Persona Anchors](https://stayfresh.dev/research/persona-anchors/): How named styles and persona anchors change agent behavior.
+
+## Optional
+
+- [RSS Feed](https://stayfresh.dev/rss.xml): Recent site updates in RSS 2.0 format.
+- [Atom Feed](https://stayfresh.dev/atom.xml): Recent site updates in Atom 1.0 format.
+- [JSON Feed](https://stayfresh.dev/feed.json): Machine-readable feed for applications that prefer JSON.
+- [XML Sitemap](https://stayfresh.dev/sitemap.xml): Full canonical URL inventory for crawlers.
+- [GitHub Repository](https://github.com/Evoke4350/stayfresh.dev): Source repository for the site.

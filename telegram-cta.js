@@ -36,6 +36,11 @@
     return parsed;
   }
 
+  function text(value) {
+    if (value === null || value === undefined) return "";
+    return String(value).trim();
+  }
+
   function percent(value) {
     var n = num(value);
     if (n < 0) return 0;
@@ -130,6 +135,12 @@
 
         var form = event.currentTarget;
         var handle = form.getAttribute("data-telegram-handle") || "Evoke86";
+        var contactName = text(form.elements.contact_name.value);
+        var businessName = text(form.elements.business_name.value);
+        var preferredChannel = text(form.elements.preferred_channel.value) || "telegram";
+        var contactDetail = text(form.elements.contact_detail.value);
+        var orgType = form.elements.org_type.value || "small_business";
+        var operatingRegion = form.elements.operating_region.value || "other_region";
         var leadVolume = num(form.elements.lead_volume.value);
         var missedLeadRate = percent(form.elements.missed_lead_rate.value);
         var responseLift = percent(form.elements.response_lift.value);
@@ -146,23 +157,66 @@
         var annualValue = recoveredRevenue + costSavings + riskAvoidance;
         var lowAnchor = annualValue * 0.1;
         var highAnchor = annualValue * 0.2;
+        var discountRate = 0;
+        var discountLabel = "standard pricing lane";
+
+        if (orgType === "nonprofit" || orgType === "education") {
+          discountRate = 0.2;
+          discountLabel = "community discount lane (20%)";
+        } else if (orgType === "factory_side_hustle") {
+          discountRate = 0.15;
+          discountLabel = "factory side-hustle lane (15%)";
+        }
+
+        var discountedLow = lowAnchor * (1 - discountRate);
+        var discountedHigh = highAnchor * (1 - discountRate);
+        var lane = "external queue";
+        var responseSla = "review within 72 hours";
+        if (operatingRegion === "puyallup_territory") {
+          lane = "hyper-local priority";
+          responseSla = "same business day";
+        } else if (operatingRegion === "wa_wider") {
+          lane = "regional lane";
+          responseSla = "within 24-48 hours";
+        }
 
         var output = form.parentNode.querySelector("[data-value-calc-output]");
         if (output) {
           output.hidden = false;
-          output.textContent =
-            "annual value estimate " + usd(annualValue) +
-            ". value-based engagement band " + usd(lowAnchor) + " to " + usd(highAnchor) +
-            " (10-20% of captured annual value).";
+          if (discountRate > 0) {
+            output.textContent =
+              "annual value estimate " + usd(annualValue) +
+              ". base consulting band " + usd(lowAnchor) + " to " + usd(highAnchor) +
+              ". discounted consulting band " + usd(discountedLow) + " to " + usd(discountedHigh) +
+              " via " + discountLabel +
+              ". routing: " + lane + ", response sla " + responseSla + ".";
+          } else {
+            output.textContent =
+              "annual value estimate " + usd(annualValue) +
+              ". value-based consulting band " + usd(lowAnchor) + " to " + usd(highAnchor) +
+              " (10-20% of captured annual value)." +
+              " routing: " + lane + ", response sla " + responseSla + ".";
+          }
         }
 
         var message = [
-          "value capture calculator submission",
+          "hyper-local consulting pipeline submission",
+          "contact_name: " + contactName,
+          "business_name: " + businessName,
+          "preferred_channel: " + preferredChannel,
+          "contact_detail: " + contactDetail,
+          "org_type: " + orgType,
+          "operating_region: " + operatingRegion,
+          "routing_lane: " + lane,
+          "response_sla: " + responseSla,
           "annual_value: " + usd(annualValue),
           "recovered_revenue: " + usd(recoveredRevenue),
           "cost_savings: " + usd(costSavings),
           "risk_avoidance: " + usd(riskAvoidance),
           "value_based_pricing_band: " + usd(lowAnchor) + " to " + usd(highAnchor),
+          "discount_lane: " + discountLabel,
+          "discounted_consulting_band: " + usd(discountedLow) + " to " + usd(discountedHigh),
+          "delivery_model: consultant-led implementation",
           "pricing_model: value-based, not hourly",
           "inputs:",
           "- lead_volume_per_month=" + leadVolume,

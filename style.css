@@ -231,7 +231,8 @@ main li {
   display: block;
 }
 
-.value-calc input {
+.value-calc input,
+.value-calc select {
   display: block;
   width: 100%;
   margin-top: 0.3rem;

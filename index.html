@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StayFresh is a static archive of workflow research and patterns for AI-assisted development, consulting pipelines, and operator-first systems.">
+  <link rel="canonical" href="https://stayfresh.dev/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
   <title>StayFresh</title>
   <link rel="stylesheet" href="style.css">
   <script defer src="/telegram-cta.js"></script>
@@ -34,10 +39,51 @@
     <p>Core rule: tools should reduce comprehension debt. Auditory cues are one practical way to improve recall when attention is split across terminals, editors, and agent loops.</p>
 
     <section class="value-calc">
-      <h2>Value Capture Calculator</h2>
-      <p>directional $$$ model for value-based pricing. no hourly framing, only captured business value.</p>
+      <h2>Hyper-Local Consulting Pipeline</h2>
+      <p>this intake is built for your own regional consulting pipeline, not a generic lead form.</p>
+      <p>directional $$$ model for value-based consulting pricing. no hourly framing, only captured business value.</p>
+      <p>regional lead pipeline focus: small businesses in and around the traditional territory of spuyaləpabš (puyallup). discount routing is built in for nonprofit, education, and factory workers building side hustles.</p>
+      <p>full operating playbook: <a href="/workflows/puyallup-consulting-pipeline/">Puyallup Consulting Lead Pipeline</a>.</p>
       <form data-value-calc data-telegram-handle="Evoke86">
         <div class="value-calc-grid">
+          <label>
+            contact name
+            <input type="text" name="contact_name" value="" required>
+          </label>
+          <label>
+            business name
+            <input type="text" name="business_name" value="" required>
+          </label>
+          <label>
+            preferred contact channel
+            <select name="preferred_channel" required>
+              <option value="telegram">telegram</option>
+              <option value="phone">phone</option>
+              <option value="email">email</option>
+            </select>
+          </label>
+          <label>
+            best contact detail
+            <input type="text" name="contact_detail" value="" required>
+          </label>
+          <label>
+            organization type
+            <select name="org_type" required>
+              <option value="small_business">small business</option>
+              <option value="nonprofit">nonprofit</option>
+              <option value="education">education</option>
+              <option value="factory_side_hustle">factory worker side hustle</option>
+              <option value="other">other</option>
+            </select>
+          </label>
+          <label>
+            operating region
+            <select name="operating_region" required>
+              <option value="puyallup_territory">puyallup territory / nearby</option>
+              <option value="wa_wider">wider washington</option>
+              <option value="other_region">other region</option>
+            </select>
+          </label>
           <label>
             lead volume per month
             <input type="number" name="lead_volume" min="0" step="1" value="200" required>
@@ -75,7 +121,7 @@
             <input type="number" name="churn_risk_reduction" min="0" step="1" value="30000" required>
           </label>
         </div>
-        <button type="submit" class="cta-link">calculate value and send to telegram</button>
+        <button type="submit" class="cta-link">calculate value + route lead brief to telegram</button>
       </form>
       <p class="value-calc-result" data-value-calc-output hidden></p>
     </section>
@@ -83,6 +129,8 @@
     <section class="telegram-cta">
       <h2>Telegram Support</h2>
       <p>businesses win faster when ai philosophy is explicit, scoped, and enforced in workflows.</p>
+      <p>regional priority: small businesses in and around the puyallup territory.</p>
+      <p>discount track: nonprofit, education, and factory-worker side-hustle projects get discounted value-based consulting bands.</p>
       <p>help is available through this cta: free 15-minute private encrypted calls by request, low friction, no form maze.</p>
       <p>evoke86 sets up systems that automatically capture, respond to, and convert leads 24/7. imagine having a technical cofounder in your pocket.</p>
       <p>direct advisory channel: <a href="tel:+16058126680">605-812-6680</a>. private cellular service with encrypted voicemail on a grapheneos phone for principal advisory channels.</p>
@@ -98,6 +146,10 @@
     <h2>Workflows</h2>
     <p>Practical patterns for AI-assisted development.</p>
     <ul class="article-list">
+      <li>
+        <span class="date">2026-03</span>
+        <a class="title" href="/workflows/puyallup-consulting-pipeline/">Puyallup Consulting Lead Pipeline</a>
+      </li>
       <li>
         <span class="date">2026-03</span>
         <a class="title" href="/workflows/instant-project-sync/">Instant Project Sync</a>

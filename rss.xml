@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>StayFresh</title>
+    <link>https://stayfresh.dev/</link>
+    <description>Static archive of workflow research and patterns for AI-assisted development.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>StayFresh Thesis</title>
+      <link>https://stayfresh.dev/thesis/</link>
+      <guid>https://stayfresh.dev/thesis/</guid>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <description>The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.</description>
+    </item>
+    <item>
+      <title>Puyallup Consulting Lead Pipeline</title>
+      <link>https://stayfresh.dev/workflows/puyallup-consulting-pipeline/</link>
+      <guid>https://stayfresh.dev/workflows/puyallup-consulting-pipeline/</guid>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <description>A consultant-first hyper-local pipeline for capturing, qualifying, and routing small-business leads around Puyallup.</description>
+    </item>
+    <item>
+      <title>Instant Project Sync</title>
+      <link>https://stayfresh.dev/workflows/instant-project-sync/</link>
+      <guid>https://stayfresh.dev/workflows/instant-project-sync/</guid>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Synchronize ticket queues against contract dates and repository evidence, with requirement reconstruction when docs are missing.</description>
+    </item>
+    <item>
+      <title>psay Agent Notifications</title>
+      <link>https://stayfresh.dev/workflows/psay-agent-notify/</link>
+      <guid>https://stayfresh.dev/workflows/psay-agent-notify/</guid>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Local voice and Notification Center loops for agent completion, handoff, and operator recall.</description>
+    </item>
+    <item>
+      <title>Project AI Philosophy</title>
+      <link>https://stayfresh.dev/workflows/project-ai-philosophy/</link>
+      <guid>https://stayfresh.dev/workflows/project-ai-philosophy/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>A written position for bounded, evidence-backed AI use in delivery.</description>
+    </item>
+    <item>
+      <title>Preference TOML</title>
+      <link>https://stayfresh.dev/workflows/preference-toml/</link>
+      <guid>https://stayfresh.dev/workflows/preference-toml/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Use RLHF-shaped semantics in a simple config DSL for agent evaluation loops.</description>
+    </item>
+    <item>
+      <title>Reward Rubric DSL</title>
+      <link>https://stayfresh.dev/workflows/reward-rubric-dsl/</link>
+      <guid>https://stayfresh.dev/workflows/reward-rubric-dsl/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>A small machine-readable format for scoring coding agent output.</description>
+    </item>
+    <item>
+      <title>Prompt Patterns</title>
+      <link>https://stayfresh.dev/workflows/prompt-patterns/</link>
+      <guid>https://stayfresh.dev/workflows/prompt-patterns/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Common prompt structures for reliable agent behavior.</description>
+    </item>
+    <item>
+      <title>Agent Psychology</title>
+      <link>https://stayfresh.dev/workflows/agent-psychology/</link>
+      <guid>https://stayfresh.dev/workflows/agent-psychology/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Understanding how agents reason and respond to instructions.</description>
+    </item>
+    <item>
+      <title>CI Automation with AI Agents</title>
+      <link>https://stayfresh.dev/workflows/ci-automation/</link>
+      <guid>https://stayfresh.dev/workflows/ci-automation/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Integrating AI agents with continuous integration workflows.</description>
+    </item>
+    <item>
+      <title>Reward Engineering for Coding Agents</title>
+      <link>https://stayfresh.dev/research/reward-engineering/</link>
+      <guid>https://stayfresh.dev/research/reward-engineering/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Why coding agents optimize the rubric more than the prompt.</description>
+    </item>
+    <item>
+      <title>Reward Hacking in Coding Agents</title>
+      <link>https://stayfresh.dev/research/reward-hacking/</link>
+      <guid>https://stayfresh.dev/research/reward-hacking/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>How poorly designed metrics produce plausible but unstable code.</description>
+    </item>
+    <item>
+      <title>AGENTS.md Effectiveness</title>
+      <link>https://stayfresh.dev/research/agents-md-effectiveness/</link>
+      <guid>https://stayfresh.dev/research/agents-md-effectiveness/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Evaluating repository-level context files for coding agents.</description>
+    </item>
+    <item>
+      <title>Formal Verification with Agents</title>
+      <link>https://stayfresh.dev/research/formal-verification-agents/</link>
+      <guid>https://stayfresh.dev/research/formal-verification-agents/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Property-based testing and specification generation.</description>
+    </item>
+    <item>
+      <title>Enterprise Agent Design</title>
+      <link>https://stayfresh.dev/research/enterprise-agent-design/</link>
+      <guid>https://stayfresh.dev/research/enterprise-agent-design/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>BCG framework for production-grade agents.</description>
+    </item>
+    <item>
+      <title>Persona Anchors</title>
+      <link>https://stayfresh.dev/research/persona-anchors/</link>
+      <guid>https://stayfresh.dev/research/persona-anchors/</guid>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Character-based instruction patterns for consistent agent behavior.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>StayFresh</title>
+  <subtitle>Static archive of workflow research and patterns for AI-assisted development.</subtitle>
+  <link href="https://stayfresh.dev/atom.xml" rel="self"/>
+  <link href="https://stayfresh.dev/"/>
+  <updated>2026-03-19T00:00:00Z</updated>
+  <id>https://stayfresh.dev/</id>
+  <entry>
+    <title>StayFresh Thesis</title>
+    <link href="https://stayfresh.dev/thesis/"/>
+    <id>https://stayfresh.dev/thesis/</id>
+    <updated>2026-03-19T00:00:00Z</updated>
+    <summary>The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.</summary>
+  </entry>
+  <entry>
+    <title>Puyallup Consulting Lead Pipeline</title>
+    <link href="https://stayfresh.dev/workflows/puyallup-consulting-pipeline/"/>
+    <id>https://stayfresh.dev/workflows/puyallup-consulting-pipeline/</id>
+    <updated>2026-03-19T00:00:00Z</updated>
+    <summary>A consultant-first hyper-local pipeline for capturing, qualifying, and routing small-business leads around Puyallup.</summary>
+  </entry>
+  <entry>
+    <title>Instant Project Sync</title>
+    <link href="https://stayfresh.dev/workflows/instant-project-sync/"/>
+    <id>https://stayfresh.dev/workflows/instant-project-sync/</id>
+    <updated>2026-03-19T00:00:00Z</updated>
+    <summary>Synchronize ticket queues against contract dates and repository evidence, with requirement reconstruction when docs are missing.</summary>
+  </entry>
+  <entry>
+    <title>psay Agent Notifications</title>
+    <link href="https://stayfresh.dev/workflows/psay-agent-notify/"/>
+    <id>https://stayfresh.dev/workflows/psay-agent-notify/</id>
+    <updated>2026-03-19T00:00:00Z</updated>
+    <summary>Local voice and Notification Center loops for agent completion, handoff, and operator recall.</summary>
+  </entry>
+  <entry>
+    <title>Project AI Philosophy</title>
+    <link href="https://stayfresh.dev/workflows/project-ai-philosophy/"/>
+    <id>https://stayfresh.dev/workflows/project-ai-philosophy/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>A written position for bounded, evidence-backed AI use in delivery.</summary>
+  </entry>
+  <entry>
+    <title>Preference TOML</title>
+    <link href="https://stayfresh.dev/workflows/preference-toml/"/>
+    <id>https://stayfresh.dev/workflows/preference-toml/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Use RLHF-shaped semantics in a simple config DSL for agent evaluation loops.</summary>
+  </entry>
+  <entry>
+    <title>Reward Rubric DSL</title>
+    <link href="https://stayfresh.dev/workflows/reward-rubric-dsl/"/>
+    <id>https://stayfresh.dev/workflows/reward-rubric-dsl/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>A small machine-readable format for scoring coding agent output.</summary>
+  </entry>
+  <entry>
+    <title>Prompt Patterns</title>
+    <link href="https://stayfresh.dev/workflows/prompt-patterns/"/>
+    <id>https://stayfresh.dev/workflows/prompt-patterns/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Common prompt structures for reliable agent behavior.</summary>
+  </entry>
+  <entry>
+    <title>Agent Psychology</title>
+    <link href="https://stayfresh.dev/workflows/agent-psychology/"/>
+    <id>https://stayfresh.dev/workflows/agent-psychology/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Understanding how agents reason and respond to instructions.</summary>
+  </entry>
+  <entry>
+    <title>CI Automation with AI Agents</title>
+    <link href="https://stayfresh.dev/workflows/ci-automation/"/>
+    <id>https://stayfresh.dev/workflows/ci-automation/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Integrating AI agents with continuous integration workflows.</summary>
+  </entry>
+  <entry>
+    <title>Reward Engineering for Coding Agents</title>
+    <link href="https://stayfresh.dev/research/reward-engineering/"/>
+    <id>https://stayfresh.dev/research/reward-engineering/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Why coding agents optimize the rubric more than the prompt.</summary>
+  </entry>
+  <entry>
+    <title>Reward Hacking in Coding Agents</title>
+    <link href="https://stayfresh.dev/research/reward-hacking/"/>
+    <id>https://stayfresh.dev/research/reward-hacking/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>How poorly designed metrics produce plausible but unstable code.</summary>
+  </entry>
+  <entry>
+    <title>AGENTS.md Effectiveness</title>
+    <link href="https://stayfresh.dev/research/agents-md-effectiveness/"/>
+    <id>https://stayfresh.dev/research/agents-md-effectiveness/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Evaluating repository-level context files for coding agents.</summary>
+  </entry>
+  <entry>
+    <title>Formal Verification with Agents</title>
+    <link href="https://stayfresh.dev/research/formal-verification-agents/"/>
+    <id>https://stayfresh.dev/research/formal-verification-agents/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Property-based testing and specification generation.</summary>
+  </entry>
+  <entry>
+    <title>Enterprise Agent Design</title>
+    <link href="https://stayfresh.dev/research/enterprise-agent-design/"/>
+    <id>https://stayfresh.dev/research/enterprise-agent-design/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>BCG framework for production-grade agents.</summary>
+  </entry>
+  <entry>
+    <title>Persona Anchors</title>
+    <link href="https://stayfresh.dev/research/persona-anchors/"/>
+    <id>https://stayfresh.dev/research/persona-anchors/</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <summary>Character-based instruction patterns for consistent agent behavior.</summary>
+  </entry>
+</feed>
