@@ -29,6 +29,80 @@
       (practical patterns) and research (empirical findings).
     </p>
 
+    <section class="stress-test">
+      <h2>60-second AI Philosophy Stress Test</h2>
+      <p>five checks. instant score. top three risks. send the brief to telegram in one click.</p>
+      <form data-ai-stress-test data-telegram-handle="Evoke86">
+        <label>
+          1. written ai philosophy with explicit allowed and forbidden actions?
+          <select
+            name="policy"
+            data-ai-score="2"
+            data-risk-high="no clear ai policy boundary. behavior will drift by prompt mood."
+            data-risk-mid="policy exists but is vague. enforcement is likely inconsistent."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <label>
+          2. machine-readable evaluation rubric with pass/fail checks?
+          <select
+            name="rubric"
+            data-ai-score="2"
+            data-risk-high="no formal evaluation rubric. quality will regress silently."
+            data-risk-mid="rubric is ad hoc. decisions are likely subjective."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <label>
+          3. human approval gate on irreversible actions (deploy/delete/charge)?
+          <select
+            name="approval"
+            data-ai-score="2"
+            data-risk-high="irreversible actions are not gated. blast radius is unacceptable."
+            data-risk-mid="approval gates exist but are not comprehensive."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <label>
+          4. lead intake and response automation coverage?
+          <select
+            name="leads"
+            data-ai-score="2"
+            data-risk-high="lead response is manual. response latency is burning pipeline value."
+            data-risk-mid="partial automation only. after-hours demand is still leaking."
+          >
+            <option value="0">manual only</option>
+            <option value="1">partial automation</option>
+            <option value="2">24/7 automation</option>
+          </select>
+        </label>
+        <label>
+          5. single accountable owner with weekly ai system review cadence?
+          <select
+            name="owner"
+            data-ai-score="2"
+            data-risk-high="no accountable ai owner. issues will circulate without closure."
+            data-risk-mid="ownership is shared loosely. review cadence is fragile."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <button type="submit" class="cta-link">score and send to telegram</button>
+      </form>
+      <p class="stress-test-result" data-ai-stress-output hidden></p>
+    </section>
+
     <section class="telegram-cta">
       <h2>Telegram Support</h2>
       <p>businesses win faster when ai philosophy is explicit, scoped, and enforced in workflows.</p>

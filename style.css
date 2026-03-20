@@ -163,6 +163,48 @@ main li {
   font-weight: normal;
 }
 
+.stress-test {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.stress-test h2 {
+  margin-top: 0;
+}
+
+.stress-test form {
+  margin-top: 1rem;
+}
+
+.stress-test label {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.stress-test select {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  text-transform: lowercase;
+  letter-spacing: inherit;
+}
+
+.stress-test .cta-link {
+  cursor: pointer;
+}
+
+.stress-test-result {
+  margin-top: 0.85rem;
+  color: var(--muted);
+}
+
 .telegram-cta {
   margin: 1.5rem 0 2rem;
   padding: 1rem 1.25rem;
