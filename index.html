@@ -29,79 +29,9 @@
       (practical patterns) and research (empirical findings).
     </p>
 
-    <section class="stress-test">
-      <h2>60-second AI Philosophy Stress Test</h2>
-      <p>five checks. instant score. top three risks. send the brief to telegram in one click.</p>
-      <form data-ai-stress-test data-telegram-handle="Evoke86">
-        <label>
-          1. written ai philosophy with explicit allowed and forbidden actions?
-          <select
-            name="policy"
-            data-ai-score="2"
-            data-risk-high="no clear ai policy boundary. behavior will drift by prompt mood."
-            data-risk-mid="policy exists but is vague. enforcement is likely inconsistent."
-          >
-            <option value="0">no</option>
-            <option value="1">partial</option>
-            <option value="2">yes</option>
-          </select>
-        </label>
-        <label>
-          2. machine-readable evaluation rubric with pass/fail checks?
-          <select
-            name="rubric"
-            data-ai-score="2"
-            data-risk-high="no formal evaluation rubric. quality will regress silently."
-            data-risk-mid="rubric is ad hoc. decisions are likely subjective."
-          >
-            <option value="0">no</option>
-            <option value="1">partial</option>
-            <option value="2">yes</option>
-          </select>
-        </label>
-        <label>
-          3. human approval gate on irreversible actions (deploy/delete/charge)?
-          <select
-            name="approval"
-            data-ai-score="2"
-            data-risk-high="irreversible actions are not gated. blast radius is unacceptable."
-            data-risk-mid="approval gates exist but are not comprehensive."
-          >
-            <option value="0">no</option>
-            <option value="1">partial</option>
-            <option value="2">yes</option>
-          </select>
-        </label>
-        <label>
-          4. lead intake and response automation coverage?
-          <select
-            name="leads"
-            data-ai-score="2"
-            data-risk-high="lead response is manual. response latency is burning pipeline value."
-            data-risk-mid="partial automation only. after-hours demand is still leaking."
-          >
-            <option value="0">manual only</option>
-            <option value="1">partial automation</option>
-            <option value="2">24/7 automation</option>
-          </select>
-        </label>
-        <label>
-          5. single accountable owner with weekly ai system review cadence?
-          <select
-            name="owner"
-            data-ai-score="2"
-            data-risk-high="no accountable ai owner. issues will circulate without closure."
-            data-risk-mid="ownership is shared loosely. review cadence is fragile."
-          >
-            <option value="0">no</option>
-            <option value="1">partial</option>
-            <option value="2">yes</option>
-          </select>
-        </label>
-        <button type="submit" class="cta-link">score and send to telegram</button>
-      </form>
-      <p class="stress-test-result" data-ai-stress-output hidden></p>
-    </section>
+    <h2>Thesis</h2>
+    <p><a href="/thesis/">StayFresh Thesis</a> is the site's center of gravity: the hard position, the named frameworks, and the shortest path through the archive.</p>
+    <p>Core rule: tools should reduce comprehension debt. Auditory cues are one practical way to improve recall when attention is split across terminals, editors, and agent loops.</p>
 
     <section class="value-calc">
       <h2>Value Capture Calculator</h2>
@@ -165,10 +95,6 @@
       >message on telegram</a>
     </section>
 
-    <h2>Thesis</h2>
-    <p><a href="/thesis/">StayFresh Thesis</a> is the site's center of gravity: the hard position, the named frameworks, and the shortest path through the archive.</p>
-    <p>Core rule: tools should reduce comprehension debt. Auditory cues are one practical way to improve recall when attention is split across terminals, editors, and agent loops.</p>
-
     <h2>Workflows</h2>
     <p>Practical patterns for AI-assisted development.</p>
     <ul class="article-list">
@@ -205,6 +131,81 @@
         <a class="title" href="/workflows/ci-automation/">CI Automation</a>
       </li>
     </ul>
+
+    <section class="stress-test">
+      <h2>single smartest addition survey</h2>
+      <p>"what's the single smartest and most radically innovative and accretive and useful and compelling addition you could make to the plan at this point?"</p>
+      <p>score this in 60 seconds. output is the top three highest-leverage additions to make next.</p>
+      <form data-ai-stress-test data-telegram-handle="Evoke86">
+        <label>
+          1. is the highest-value bottleneck quantified in dollars right now?
+          <select
+            name="bottleneck_value"
+            data-ai-score="2"
+            data-add-high="install a value baseline first: quantify one bottleneck in annual dollars before adding features."
+            data-add-mid="tighten value precision: replace directional estimate with measured baseline and owner."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <label>
+          2. is there one automation that captures, responds to, and routes leads 24/7?
+          <select
+            name="lead_loop"
+            data-ai-score="2"
+            data-add-high="build one end-to-end lead loop (capture -> respond -> route) before adding more channels."
+            data-add-mid="close lead-loop gaps: cover after-hours response and route-to-owner latency."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <label>
+          3. does every priority ticket map to searchable evidence and contract dates?
+          <select
+            name="evidence_sync"
+            data-ai-score="2"
+            data-add-high="stand up ticket-to-contract evidence sync so priorities are date-safe and source-linked."
+            data-add-mid="enforce evidence links on priority tickets; block delivery-ready state when links are missing."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <label>
+          4. is there a single feedback loop with weekly review and one accountable owner?
+          <select
+            name="feedback_owner"
+            data-ai-score="2"
+            data-add-high="assign one accountable owner and run a weekly decision loop with explicit pass/fail criteria."
+            data-add-mid="reduce shared ownership drift: tighten review cadence and escalation triggers."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <label>
+          5. can the next major change be shipped reversibly inside 14 days?
+          <select
+            name="reversible_ship"
+            data-ai-score="2"
+            data-add-high="define a reversible 14-day ship plan with rollback path before adding scope."
+            data-add-mid="improve reversibility: add rollback criteria and stop conditions."
+          >
+            <option value="0">no</option>
+            <option value="1">partial</option>
+            <option value="2">yes</option>
+          </select>
+        </label>
+        <button type="submit" class="cta-link">score and send to telegram</button>
+      </form>
+      <p class="stress-test-result" data-ai-stress-output hidden></p>
+    </section>
 
     <h2>Research</h2>
     <p>Empirical findings on AI workflow effectiveness.</p>

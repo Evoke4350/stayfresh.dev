@@ -59,8 +59,8 @@
         var fields = form.querySelectorAll("select[data-ai-score]");
         var total = 0;
         var max = 0;
-        var highRisks = [];
-        var mediumRisks = [];
+        var highAdds = [];
+        var mediumAdds = [];
         var answers = [];
 
         for (var j = 0; j < fields.length; j += 1) {
@@ -74,33 +74,41 @@
           answers.push(name + "=" + value + "/" + fieldMax);
 
           if (value === 0) {
-            highRisks.push(field.getAttribute("data-risk-high"));
+            highAdds.push(
+              field.getAttribute("data-add-high") ||
+              field.getAttribute("data-risk-high") ||
+              "define a single highest-leverage addition with explicit owner and date."
+            );
           } else if (value < fieldMax) {
-            mediumRisks.push(field.getAttribute("data-risk-mid"));
+            mediumAdds.push(
+              field.getAttribute("data-add-mid") ||
+              field.getAttribute("data-risk-mid") ||
+              "tighten the current plan into one measurable next addition."
+            );
           }
         }
 
-        var risks = highRisks.concat(mediumRisks);
-        while (risks.length < 3) {
-          risks.push("decision latency risk: no fast operator feedback loop for ai change control.");
+        var additions = highAdds.concat(mediumAdds);
+        while (additions.length < 3) {
+          additions.push("install one operator feedback loop that shortens decision latency.");
         }
 
-        var topRisks = risks.slice(0, 3);
+        var topAdditions = additions.slice(0, 3);
         var tier = scoreTier(total);
-        var summary = "stress test score " + total + "/" + max + " (" + tier + ").";
+        var summary = "survey score " + total + "/" + max + " (" + tier + ").";
         var output = form.parentNode.querySelector("[data-ai-stress-output]");
         if (output) {
           output.hidden = false;
-          output.textContent = summary + " top risk: " + topRisks[0];
+          output.textContent = summary + " smartest next addition: " + topAdditions[0];
         }
 
         var message = [
-          "ai philosophy stress test submission",
+          "single smartest addition survey submission",
           "score: " + total + "/" + max + " (" + tier + ")",
-          "top_risks:",
-          "1) " + topRisks[0],
-          "2) " + topRisks[1],
-          "3) " + topRisks[2],
+          "top_additions:",
+          "1) " + topAdditions[0],
+          "2) " + topAdditions[1],
+          "3) " + topAdditions[2],
           "answers: " + answers.join(", "),
           "source: " + window.location.href
         ].join("\n");
