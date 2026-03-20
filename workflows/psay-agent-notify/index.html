@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>psay Agent Notifications - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">March 2026</p>
+    <h2>psay Agent Notifications</h2>
+
+    <p>Initial reconnaissance started with KittenTTS and <code>purr</code>.</p>
+    <p>Execution moved to Piper because the Python toolchain was cleaner for local automation, scripting, and reproducible agent setup.</p>
+
+    <h3>Three Solid Use Cases</h3>
+    <table>
+      <thead>
+        <tr><th>Use Case</th><th>Why It Matters</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Long-running builds/tests</td><td>Stops terminal polling and returns focus only when work is done.</td></tr>
+        <tr><td>Agent handoff points</td><td>Flags when an agent needs human input so loops do not stall silently.</td></tr>
+        <tr><td>Risky local operations</td><td>Announces success/failure and duration for migrations, deploy scripts, and data jobs.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Advantages</h3>
+    <ul>
+      <li><strong>Lower context-switch cost</strong> - fewer manual terminal checks</li>
+      <li><strong>Faster human response</strong> - immediate handoff when input is required</li>
+      <li><strong>Better operational visibility</strong> - duration and exit status are surfaced at completion time</li>
+    </ul>
+
+    <h3>Local Push Notifications on macOS</h3>
+    <p>Yes. This is straightforward with Notification Center and does not require a cloud service.</p>
+    <p>Preferred channel is <code>terminal-notifier</code> when installed; fallback is <code>osascript "display notification ..."</code>.</p>
+
+    <h3>Hacker News Signal</h3>
+    <ul>
+      <li><a href="https://news.ycombinator.com/item?id=38757107">HN 38757107</a> - shell <code>preexec/precmd</code> snippet with thresholded completion notifications using <code>terminal-notifier</code>.</li>
+      <li><a href="https://news.ycombinator.com/item?id=36491704">HN 36491704</a> - lightweight <code>osascript</code> notification helper for command completion.</li>
+      <li><a href="https://news.ycombinator.com/item?id=46794537">HN 46794537</a> - recent agent workflow discussion combining Notification Center, voice output, and phone push channels.</li>
+    </ul>
+
+    <h3>Engineering Enhancement Implemented</h3>
+    <p><code>scripts/psay-notify.sh</code> is the highest-leverage first upgrade for this setup.</p>
+    <p>It wraps any command, tracks runtime, emits local notification on completion, and speaks status through Piper (or falls back to <code>say</code>).</p>
+    <pre><code># notify + speak only when runtime >= 15s
+scripts/psay-notify.sh --threshold 15 --title "Agent Run" -- make test
+
+# quiet mode: desktop notification only
+scripts/psay-notify.sh --no-speak --threshold 5 -- pnpm build</code></pre>
+
+    <h3>Why This Enhancement Wins</h3>
+    <p>It solves the real bottleneck first: delayed awareness of completion and failure.</p>
+    <p>No retraining, no custom voice dataset, no external infra. Just faster operator feedback loops with local-only primitives.</p>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>
