@@ -163,120 +163,15 @@ main li {
   font-weight: normal;
 }
 
-.stress-test {
+.callout {
   margin: 1.5rem 0 2rem;
   padding: 1rem 1.25rem;
   border: 1px solid var(--border);
   background: var(--code-bg);
 }
 
-.stress-test h2 {
+.callout h2 {
   margin-top: 0;
-}
-
-.stress-test form {
-  margin-top: 1rem;
-}
-
-.stress-test label {
-  display: block;
-  margin-bottom: 0.75rem;
-}
-
-.stress-test select {
-  display: block;
-  width: 100%;
-  margin-top: 0.3rem;
-  padding: 0.35rem 0.45rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
-  font: inherit;
-  text-transform: lowercase;
-  letter-spacing: inherit;
-}
-
-.stress-test .cta-link {
-  cursor: pointer;
-}
-
-.stress-test-result {
-  margin-top: 0.85rem;
-  color: var(--muted);
-}
-
-.value-calc {
-  margin: 1.5rem 0 2rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--border);
-  background: var(--code-bg);
-}
-
-.value-calc h2 {
-  margin-top: 0;
-}
-
-.value-calc form {
-  margin-top: 1rem;
-}
-
-.value-calc-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem 0.8rem;
-  margin-bottom: 0.8rem;
-}
-
-.value-calc label {
-  display: block;
-}
-
-.value-calc input,
-.value-calc select {
-  display: block;
-  width: 100%;
-  margin-top: 0.3rem;
-  padding: 0.35rem 0.45rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
-  font: inherit;
-  text-transform: lowercase;
-  letter-spacing: inherit;
-}
-
-.value-calc .cta-link {
-  cursor: pointer;
-}
-
-.value-calc-result {
-  margin-top: 0.85rem;
-  color: var(--muted);
-}
-
-@media (max-width: 760px) {
-  .value-calc-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.telegram-cta {
-  margin: 1.5rem 0 2rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--border);
-  background: var(--code-bg);
-}
-
-.telegram-cta h2 {
-  margin-top: 0;
-}
-
-.telegram-cta .cta-link {
-  display: inline-block;
-  margin-top: 0.25rem;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
 }
 
 /* Code blocks — preserve capitalization and use system monospace */

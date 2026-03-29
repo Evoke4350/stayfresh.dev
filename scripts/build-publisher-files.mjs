@@ -14,8 +14,8 @@ const pages = [
     path: "/",
     sourceFile: "index.html",
     title: "StayFresh",
-    description: "Static archive of workflow research and patterns for AI-assisted development.",
-    updated: "2026-03-19",
+    description: "Static archive of workflow research and patterns for AI-assisted development, with deployment notes for putting Anubis in front of a GitHub Pages site.",
+    updated: "2026-03-29",
     includeInFeed: false
   },
   {
@@ -23,7 +23,7 @@ const pages = [
     sourceFile: "thesis/index.html",
     title: "StayFresh Thesis",
     description: "The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.",
-    updated: "2026-03-19",
+    updated: "2026-03-29",
     includeInFeed: true
   },
   {
@@ -31,7 +31,7 @@ const pages = [
     sourceFile: "workflows/index.html",
     title: "Workflows",
     description: "Practical patterns for AI-assisted development.",
-    updated: "2026-03-19",
+    updated: "2026-03-29",
     includeInFeed: false
   },
   {
@@ -43,11 +43,11 @@ const pages = [
     includeInFeed: false
   },
   {
-    path: "/workflows/puyallup-consulting-pipeline/",
-    sourceFile: "workflows/puyallup-consulting-pipeline/index.html",
-    title: "Puyallup Consulting Lead Pipeline",
-    description: "A consultant-first hyper-local pipeline for capturing, qualifying, and routing small-business leads around Puyallup.",
-    updated: "2026-03-19",
+    path: "/workflows/anubis-github-pages/",
+    sourceFile: "workflows/anubis-github-pages/index.html",
+    title: "Anubis in Front of GitHub Pages",
+    description: "How to put Anubis in front of a GitHub Pages site with a real reverse proxy and no proxy-loop nonsense.",
+    updated: "2026-03-29",
     includeInFeed: true
   },
   {
@@ -288,21 +288,21 @@ function llmsLink(pagePath, note) {
 const llms = [
   "# StayFresh",
   "",
-  "> Static archive of workflow research and patterns for AI-assisted development, with a consultant-first operating track for hyper-local business systems around Puyallup.",
+  "> Static archive of workflow research and patterns for AI-assisted development, with practical notes for keeping static sites useful and less scrapeable.",
   "",
   "Use the thesis first for doctrine, then workflows for implementation patterns, then research for supporting evidence. Canonical HTML pages are listed below. Markdown mirrors are not published yet.",
   "",
   "## Start Here",
   "",
-  llmsLink("/", "Homepage with thesis, consulting intake, workflow index, survey, and contact routes."),
+  llmsLink("/", "Homepage with the thesis, workflow index, and the GitHub Pages plus Anubis deployment pattern."),
   llmsLink("/thesis/", "Best single starting point. Explains the site's position on reward surfaces, architecture, and comprehension debt."),
   llmsLink("/workflows/", "Index of practical workflow patterns."),
   llmsLink("/research/", "Index of supporting research notes."),
   "",
-  "## Consulting and Operations",
+  "## Site and Operations",
   "",
-  llmsLink("/workflows/puyallup-consulting-pipeline/", "Consultant-first hyper-local lead pipeline for small businesses in and around Puyallup."),
-  llmsLink("/workflows/instant-project-sync/", "Ticket-to-contract evidence sync for consulting and delivery operations."),
+  llmsLink("/workflows/anubis-github-pages/", "How to front a GitHub Pages site with Anubis using Caddy or Nginx without creating a proxy loop."),
+  llmsLink("/workflows/instant-project-sync/", "Ticket-to-contract evidence sync for delivery operations."),
   llmsLink("/workflows/psay-agent-notify/", "Operator alerts via local voice and notifications for long-running agent work."),
   llmsLink("/workflows/project-ai-philosophy/", "How client AI policy gets translated into bounded operating rules."),
   "",

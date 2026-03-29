@@ -5,20 +5,20 @@
     <link>https://stayfresh.dev/</link>
     <description>Static archive of workflow research and patterns for AI-assisted development.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 GMT</lastBuildDate>
     <item>
       <title>StayFresh Thesis</title>
       <link>https://stayfresh.dev/thesis/</link>
       <guid>https://stayfresh.dev/thesis/</guid>
-      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
       <description>The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.</description>
     </item>
     <item>
-      <title>Puyallup Consulting Lead Pipeline</title>
-      <link>https://stayfresh.dev/workflows/puyallup-consulting-pipeline/</link>
-      <guid>https://stayfresh.dev/workflows/puyallup-consulting-pipeline/</guid>
-      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
-      <description>A consultant-first hyper-local pipeline for capturing, qualifying, and routing small-business leads around Puyallup.</description>
+      <title>Anubis in Front of GitHub Pages</title>
+      <link>https://stayfresh.dev/workflows/anubis-github-pages/</link>
+      <guid>https://stayfresh.dev/workflows/anubis-github-pages/</guid>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
+      <description>How to put Anubis in front of a GitHub Pages site with a real reverse proxy and no proxy-loop nonsense.</description>
     </item>
     <item>
       <title>Instant Project Sync</title>

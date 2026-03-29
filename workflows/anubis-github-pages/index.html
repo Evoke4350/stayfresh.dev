@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How to put Anubis in front of a GitHub Pages site with a real reverse proxy and no proxy-loop nonsense.">
+  <link rel="canonical" href="https://stayfresh.dev/workflows/anubis-github-pages/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <title>Anubis in Front of GitHub Pages - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">March 2026</p>
+    <h2>Anubis in Front of GitHub Pages</h2>
+
+    <p>GitHub Pages serves static files. Anubis is a filter proxy. Those are different jobs, and pretending otherwise is how you end up debugging a loop at 1:30am.</p>
+    <p>The working shape is boring and correct: GitHub Pages stays the origin, your custom domain points at infrastructure you control, and that infrastructure runs the reverse proxy plus Anubis.</p>
+
+    <h3>Architecture</h3>
+    <pre><code>browser
+  -> caddy or nginx on your server
+  -> anubis
+  -> github pages origin
+
+example:
+  stayfresh.dev
+    -> vps
+    -> anubis
+    -> https://evoke4350.github.io/stayfresh.dev/</code></pre>
+
+    <h3>The Non-Negotiables</h3>
+    <ul>
+      <li>GitHub Pages cannot execute Anubis. It can only host the site files.</li>
+      <li>Your public DNS for the custom domain must point to your proxy layer, not directly to GitHub Pages.</li>
+      <li>Anubis <strong>target</strong> should be the GitHub Pages origin URL, not your public custom domain, or you will proxy traffic back into yourself.</li>
+      <li>If you want search engines or feed readers to survive, write explicit allow rules. Anubis defaults to being heavy-handed.</li>
+    </ul>
+
+    <h3>Minimal Docker Compose</h3>
+    <p>This is the shortest useful version: Caddy terminates TLS, Anubis sits behind it, and GitHub Pages is the upstream.</p>
+    <pre><code>services:
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - anubis
+
+  anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    pull_policy: always
+    environment:
+      BIND: ":8923"
+      TARGET: "https://evoke4350.github.io/stayfresh.dev/"
+      TARGET_HOST: "evoke4350.github.io"
+      DIFFICULTY: "4"
+      SERVE_ROBOTS_TXT: "true"
+      POLICY_FNAME: "/data/cfg/botPolicy.yaml"
+    volumes:
+      - ./botPolicy.yaml:/data/cfg/botPolicy.yaml:ro
+
+volumes:
+  caddy_data:
+  caddy_config:</code></pre>
+
+    <h3>Minimal Caddyfile</h3>
+    <pre><code>stayfresh.dev, www.stayfresh.dev {
+  encode gzip zstd
+
+  reverse_proxy http://anubis:8923 {
+    header_up X-Real-Ip {remote_host}
+    header_up X-Http-Version {http.request.proto}
+  }
+}</code></pre>
+
+    <h3>Minimal Policy File</h3>
+    <p>Start small. Allow the obvious utility paths, then challenge browser-looking traffic.</p>
+    <pre><code>bots:
+  - name: well-known
+    path_regex: ^/.well-known/.*$
+    action: ALLOW
+  - name: favicon
+    path_regex: ^/favicon.ico$
+    action: ALLOW
+  - name: robots
+    path_regex: ^/robots.txt$
+    action: ALLOW
+  - name: feeds
+    path_regex: ^/(rss.xml|atom.xml|feed.json|sitemap.xml)$
+    action: ALLOW
+  - name: generic-browser
+    user_agent_regex: Mozilla
+    action: CHALLENGE</code></pre>
+
+    <h3>Rollout Order</h3>
+    <ol>
+      <li>Leave GitHub Pages publishing the site exactly as it does now.</li>
+      <li>Bring up Caddy and Anubis on a VPS or similar box.</li>
+      <li>Target the GitHub Pages origin URL from Anubis.</li>
+      <li>Move the custom domain DNS to the VPS.</li>
+      <li>Test the challenge flow, feed URLs, and a direct content fetch with JavaScript enabled.</li>
+      <li>Add allow rules for anything you actually want to keep working.</li>
+    </ol>
+
+    <h3>Why This Beats Faking It</h3>
+    <p>Because it respects the deployment boundary. Pages stays static and cheap. The proxy layer does the dynamic work. That split is not glamorous, but it is solid.</p>
+
+    <h3>References</h3>
+    <ul>
+      <li><a href="https://github.com/TecharoHQ/anubis">TecharoHQ/anubis</a></li>
+      <li><a href="https://anubis.techaro.lol/docs/admin/installation">Anubis installation docs</a></li>
+      <li><a href="https://anubis.techaro.lol/docs/admin/environments/caddy">Anubis Caddy docs</a></li>
+      <li><a href="https://anubis.techaro.lol/docs/admin/policies">Anubis policy docs</a></li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

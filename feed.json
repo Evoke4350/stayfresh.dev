@@ -16,16 +16,16 @@
       "url": "https://stayfresh.dev/thesis/",
       "title": "StayFresh Thesis",
       "summary": "The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.",
-      "date_published": "2026-03-19T00:00:00Z",
-      "date_modified": "2026-03-19T00:00:00Z"
+      "date_published": "2026-03-29T00:00:00Z",
+      "date_modified": "2026-03-29T00:00:00Z"
     },
     {
-      "id": "https://stayfresh.dev/workflows/puyallup-consulting-pipeline/",
-      "url": "https://stayfresh.dev/workflows/puyallup-consulting-pipeline/",
-      "title": "Puyallup Consulting Lead Pipeline",
-      "summary": "A consultant-first hyper-local pipeline for capturing, qualifying, and routing small-business leads around Puyallup.",
-      "date_published": "2026-03-19T00:00:00Z",
-      "date_modified": "2026-03-19T00:00:00Z"
+      "id": "https://stayfresh.dev/workflows/anubis-github-pages/",
+      "url": "https://stayfresh.dev/workflows/anubis-github-pages/",
+      "title": "Anubis in Front of GitHub Pages",
+      "summary": "How to put Anubis in front of a GitHub Pages site with a real reverse proxy and no proxy-loop nonsense.",
+      "date_published": "2026-03-29T00:00:00Z",
+      "date_modified": "2026-03-29T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/workflows/instant-project-sync/",

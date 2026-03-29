@@ -4,21 +4,21 @@
   <subtitle>Static archive of workflow research and patterns for AI-assisted development.</subtitle>
   <link href="https://stayfresh.dev/atom.xml" rel="self"/>
   <link href="https://stayfresh.dev/"/>
-  <updated>2026-03-19T00:00:00Z</updated>
+  <updated>2026-03-29T00:00:00Z</updated>
   <id>https://stayfresh.dev/</id>
   <entry>
     <title>StayFresh Thesis</title>
     <link href="https://stayfresh.dev/thesis/"/>
     <id>https://stayfresh.dev/thesis/</id>
-    <updated>2026-03-19T00:00:00Z</updated>
+    <updated>2026-03-29T00:00:00Z</updated>
     <summary>The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.</summary>
   </entry>
   <entry>
-    <title>Puyallup Consulting Lead Pipeline</title>
-    <link href="https://stayfresh.dev/workflows/puyallup-consulting-pipeline/"/>
-    <id>https://stayfresh.dev/workflows/puyallup-consulting-pipeline/</id>
-    <updated>2026-03-19T00:00:00Z</updated>
-    <summary>A consultant-first hyper-local pipeline for capturing, qualifying, and routing small-business leads around Puyallup.</summary>
+    <title>Anubis in Front of GitHub Pages</title>
+    <link href="https://stayfresh.dev/workflows/anubis-github-pages/"/>
+    <id>https://stayfresh.dev/workflows/anubis-github-pages/</id>
+    <updated>2026-03-29T00:00:00Z</updated>
+    <summary>How to put Anubis in front of a GitHub Pages site with a real reverse proxy and no proxy-loop nonsense.</summary>
   </entry>
   <entry>
     <title>Instant Project Sync</title>
