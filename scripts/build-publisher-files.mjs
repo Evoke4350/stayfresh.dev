@@ -43,6 +43,14 @@ const pages = [
     includeInFeed: false
   },
   {
+    path: "/workflows/modular-workflow-stack/",
+    sourceFile: "workflows/modular-workflow-stack/index.html",
+    title: "Modular Workflow Stack",
+    description: "Right tool, right job, right time: layered orchestration, typed agent delegation, human-in-the-loop gates, parallelism, and loops with real halting conditions.",
+    updated: "2026-04-07",
+    includeInFeed: true
+  },
+  {
     path: "/workflows/anubis-github-pages/",
     sourceFile: "workflows/anubis-github-pages/index.html",
     title: "Anubis in Front of GitHub Pages",
@@ -308,6 +316,7 @@ const llms = [
   "",
   "## Agent Workflow Patterns",
   "",
+  llmsLink("/workflows/modular-workflow-stack/", "Three-layer model for orchestration, context stability, and execution: role-based routing, human gates, parallelism, and loop patterns."),
   llmsLink("/workflows/preference-toml/", "Simple config shape for critique, selection, and evaluation loops."),
   llmsLink("/workflows/reward-rubric-dsl/", "Machine-readable rubric pattern for scoring agent output."),
   llmsLink("/workflows/prompt-patterns/", "Prompt structures that reduce token waste and instruction bloat."),

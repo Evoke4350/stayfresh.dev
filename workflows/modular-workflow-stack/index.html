@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modular Workflow Stack - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">April 2026</p>
+    <h2>Modular Workflow Stack</h2>
+
+    <p>The right tool for the right job at the right time. Not all at once — in sequence, with deliberate hand-offs and human checkpoints between layers.</p>
+
+    <blockquote><p>A modular workflow is not a pipeline. It is a decision surface with execution attached.</p></blockquote>
+
+    <p>The Skills Stack pattern — pairing role-based orchestration (gstack), context stability (GSD), and execution skills (Superpowers) — makes this concrete. Each layer has a job. Each layer hands off cleanly. None of them run simultaneously from a single monolithic prompt.</p>
+
+    <h3>The Three Layers</h3>
+
+    <p>Every durable workflow decomposes into three concerns:</p>
+
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Job</th><th>Failure Mode When Missing</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Orchestration</td><td>Decide what to do next, route to the right agent, gate on human input</td><td>Agents start work before the goal is clear; you debug outputs instead of inputs</td></tr>
+        <tr><td>Context</td><td>Keep specifications stable across a long chain of steps</td><td>Context drift — later steps contradict earlier decisions; agents re-argue closed questions</td></tr>
+        <tr><td>Execution</td><td>Do one narrow task well with minimal context</td><td>Bloated prompts, multi-objective confusion, unpredictable output</td></tr>
+      </tbody>
+    </table>
+
+    <p>The layers must be physically separate. An orchestration prompt that also does execution collapses both failure modes into one.</p>
+
+    <h3>Layer 1: Orchestration</h3>
+
+    <p>The orchestrator is the conductor, not a performer. Its only job is to route: given the current state and user input, which agent runs next, with what context, and who reviews the result?</p>
+
+    <h4>Orchestrator Responsibilities</h4>
+    <ul>
+      <li>Accept structured user input at each decision point</li>
+      <li>Choose agent type based on the task class</li>
+      <li>Decide whether steps run sequentially or in parallel</li>
+      <li>Insert human-in-the-loop gates before irreversible actions</li>
+      <li>Decide when to loop (retry, refine, escalate)</li>
+      <li>Decide when to halt</li>
+    </ul>
+
+    <h4>Role-Based Routing</h4>
+    <p>gstack formalizes what most effective teams do informally: different decisions belong to different roles. The same principle applies to agents.</p>
+
+    <table>
+      <thead>
+        <tr><th>Decision Type</th><th>Route To</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Product scope, priority</td><td>Product/CEO agent</td><td>Avoids over-engineering at the execution layer</td></tr>
+        <tr><td>Architecture, interfaces</td><td>Engineering Manager agent</td><td>Separates design from implementation concerns</td></tr>
+        <tr><td>UX, component structure</td><td>Designer agent</td><td>Keeps visual decisions out of backend prompts</td></tr>
+        <tr><td>Implementation</td><td>Execution agent</td><td>Single-objective, narrow context, fast</td></tr>
+        <tr><td>Correctness, edge cases</td><td>QA agent</td><td>Fresh context; no sunk-cost bias from implementation</td></tr>
+        <tr><td>Security, injection, auth</td><td>Security agent</td><td>Adversarial lens requires explicit framing</td></tr>
+        <tr><td>Merge, deploy, release</td><td>Release agent</td><td>Separate concern; human gate before irreversible push</td></tr>
+      </tbody>
+    </table>
+
+    <p>The orchestrator does not implement any of these roles. It knows which role applies and routes accordingly.</p>
+
+    <h3>Layer 2: Context Stability</h3>
+
+    <p>Long chains of agents fail from context drift. The specification decided in step 2 is forgotten by step 8. The GSD pattern addresses this by treating the spec as a first-class artifact, not a conversation thread.</p>
+
+    <h4>What Context Stability Requires</h4>
+    <ul>
+      <li>A written, versioned spec that agents load — not reconstruct from history</li>
+      <li>Explicit update steps when the spec changes (not implicit drift)</li>
+      <li>A human gate before the spec changes mid-chain</li>
+      <li>Agents that confirm spec alignment before proceeding</li>
+    </ul>
+
+    <pre><code># Context handoff pattern
+# At each agent boundary, pass the spec explicitly:
+
+SPEC: See SPEC.md at commit abc123
+TASK: Implement the authentication module as defined in section 3.2
+CONSTRAINTS: Do not modify the user model schema
+OUTPUT: PR ready for QA agent review
+
+# The spec is not in the prompt. It is referenced by the prompt.</code></pre>
+
+    <p>This separates context (stable, versioned) from instructions (per-task, ephemeral). Token cost drops. Drift disappears. Disputes resolve against the written spec, not conversation history.</p>
+
+    <h3>Layer 3: Execution</h3>
+
+    <p>Execution agents are narrow by design. They receive a single objective, minimal context, and a verifiable exit condition. Width is the orchestrator's job. Depth is the execution agent's job.</p>
+
+    <pre><code># Good execution prompt
+ROLE: QA agent
+CONTEXT: See SPEC.md §3.2, auth module PR #47
+TASK: Find edge cases not covered by the current test suite
+OUTPUT: Numbered list of uncovered cases with reproduction steps
+HALT: When list is complete or you have checked all spec assertions
+
+# Bad execution prompt (orchestration collapsed into execution)
+You are a full-stack engineer. Review the spec, implement auth,
+write tests, check security, prepare the PR, and make sure
+it matches the design. Be thorough.</code></pre>
+
+    <h3>Human-in-the-Loop</h3>
+
+    <p>Human gates are not an apology for agent unreliability. They are the architecture. The workflow is designed around them.</p>
+
+    <h4>Where to Insert Gates</h4>
+    <table>
+      <thead>
+        <tr><th>Step</th><th>Gate Type</th><th>Question to the Human</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Before spec is finalized</td><td>Approval</td><td>Does this spec match your intent?</td></tr>
+        <tr><td>After architecture decision</td><td>Approval</td><td>Does this design fit constraints we haven't told the agent?</td></tr>
+        <tr><td>After QA report</td><td>Triage</td><td>Which findings are blockers vs. accepted risk?</td></tr>
+        <tr><td>Before any push/deploy</td><td>Hard gate</td><td>Explicit approval — no default proceed</td></tr>
+        <tr><td>When agent signals uncertainty</td><td>Escalation</td><td>Agent surfaces ambiguity; human resolves it</td></tr>
+      </tbody>
+    </table>
+
+    <p>Gates must be explicit in the workflow definition. An implicit assumption that the human will "just notice" when to intervene is not a gate — it is an absence of architecture.</p>
+
+    <h4>Designing for Interruption</h4>
+    <p>A workflow that cannot be interrupted mid-chain is fragile. Every long chain should support:</p>
+    <ul>
+      <li><strong>Checkpoint saves</strong>: State is written to disk at each gate so the chain can resume</li>
+      <li><strong>Step-back</strong>: Human can reject a step and re-run from the previous checkpoint</li>
+      <li><strong>Override</strong>: Human can inject context or change direction at any gate</li>
+    </ul>
+
+    <h3>Parallelism</h3>
+
+    <p>Independent tasks should not run sequentially. The constraint is dependency, not caution.</p>
+
+    <h4>When to Parallelize</h4>
+    <pre><code># Sequential (correct — B depends on A's output)
+A: Finalize spec
+B: Implement auth module per spec
+
+# Parallel (correct — no dependency between B and C)
+A: Finalize spec
+B: Implement auth module per spec     ← launch together
+C: Write E2E test scaffold per spec   ← launch together
+D: Security review of spec            ← launch together
+E: Merge B+C+D results, resolve conflicts</code></pre>
+
+    <h4>Parallelism Boundaries</h4>
+    <table>
+      <thead>
+        <tr><th>Safe to Parallelize</th><th>Must Be Sequential</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Independent feature branches</td><td>Spec finalization → implementation</td></tr>
+        <tr><td>QA + security review of same PR</td><td>Implementation → QA</td></tr>
+        <tr><td>Multiple execution agents on different modules</td><td>Architecture → any implementation</td></tr>
+        <tr><td>Competing design proposals</td><td>Human gate → next phase</td></tr>
+        <tr><td>Background context refresh</td><td>Merge + conflict resolution</td></tr>
+      </tbody>
+    </table>
+
+    <p>Parallelism multiplies throughput only when the merge step is cheap. If parallel outputs require substantial reconciliation, the cost is hidden, not eliminated. Design merge steps explicitly — they are not free.</p>
+
+    <h3>Loops</h3>
+
+    <p>Loops are the mechanism for refinement. They require halting conditions, not just goals.</p>
+
+    <h4>Loop Anatomy</h4>
+    <pre><code>LOOP:
+  INPUT:  Current state + failure signal
+  TASK:   Fix one thing
+  VERIFY: Run oracle (tests, lint, typecheck)
+  HALT:   Oracle passes OR loop count exceeds N
+  ON HALT EXCEEDED: Escalate to human, do not auto-proceed</code></pre>
+
+    <h4>Loop Types</h4>
+    <table>
+      <thead>
+        <tr><th>Loop Type</th><th>Trigger</th><th>Halting Condition</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fix-CI loop</td><td>Test/lint failure</td><td>All checks pass</td></tr>
+        <tr><td>Review loop</td><td>QA or human feedback</td><td>All blockers addressed</td></tr>
+        <tr><td>Refinement loop</td><td>Output quality below rubric threshold</td><td>Score exceeds threshold or max iterations</td></tr>
+        <tr><td>Exploration loop</td><td>Unknown solution space</td><td>N candidates generated; human selects</td></tr>
+        <tr><td>Context-refresh loop</td><td>Spec version mismatch</td><td>Agent confirms spec alignment</td></tr>
+      </tbody>
+    </table>
+
+    <p>A loop without a halting condition is a runaway. A loop that halts on "done" is a loop that never halts on time. Halting conditions must be machine-verifiable.</p>
+
+    <h3>Composing Many Steps</h3>
+
+    <p>A 30-step workflow is not a 30-prompt workflow. Most prompts are small. The complexity is in the graph, not the nodes.</p>
+
+    <h4>Step Graph Properties</h4>
+    <ul>
+      <li><strong>Acyclic by default</strong>: Loops are explicit subgraphs, not accidental cycles</li>
+      <li><strong>Typed edges</strong>: Each edge carries a type (sequential, parallel, gate, loop-back)</li>
+      <li><strong>Named steps</strong>: Steps have IDs. Checkpoints reference IDs. Humans refer to steps by name, not by memory</li>
+      <li><strong>Explicit merge nodes</strong>: Parallel branches always converge at a named merge step</li>
+    </ul>
+
+    <h4>Workflow Definition Pattern</h4>
+    <pre><code># Minimal workflow definition
+workflow: auth-feature
+spec: specs/auth-v2.md
+
+steps:
+  - id: scope
+    agent: product
+    input: user_request
+    gate: human_approval
+
+  - id: design
+    agent: eng-manager
+    input: scope.output
+    gate: human_approval
+
+  - id: implement
+    agent: execution
+    parallel:
+      - id: impl-backend
+        input: design.output
+      - id: impl-tests
+        input: design.output
+      - id: security-review
+        input: design.output
+
+  - id: merge
+    agent: eng-manager
+    input: [impl-backend.output, impl-tests.output, security-review.output]
+
+  - id: qa
+    agent: qa
+    input: merge.output
+    loop:
+      on: qa_findings
+      until: no_blockers
+      max: 3
+
+  - id: release
+    agent: release
+    input: qa.output
+    gate: human_approval  # hard gate — no default proceed</code></pre>
+
+    <p>This is not a prompt. It is a schema. The prompts are inside the agent definitions, kept separate from the workflow graph. When a step fails, you debug the step definition, not the entire chain.</p>
+
+    <h3>Token Economics at Scale</h3>
+
+    <p>Long workflows amplify token decisions made early. A 600-token context file loaded at every step of a 30-step workflow is 18,000 tokens spent on generic context. Task-specific context passed only to the relevant step costs a fraction of that.</p>
+
+    <p>Rules of thumb:</p>
+    <ul>
+      <li>Pass the spec by reference (path + version), not by value (full text), except at the context layer</li>
+      <li>Execution agents get the minimum context required for their single task</li>
+      <li>Orchestration agents get workflow state, not file contents</li>
+      <li>Human gates are the correct place to surface summaries — not inside agent prompts</li>
+    </ul>
+
+    <h3>Anti-Patterns</h3>
+
+    <h4>The Monolith Prompt</h4>
+    <p>A single prompt that asks an agent to plan, implement, review, and ship. All three layers collapsed into one. When it fails — and it will — there is nowhere to debug.</p>
+
+    <h4>Implicit Sequencing</h4>
+    <p>Running steps in order without documenting why. When a step needs to move or be parallelized, the dependency is unknown. The sequence breaks silently.</p>
+
+    <h4>Unbounded Loops</h4>
+    <p>Loops without maximum iterations or without escalation on failure. The agent retries indefinitely. The human discovers it hours later.</p>
+
+    <h4>Framwork Stacking Without Layer Separation</h4>
+    <p>Using gstack, GSD, and Skills all in the same prompt is not a Skills Stack — it is noise. The frameworks are complements because they operate at different layers. Running them in parallel from one context collapses the layers and eliminates the benefit of any of them.</p>
+
+    <h4>Parallelism Without Merge Design</h4>
+    <p>Launching parallel agents without planning how their outputs reconcile. Merge conflicts in parallel agent output are harder to resolve than sequential conflicts because neither agent knows about the other's decisions.</p>
+
+    <h4>Missing Human Gates</h4>
+    <p>Automating past a decision point that requires human judgment. The workflow moves fast and lands in the wrong place. Speed is not the issue — irreversibility is.</p>
+
+    <h3>The Compounding Effect</h3>
+
+    <p>Garry Tan's reported output — 10,000 lines of code and 100 pull requests per week over 50 days — is not the product of any single tool or prompt. It is the compounding product of clean layer separation applied consistently.</p>
+
+    <p>Each layer running at its level of abstraction means:</p>
+    <ul>
+      <li>Orchestration is never re-litigating implementation details</li>
+      <li>Execution is never making architectural decisions</li>
+      <li>Context is never reconstructed from memory</li>
+      <li>Humans are never reviewing work that hasn't passed its own layer's gate</li>
+    </ul>
+
+    <p>The workflow does not scale because it runs faster. It scales because it fails locally. Failures in execution do not corrupt orchestration. Failures in orchestration do not corrupt the spec. Each layer's failure mode is contained to that layer.</p>
+
+    <h3>Related Workflows</h3>
+    <ul>
+      <li><a href="/workflows/ci-automation/">CI Automation</a> — Loop patterns, halting conditions, and CI integration</li>
+      <li><a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a> — Machine-verifiable halting conditions for refinement loops</li>
+      <li><a href="/workflows/prompt-patterns/">Prompt Patterns</a> — Single-objective execution prompt structure</li>
+      <li><a href="/workflows/agent-psychology/">Agent Psychology</a> — How agents reason within a step; why narrow context wins</li>
+      <li><a href="/research/enterprise-agent-design/">Enterprise Agent Design</a> — Production-grade agent architecture patterns</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

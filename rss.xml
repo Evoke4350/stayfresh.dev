@@ -5,7 +5,14 @@
     <link>https://stayfresh.dev/</link>
     <description>Static archive of workflow research and patterns for AI-assisted development.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 07 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Modular Workflow Stack</title>
+      <link>https://stayfresh.dev/workflows/modular-workflow-stack/</link>
+      <guid>https://stayfresh.dev/workflows/modular-workflow-stack/</guid>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Right tool, right job, right time: layered orchestration, typed agent delegation, human-in-the-loop gates, parallelism, and loops with real halting conditions.</description>
+    </item>
     <item>
       <title>StayFresh Thesis</title>
       <link>https://stayfresh.dev/thesis/</link>
