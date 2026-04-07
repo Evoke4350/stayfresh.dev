@@ -12,6 +12,14 @@
   ],
   "items": [
     {
+      "id": "https://stayfresh.dev/workflows/modular-workflow-stack/",
+      "url": "https://stayfresh.dev/workflows/modular-workflow-stack/",
+      "title": "Modular Workflow Stack",
+      "summary": "Right tool, right job, right time: layered orchestration, typed agent delegation, human-in-the-loop gates, parallelism, and loops with real halting conditions.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
+    },
+    {
       "id": "https://stayfresh.dev/thesis/",
       "url": "https://stayfresh.dev/thesis/",
       "title": "StayFresh Thesis",
