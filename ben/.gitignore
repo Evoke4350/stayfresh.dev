@@ -1,0 +1,4 @@
+bin/
+dist/
+.ben-codex-last-message.txt
+.codex-*.txt

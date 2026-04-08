@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="A compact accessible todo app demo built with plain HTML, CSS, and JavaScript.">
+  <title>Ben Todo App</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero" aria-labelledby="app-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Ben demo artifact</p>
+        <h1 id="app-title">Todo app</h1>
+        <p class="lede">
+          Semantic HTML, keyboard-first controls, and persistent state.
+        </p>
+      </div>
+
+      <div class="hero-stats" aria-live="polite">
+        <p><strong id="task-count">0</strong> open tasks</p>
+        <p><strong id="done-count">0</strong> completed</p>
+      </div>
+    </header>
+
+    <section class="panel" aria-labelledby="create-title">
+      <div class="panel-head">
+        <h2 id="create-title">Add task</h2>
+        <p id="todo-help">Write the smallest useful next step.</p>
+      </div>
+
+      <form id="todo-form" class="todo-form">
+        <label class="sr-only" for="todo-input">New task</label>
+        <input
+          id="todo-input"
+          name="task"
+          type="text"
+          autocomplete="off"
+          placeholder="e.g. Wire the review state"
+          aria-describedby="todo-help"
+          maxlength="120"
+          required
+        >
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="list-title">
+      <div class="panel-head panel-head-row">
+        <div>
+          <h2 id="list-title">Tasks</h2>
+          <p>Built for fast keyboard and screen-reader use.</p>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="complete-all">Complete all</button>
+          <button type="button" id="clear-completed" class="secondary">Clear completed</button>
+        </div>
+      </div>
+
+      <fieldset class="filters">
+        <legend class="sr-only">Task filters</legend>
+        <button type="button" class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="filter" data-filter="active" aria-pressed="false">Active</button>
+        <button type="button" class="filter" data-filter="completed" aria-pressed="false">Completed</button>
+      </fieldset>
+
+      <ul id="todo-list" class="todo-list" aria-live="polite" aria-relevant="additions removals"></ul>
+
+      <p id="empty-state" class="empty-state" hidden>No tasks in this filter. Add one or switch views.</p>
+    </section>
+
+    <p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  </main>
+</body>
+</html>
