@@ -26,7 +26,7 @@
   </nav>
 
   <main>
-    <p class="date">March 2026</p>
+    <p class="date">Revised April 2026</p>
     <h2>StayFresh Thesis</h2>
 
     <p>This site is not a feed. It is a position.</p>
@@ -37,39 +37,43 @@
 
     <h3>What This Site Believes</h3>
 
-    <h4>1. Reward Surfaces Matter More Than Prompt Tricks</h4>
+    <h4>1. Prompting Is a Constrained Pipeline, Not Magic Language</h4>
+    <p>Prompts don't float free. They move through tokenization, token budgets, and control structures. Understanding what prompts actually are—the mechanism, not the incantation—changes everything about how to use them.</p>
+    <p>See <a href="/research/what-is-prompting/">What is Prompting: Operational Constraints</a>.</p>
+
+    <h4>2. Reward Surfaces Matter More Than Prompt Tricks</h4>
     <p>Prompting can steer tone, ordering, and local behavior. It does not reliably determine what gets optimized under pressure.</p>
     <p>The control surface is the rubric. See <a href="/research/reward-engineering/">Reward Engineering for Coding Agents</a>.</p>
 
-    <h4>2. Narrow Metrics Produce Fake Progress</h4>
+    <h4>3. Narrow Metrics Produce Fake Progress</h4>
     <p>Single numbers are easy to optimize and easy to game.</p>
     <p>Useful evaluation is multi-axis and explicit about what counts as failure. See <a href="/research/reward-hacking/">Reward Hacking in Coding Agents</a>.</p>
 
-    <h4>3. Machine-Readable Criteria Beat Vibe-Based Review</h4>
+    <h4>4. Machine-Readable Criteria Beat Vibe-Based Review</h4>
     <p>Agents behave more predictably when success criteria are literal and inspectable.</p>
     <p>That is why rubric DSLs and preference specs matter. See <a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a> and <a href="/workflows/preference-toml/">Preference TOML</a>.</p>
 
-    <h4>4. Context Inflation Is Usually a Smell</h4>
+    <h4>5. Context Inflation Is Usually a Smell</h4>
     <p>When agents need long repository manifestos to function, the codebase is often the real problem.</p>
     <p>Costly context is not the same thing as useful context. See <a href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a>.</p>
 
-    <h4>5. Loops Beat One-Shot Heroics</h4>
+    <h4>6. Loops Beat One-Shot Heroics</h4>
     <p>Attempt, critique, revision, and rescore usually beat longer and louder prompts.</p>
     <p>The boring loop wins because it narrows the next move. See <a href="/workflows/prompt-patterns/">Prompt Patterns</a>.</p>
 
-    <h4>6. Strong Positions Require Evidence</h4>
+    <h4>7. Strong Positions Require Evidence</h4>
     <p>This archive is opinionated on purpose.</p>
     <p>Every durable claim should reduce to a failure mode, an example, or a reproducible workflow pattern.</p>
 
-    <h4>7. Field Notes Need Compression</h4>
+    <h4>8. Field Notes Need Compression</h4>
     <p>Raw observation is not enough. Findings need to compress into something reusable.</p>
     <p>The Starfish method exists for that reason: Start, Stop, Continue, Investigate, Amplify.</p>
 
-    <h4>8. Personal Brand Comes From Doctrine, Not Volume</h4>
+    <h4>9. Personal Brand Comes From Doctrine, Not Volume</h4>
     <p>More posts create more output. A named position creates memorability.</p>
     <p>The archive exists to support a doctrine, not to cosplay momentum.</p>
 
-    <h4>9. Tools Must Lower Comprehension Debt</h4>
+    <h4>10. Tools Must Lower Comprehension Debt</h4>
     <p>Tooling should reduce cognitive load, not multiply tabs, polling, and context switching.</p>
     <p>Auditory cues are a practical operator channel: they surface completion state quickly and improve recall under split attention. See <a href="/workflows/psay-agent-notify/">psay Agent Notifications</a>.</p>
 
@@ -91,6 +95,7 @@
 
     <h3>Best Starting Reads</h3>
     <ul>
+      <li><a href="/research/what-is-prompting/">What is Prompting: Operational Constraints</a></li>
       <li><a href="/workflows/project-ai-philosophy/">Project AI Philosophy</a></li>
       <li><a href="/research/reward-engineering/">Reward Engineering for Coding Agents</a></li>
       <li><a href="/research/reward-hacking/">Reward Hacking in Coding Agents</a></li>
