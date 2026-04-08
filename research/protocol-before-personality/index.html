@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agents need shared protocol before they need personality. Handoffs, artifacts, and exit conditions beat cosplay.">
+  <link rel="canonical" href="https://stayfresh.dev/research/protocol-before-personality/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <title>Protocol Before Personality - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">April 2026</p>
+    <h2>Protocol Before Personality</h2>
+
+    <p>Most agent discourse is drunk on personality. Give the model a founder voice. Give it a design guru mask. Give it a partner vibe. Give it a fake biography and hope competence appears.</p>
+    <p>This is backwards. Shared protocol matters first. Personality is garnish.</p>
+
+    <h3>Position</h3>
+    <blockquote><p>Agents cooperate through artifacts, handoff rules, and exit conditions. Tone may shape style. Protocol determines whether the work survives.</p></blockquote>
+
+    <h3>What Protocol Means Here</h3>
+    <p>Protocol is the structure that makes a handoff legible.</p>
+    <ul>
+      <li>what artifact is being passed</li>
+      <li>what status that artifact is in</li>
+      <li>what the receiver is allowed to change</li>
+      <li>what counts as completion</li>
+      <li>what happens on failure or ambiguity</li>
+    </ul>
+
+    <p>If those rules are missing, personality prompts do not rescue anything. They just make the failure more confidently worded.</p>
+
+    <h3>The Seduction of Personality</h3>
+    <p>Personality prompts feel powerful because they change output immediately. The prose gets sharper. The confidence rises. The advice sounds more "senior."</p>
+    <p>But a better voice is not the same thing as a better operating model.</p>
+
+    <p>An agent told to "think like a world-class CTO" still needs to know:</p>
+    <ul>
+      <li>which artifact is canonical</li>
+      <li>which constraints are binding</li>
+      <li>whether the task is analysis or mutation</li>
+      <li>who signs off on irreversible actions</li>
+    </ul>
+
+    <p>Without that, the persona mostly changes the accent of the mistake.</p>
+
+    <h3>Why Protocol Comes First</h3>
+
+    <h4>1. Protocol Survives Model Swaps</h4>
+    <p>A decent handoff schema still works when the model changes. A personality-heavy stack often falls apart because too much behavior lived in vibes instead of structure.</p>
+
+    <h4>2. Protocol Supports Delegation</h4>
+    <p>Multi-agent work only makes sense when subagents can exchange something more precise than "here is what happened, probably."</p>
+
+    <h4>3. Protocol Makes Failure Visible</h4>
+    <p>If the output contract says what must be returned, then missing fields, unsupported claims, and unresolved blockers become obvious. Without protocol, everything degrades into prose review.</p>
+
+    <h4>4. Protocol Narrows Disagreement</h4>
+    <p>When two agents or an agent and a human disagree, protocol tells the system where to look: spec, test, decision log, policy file, approval state. That is actual epistemology. Not "which persona felt wiser."</p>
+
+    <h3>Minimal Shared Protocol</h3>
+    <p>Most agent stacks need less protocol than they think. But they do need some.</p>
+    <pre><code>{
+  "task_id": "AUTH-17",
+  "artifact": "specs/auth-v2.md",
+  "artifact_version": "a81c2f4",
+  "role": "qa",
+  "allowed_actions": ["analyze", "comment"],
+  "blocked_on": [],
+  "done_when": [
+    "all auth assertions checked",
+    "edge cases listed with reproduction steps"
+  ],
+  "on_ambiguity": "escalate",
+  "on_failure": "return blocker report"
+}</code></pre>
+
+    <p>This is enough to make a handoff inspectable. No grand theory required.</p>
+
+    <h3>Where Personality Still Helps</h3>
+    <p>Personality is not useless. It is just downstream.</p>
+    <p>It can help with:</p>
+    <ul>
+      <li>tone consistency</li>
+      <li>review posture</li>
+      <li>how bluntly tradeoffs are surfaced</li>
+      <li>which defaults get emphasized when protocol leaves room</li>
+    </ul>
+
+    <p>That matters. It is just not the first-order control surface.</p>
+
+    <h3>Protocol Failures in the Wild</h3>
+
+    <h4>Unowned Handoffs</h4>
+    <p>Agent A "finishes" and Agent B starts, but nobody can say what was actually delivered. Was it analysis? Was it code ready for merge? Was it only a proposal? This is a protocol failure disguised as a communication problem.</p>
+
+    <h4>Ambiguous Mutation Rights</h4>
+    <p>The planning agent edits code. The implementation agent rewrites the spec. The review agent silently fixes tests. Congratulations, now nobody knows which role is accountable for what.</p>
+
+    <h4>No Failure Channel</h4>
+    <p>If an agent cannot clearly return "blocked," "ambiguous," or "unsafe to continue," the system quietly converts uncertainty into action. That is how bad pushes happen.</p>
+
+    <h4>Personality Collision</h4>
+    <p>One persona optimizes for speed. Another optimizes for elegance. Another imitates executive confidence. None of them share a structured rule for resolving conflict. This is not orchestration. It is cosplay with race conditions.</p>
+
+    <h3>Artifacts Are the Real Conversation</h3>
+    <p>In durable agent systems, conversation is not the main substrate. Artifacts are.</p>
+    <ul>
+      <li>spec files</li>
+      <li>decision logs</li>
+      <li>issue states</li>
+      <li>rubrics</li>
+      <li>tests</li>
+      <li>patches</li>
+      <li>approval markers</li>
+    </ul>
+
+    <p>The messages in between matter only insofar as they update or interpret those artifacts.</p>
+    <p>This is why agent-to-agent protocol should be boring. Boring means legible. Legible means debuggable.</p>
+
+    <h3>Exit Conditions Beat Charisma</h3>
+    <p>The strongest protocol element is often the simplest one: a clear stop rule.</p>
+    <pre><code>role: implementation
+halt_when:
+  - tests for changed modules pass
+  - no schema changes introduced
+  - diff is ready for review
+otherwise:
+  - return blocker report</code></pre>
+
+    <p>Compare that with a charismatic instruction like "act like a meticulous principal engineer." One of these creates a checkable boundary. The other creates mood.</p>
+
+    <h3>Human Review Improves When Protocol Exists</h3>
+    <p>Humans review faster when outputs are shaped. They do not have to infer intent from narrative sludge.</p>
+    <p>A structured handoff lets the human ask better questions:</p>
+    <ul>
+      <li>Did the agent exceed allowed mutation rights?</li>
+      <li>Did it satisfy the done condition?</li>
+      <li>Did it escalate ambiguity correctly?</li>
+      <li>Did it cite the right artifact version?</li>
+    </ul>
+
+    <p>That is review. Everything else is literary criticism.</p>
+
+    <h3>Practical Rules</h3>
+    <ol>
+      <li>Define roles by permissions, not only by tone.</li>
+      <li>Pass artifacts by reference and version when possible.</li>
+      <li>Require every handoff to state status, blockers, and next action.</li>
+      <li>Make escalation a first-class outcome, not a sign of weakness.</li>
+      <li>Use personality only after protocol is stable.</li>
+    </ol>
+
+    <h3>Bottom Line</h3>
+    <p>Personality can make an agent nicer to work with.</p>
+    <p>Protocol is what makes it trustworthy to work with. Get the order wrong and the whole stack starts mistaking style for coordination.</p>
+
+    <h3>Further Reading</h3>
+    <ul>
+      <li><a href="/research/persona-anchors/">Persona Anchors</a> - Where stylistic anchoring helps and where it does not</li>
+      <li><a href="/workflows/modular-workflow-stack/">Modular Workflow Stack</a> - Role boundaries, gates, and handoffs</li>
+      <li><a href="/workflows/claude-code-skills-stack/">Claude Code Skills Stack</a> - Decision, context, and execution as separate layers</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

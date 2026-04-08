@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agents do not share understanding. They share artifacts. Specs are the closest thing to common reality.">
+  <link rel="canonical" href="https://stayfresh.dev/research/specs-as-shared-reality/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <title>Specs as Shared Reality - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">April 2026</p>
+    <h2>Specs as Shared Reality</h2>
+
+    <p>Agents do not share understanding in any mystical sense. They do not "align" by wanting the same thing. They align, when they align at all, by reading the same artifacts and being judged against the same boundaries.</p>
+    <p>The spec is the closest thing an agent workflow has to common reality.</p>
+
+    <h3>Position</h3>
+    <blockquote><p>If the truth of the task only exists in conversation history, then the task does not have a durable truth.</p></blockquote>
+
+    <h3>Why This Matters</h3>
+    <p>Human teams can survive a surprising amount of ambiguity because they carry shared background, tacit knowledge, and the ability to ask annoying follow-up questions.</p>
+    <p>Agents are worse at all three.</p>
+
+    <p>That changes the epistemology of delivery.</p>
+    <p>Instead of asking whether the model "understood," the better question is: what artifact would make misunderstanding harder?</p>
+
+    <h3>Conversation Is Not a Stable Substrate</h3>
+    <p>Conversation history feels like shared reality because it is chronologically complete. That is not the same thing as being authoritative.</p>
+    <p>History contains:</p>
+    <ul>
+      <li>draft ideas</li>
+      <li>obsolete assumptions</li>
+      <li>midstream reversals</li>
+      <li>soft language that never became a decision</li>
+      <li>local clarifications buried under later turns</li>
+    </ul>
+
+    <p>Asking each new agent to reconstruct truth from that pile is not robust. It is archaeological cosplay.</p>
+
+    <h3>What a Spec Does</h3>
+    <p>A spec does not need to be grand or bureaucratic. It just needs to collapse uncertainty into a current, inspectable statement.</p>
+    <p>At minimum, a useful spec names:</p>
+    <ul>
+      <li>the objective</li>
+      <li>the actors</li>
+      <li>the expected behavior</li>
+      <li>the constraints</li>
+      <li>the rejection conditions</li>
+    </ul>
+
+    <pre><code>feature: webhook retry backoff
+
+objective:
+  prevent rapid retry storms on downstream failure
+
+behavior:
+  - failed deliveries retry with exponential backoff
+  - max attempts default to 5
+  - terminal failure emits metric and marks delivery dead
+
+constraints:
+  - no schema changes
+  - preserve current API payload shape
+  - reuse existing queue system
+
+reject_if:
+  - retries become unbounded
+  - delivery ordering semantics change
+  - failure metrics disappear</code></pre>
+
+    <p>That is enough to ground planning, implementation, QA, and review in the same world.</p>
+
+    <h3>Specs Beat Memory for the Important Things</h3>
+    <p>Memory is useful for durable preferences and persistent facts. Specs are better for current truth because they are explicit, local, and revisable on purpose.</p>
+    <p>Memories linger. Specs can be versioned, superseded, diffed, and approved.</p>
+
+    <p>This is why a good spec is not just another note. It is a legitimacy mechanism.</p>
+
+    <h3>Shared Reality Requires Versioning</h3>
+    <p>The moment multiple agents or sessions touch the same feature, versioning stops being optional.</p>
+    <p>If one agent read spec v2 and another implemented against v1, the team no longer shares a reality. It shares a category name.</p>
+
+    <pre><code>spec: specs/auth-v2.md
+version: 6f1e0d9
+status: approved
+supersedes: auth-v1.md</code></pre>
+
+    <p>That tiny bit of ceremony pays for itself immediately. It prevents the soft chaos where everyone thinks they are talking about the same thing because the filename still sounds familiar.</p>
+
+    <h3>Tests Are Spec Fragments</h3>
+    <p>Tests do not replace specs. They do, however, encode parts of the same reality.</p>
+    <p>The best workflows make the relationship explicit:</p>
+    <ul>
+      <li>spec says what should happen</li>
+      <li>tests prove selected claims about what should happen</li>
+      <li>implementation attempts to satisfy both</li>
+    </ul>
+
+    <p>When the spec and tests disagree, that disagreement is gold. It reveals that the workflow does not actually have one truth yet.</p>
+
+    <h3>What Happens Without a Spec</h3>
+
+    <h4>Planning Drifts Into Invention</h4>
+    <p>The planning step quietly becomes requirements generation.</p>
+
+    <h4>Implementation Overfits to the Last Message</h4>
+    <p>The coder agent obeys whatever was said most recently, whether or not it outranks the rest of the project.</p>
+
+    <h4>Review Turns Vague</h4>
+    <p>Without a grounded artifact, review comments become aesthetic: "this feels wrong," "maybe cleaner," "not quite what was intended." Translation: nobody can point to shared truth.</p>
+
+    <h4>Handoffs Become Storytelling</h4>
+    <p>Instead of passing a stable document, agents summarize their own interpretation of what happened. Now every handoff introduces a chance to mutate reality by accident.</p>
+
+    <h3>Spec Writing for Agents Is Different</h3>
+    <p>Traditional specs often assume patient human readers who can tolerate narrative, politics, and historical context. Agent-facing specs should be tighter.</p>
+    <p>Better agent specs are:</p>
+    <ul>
+      <li>operational instead of inspirational</li>
+      <li>bounded instead of visionary</li>
+      <li>explicit about rejection conditions</li>
+      <li>split into sections that can be referenced directly</li>
+      <li>short enough to reload without resentment</li>
+    </ul>
+
+    <p>The good news is that this is also better for humans.</p>
+
+    <h3>Specs Need Update Rules</h3>
+    <p>A stale spec is worse than no spec because it advertises confidence it does not deserve.</p>
+    <p>Every workflow needs to answer:</p>
+    <ul>
+      <li>who is allowed to change the spec</li>
+      <li>which changes need human approval</li>
+      <li>how downstream agents are told a revision happened</li>
+      <li>whether in-flight work must restart on spec change</li>
+    </ul>
+
+    <p>If that policy does not exist, "the spec" is just a nice-looking prop.</p>
+
+    <h3>Specs Are the Human-Agent Treaty</h3>
+    <p>The spec is where human intent becomes something the system can inspect repeatedly without asking the human to restate it every time.</p>
+    <p>This matters because repeated restatement is a hidden tax. Each retelling introduces drift, omission, and accidental re-prioritization.</p>
+
+    <p>A spec stops that bleed. It turns intent into a revisable object.</p>
+
+    <h3>Practical Rules</h3>
+    <ol>
+      <li>Write a spec before parallel work begins.</li>
+      <li>Version it when multiple sessions or agents depend on it.</li>
+      <li>Keep it shorter than the conversation it replaces.</li>
+      <li>Link tests and rubrics back to it explicitly.</li>
+      <li>Treat undocumented midstream changes as scope changes, not casual chat.</li>
+    </ol>
+
+    <h3>Bottom Line</h3>
+    <p>Agents do not need a perfect theory of the project.</p>
+    <p>They need the same binding artifact, the same revision history, and the same criteria for being wrong. That is what shared reality looks like in practice.</p>
+
+    <h3>Further Reading</h3>
+    <ul>
+      <li><a href="/workflows/project-ai-philosophy/">Project AI Philosophy</a> - Why bounded operating rules matter</li>
+      <li><a href="/workflows/modular-workflow-stack/">Modular Workflow Stack</a> - Specs as a distinct context layer</li>
+      <li><a href="/research/context-is-a-budget/">Context Is a Budget</a> - Why stable truth should be compressed, not endlessly repeated</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

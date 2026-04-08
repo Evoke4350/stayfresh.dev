@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agent context is a budget, not a dumping ground. More tokens do not create more truth.">
+  <link rel="canonical" href="https://stayfresh.dev/research/context-is-a-budget/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <title>Context Is a Budget - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">April 2026</p>
+    <h2>Context Is a Budget</h2>
+
+    <p>Agent operators talk about context like it is free oxygen. It is not. It is closer to cash, battery, and attention packed into one constraint.</p>
+    <p>Every extra token costs something: money, latency, retrieval noise, weaker focus, and more opportunities for stale information to masquerade as truth.</p>
+
+    <h3>Position</h3>
+    <blockquote><p>Context should be spent where it changes the next decision. Everything else is clutter wearing a lanyard.</p></blockquote>
+
+    <h3>What Context Actually Buys</h3>
+    <p>Useful context does one of four jobs:</p>
+    <ul>
+      <li>exposes the current objective</li>
+      <li>states the active constraints</li>
+      <li>shows the artifact under change</li>
+      <li>defines how success will be judged</li>
+    </ul>
+
+    <p>That is the whole game. If a block of text does not help with one of those four jobs, it is probably there because nobody wanted to decide what mattered.</p>
+
+    <h3>The Common Failure</h3>
+    <p>Most agent setups die from one of two bad instincts.</p>
+    <p><strong>Instinct one:</strong> dump in everything "just in case."</p>
+    <p><strong>Instinct two:</strong> keep adding summaries of summaries until the system cannot tell current truth from yesterday's interpretation of it.</p>
+
+    <p>The result looks thorough and feels intelligent. It is neither.</p>
+    <p>Wide context often makes agents more obedient to the wrong thing. They follow whatever is easiest to quote, not whatever is most relevant to the live decision.</p>
+
+    <h3>Why More Context Does Not Mean More Truth</h3>
+    <p>Truth in an agent workflow is not the total volume of available text. It is the subset that still governs the present task.</p>
+    <p>A stale note, an old roadmap, an outdated README section, and a one-line user correction do not have equal authority. But once they enter the same prompt soup, they start competing as peers.</p>
+
+    <p>This is the real problem with context inflation. It flattens authority.</p>
+    <p>The model sees everything. The operator forgets that not everything should count equally.</p>
+
+    <h3>Authority Matters More Than Recall</h3>
+    <p>Useful context is hierarchical.</p>
+    <ul>
+      <li><strong>highest authority</strong> - current spec, explicit user correction, failing test, live interface contract</li>
+      <li><strong>middle authority</strong> - recent decision log, current implementation, current task brief</li>
+      <li><strong>low authority</strong> - brainstorming notes, old summaries, generic project lore</li>
+    </ul>
+
+    <p>Most teams have this hierarchy implicitly. Few encode it explicitly. Then they wonder why the agent keeps honoring obsolete notes like a dutiful little historian.</p>
+
+    <h3>The Four Good Uses of Context</h3>
+
+    <h4>1. State the Objective</h4>
+    <p>What is happening now? Not what the project is "about." Not the company mission. What is the current move?</p>
+    <pre><code>task: add retry backoff to outbound webhook delivery
+done_when:
+  - retries use exponential backoff
+  - max attempt count is configurable
+  - existing webhook tests pass
+  - failure metrics remain emitted</code></pre>
+
+    <h4>2. State the Constraints</h4>
+    <p>Good constraints save tokens because they eliminate branches of thought before the model wanders into them.</p>
+    <pre><code>constraints:
+  - do not change database schema
+  - preserve public API response shape
+  - prefer existing queue abstractions
+  - no new dependencies</code></pre>
+
+    <h4>3. Show the Work Surface</h4>
+    <p>The most valuable context is usually the artifact under change: the file, interface, failing test, log line, schema, or diff. Not a sermon about the repository.</p>
+
+    <h4>4. Define Judgment</h4>
+    <p>Agents behave better when the evaluation surface is present. See <a href="/research/reward-engineering/">Reward Engineering for Coding Agents</a>. If success is visible, less narration is needed.</p>
+
+    <h3>Bad Context Smells</h3>
+    <ul>
+      <li>long codebase overviews before a narrow task</li>
+      <li>duplicate summaries at multiple levels of abstraction</li>
+      <li>persona fluff that outranks operational facts</li>
+      <li>old decisions with no validity window</li>
+      <li>notes that explain what the code already says clearly</li>
+      <li>entire browser snapshots shoved into every turn</li>
+    </ul>
+
+    <p>If context starts looking like archival preservation, the workflow has already gone off the rails.</p>
+
+    <h3>Memory Is Not a Junk Drawer</h3>
+    <p>Persistent memory gets sold as the answer to drift. Sometimes it is. Often it just preserves mistakes at scale.</p>
+    <p>Memory only helps when it stores things that should survive task boundaries:</p>
+    <ul>
+      <li>stable project facts</li>
+      <li>decisions that remain binding</li>
+      <li>open questions that still block progress</li>
+      <li>operator preferences that genuinely affect output</li>
+    </ul>
+
+    <p>Everything else should decay.</p>
+    <p>That sounds harsh. It is correct. A memory system without forgetting is just an optimism-powered landfill.</p>
+
+    <h3>Compression Beats Accumulation</h3>
+    <p>Strong operators compress state after each meaningful step.</p>
+    <p>Weak operators accumulate every intermediate thought because deleting anything feels risky.</p>
+
+    <p>Compression is not summarization theater. It means writing the smallest artifact that preserves the next valid move.</p>
+    <pre><code>current_state:
+  objective: ship webhook backoff without API changes
+  decisions:
+    - use existing retry queue
+    - default max attempts stays 5
+  unresolved:
+    - metric name for terminal failure event
+  next_step:
+    - patch dispatcher and update tests</code></pre>
+
+    <p>That is enough. The rest can be reconstructed from code and git history if needed.</p>
+
+    <h3>Prompt Caching Does Not Solve Epistemology</h3>
+    <p>Cheap cached context is still context. Lower price does not turn fluff into signal.</p>
+    <p>Caching is useful when the same high-value substrate must stay present across turns. It is not a moral license to keep every paragraph ever written in the loop forever.</p>
+
+    <h3>Heartbeats and Checkpoints</h3>
+    <p>Long-running agent work benefits from tiny recurring checks. But the heartbeat should ask whether reality changed, not restate the entire universe.</p>
+    <p>A good heartbeat pattern is boring:</p>
+    <pre><code>if nothing_changed:
+  return HEARTBEAT_OK
+
+if state_changed:
+  return {
+    changed_fact,
+    impact_on_task,
+    required_next_action
+  }</code></pre>
+
+    <p>The point is to surface deltas. If every heartbeat rehydrates the full workflow state, the system is paying rent on its own indecision.</p>
+
+    <h3>The Better Rule</h3>
+    <p>Pass full context only at real boundaries:</p>
+    <ul>
+      <li>new task class</li>
+      <li>new artifact surface</li>
+      <li>spec revision</li>
+      <li>handoff between roles</li>
+    </ul>
+
+    <p>Inside a narrow loop, context should shrink, not grow.</p>
+
+    <h3>Practical Consequences</h3>
+    <ol>
+      <li>Prefer references to artifacts over pasting entire artifacts.</li>
+      <li>Store state in versioned files, not only in conversation history.</li>
+      <li>Expire summaries when the underlying truth changes.</li>
+      <li>Make authority explicit: spec beats note, test beats plan, operator correction beats both.</li>
+      <li>Measure context by decision value, not token count alone.</li>
+    </ol>
+
+    <h3>Bottom Line</h3>
+    <p>Context is not a memory contest.</p>
+    <p>It is a spending decision. Spend it on the facts that change the next move. Cut the rest before it starts pretending to be knowledge.</p>
+
+    <h3>Further Reading</h3>
+    <ul>
+      <li><a href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a> - When extra repository context helps and when it just burns money</li>
+      <li><a href="/workflows/modular-workflow-stack/">Modular Workflow Stack</a> - Why context belongs in a distinct layer</li>
+      <li><a href="/research/reward-engineering/">Reward Engineering for Coding Agents</a> - The evaluation surface matters more than prompt bulk</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

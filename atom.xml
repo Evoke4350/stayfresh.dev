@@ -21,6 +21,27 @@
     <summary>Right tool, right job, right time: layered orchestration, typed agent delegation, human-in-the-loop gates, parallelism, and loops with real halting conditions.</summary>
   </entry>
   <entry>
+    <title>Context Is a Budget</title>
+    <link href="https://stayfresh.dev/research/context-is-a-budget/"/>
+    <id>https://stayfresh.dev/research/context-is-a-budget/</id>
+    <updated>2026-04-07T00:00:00Z</updated>
+    <summary>More tokens do not create more truth. Context should be spent where it changes the next decision.</summary>
+  </entry>
+  <entry>
+    <title>Protocol Before Personality</title>
+    <link href="https://stayfresh.dev/research/protocol-before-personality/"/>
+    <id>https://stayfresh.dev/research/protocol-before-personality/</id>
+    <updated>2026-04-07T00:00:00Z</updated>
+    <summary>Shared artifacts and exit conditions beat charisma, cosplay, and fake seniority.</summary>
+  </entry>
+  <entry>
+    <title>Specs as Shared Reality</title>
+    <link href="https://stayfresh.dev/research/specs-as-shared-reality/"/>
+    <id>https://stayfresh.dev/research/specs-as-shared-reality/</id>
+    <updated>2026-04-07T00:00:00Z</updated>
+    <summary>Agents do not share understanding. They share binding artifacts, versions, and tests.</summary>
+  </entry>
+  <entry>
     <title>StayFresh Thesis</title>
     <link href="https://stayfresh.dev/thesis/"/>
     <id>https://stayfresh.dev/thesis/</id>

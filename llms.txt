@@ -30,6 +30,9 @@ Use the thesis first for doctrine, then workflows for implementation patterns, t
 
 ## Research
 
+- [Context Is a Budget](https://stayfresh.dev/research/context-is-a-budget/): Why agent context should be treated as a scarce budget rather than an everything bucket.
+- [Protocol Before Personality](https://stayfresh.dev/research/protocol-before-personality/): Why multi-agent coordination depends more on handoff rules than on persona prompts.
+- [Specs as Shared Reality](https://stayfresh.dev/research/specs-as-shared-reality/): How specs become the closest thing agent workflows have to a common truth.
 - [Reward Engineering for Coding Agents](https://stayfresh.dev/research/reward-engineering/): Why rubrics shape agent behavior more than prompts.
 - [Reward Hacking in Coding Agents](https://stayfresh.dev/research/reward-hacking/): Failure modes caused by narrow or gameable evaluation.
 - [AGENTS.md Effectiveness](https://stayfresh.dev/research/agents-md-effectiveness/): Evidence on repository instruction files and why they often add cost without helping.

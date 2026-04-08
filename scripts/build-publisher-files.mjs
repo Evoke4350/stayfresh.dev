@@ -39,7 +39,7 @@ const pages = [
     sourceFile: "research/index.html",
     title: "Research",
     description: "Empirical findings on AI workflow effectiveness.",
-    updated: "2026-03-19",
+    updated: "2026-04-07",
     includeInFeed: false
   },
   {
@@ -120,6 +120,30 @@ const pages = [
     sourceFile: "workflows/ci-automation/index.html",
     title: "CI Automation with AI Agents",
     description: "Integrating AI agents with continuous integration workflows.",
+    includeInFeed: true
+  },
+  {
+    path: "/research/context-is-a-budget/",
+    sourceFile: "research/context-is-a-budget/index.html",
+    title: "Context Is a Budget",
+    description: "More tokens do not create more truth. Context should be spent where it changes the next decision.",
+    updated: "2026-04-07",
+    includeInFeed: true
+  },
+  {
+    path: "/research/protocol-before-personality/",
+    sourceFile: "research/protocol-before-personality/index.html",
+    title: "Protocol Before Personality",
+    description: "Shared artifacts and exit conditions beat charisma, cosplay, and fake seniority.",
+    updated: "2026-04-07",
+    includeInFeed: true
+  },
+  {
+    path: "/research/specs-as-shared-reality/",
+    sourceFile: "research/specs-as-shared-reality/index.html",
+    title: "Specs as Shared Reality",
+    description: "Agents do not share understanding. They share binding artifacts, versions, and tests.",
+    updated: "2026-04-07",
     includeInFeed: true
   },
   {
@@ -334,6 +358,9 @@ const llms = [
   "",
   "## Research",
   "",
+  llmsLink("/research/context-is-a-budget/", "Why agent context should be treated as a scarce budget rather than an everything bucket."),
+  llmsLink("/research/protocol-before-personality/", "Why multi-agent coordination depends more on handoff rules than on persona prompts."),
+  llmsLink("/research/specs-as-shared-reality/", "How specs become the closest thing agent workflows have to a common truth."),
   llmsLink("/research/reward-engineering/", "Why rubrics shape agent behavior more than prompts."),
   llmsLink("/research/reward-hacking/", "Failure modes caused by narrow or gameable evaluation."),
   llmsLink("/research/agents-md-effectiveness/", "Evidence on repository instruction files and why they often add cost without helping."),

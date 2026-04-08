@@ -28,6 +28,30 @@
       "date_modified": "2026-04-07T00:00:00Z"
     },
     {
+      "id": "https://stayfresh.dev/research/context-is-a-budget/",
+      "url": "https://stayfresh.dev/research/context-is-a-budget/",
+      "title": "Context Is a Budget",
+      "summary": "More tokens do not create more truth. Context should be spent where it changes the next decision.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/protocol-before-personality/",
+      "url": "https://stayfresh.dev/research/protocol-before-personality/",
+      "title": "Protocol Before Personality",
+      "summary": "Shared artifacts and exit conditions beat charisma, cosplay, and fake seniority.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/specs-as-shared-reality/",
+      "url": "https://stayfresh.dev/research/specs-as-shared-reality/",
+      "title": "Specs as Shared Reality",
+      "summary": "Agents do not share understanding. They share binding artifacts, versions, and tests.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
+    },
+    {
       "id": "https://stayfresh.dev/thesis/",
       "url": "https://stayfresh.dev/thesis/",
       "title": "StayFresh Thesis",
