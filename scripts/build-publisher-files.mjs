@@ -187,6 +187,14 @@ const pages = [
     title: "Persona Anchors",
     description: "Character-based instruction patterns for consistent agent behavior.",
     includeInFeed: true
+  },
+  {
+    path: "/research/what-is-prompting/",
+    sourceFile: "research/what-is-prompting/index.html",
+    title: "What is Prompting: Operational Constraints",
+    description: "Prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.",
+    updated: "2026-04-07",
+    includeInFeed: true
   }
 ];
 

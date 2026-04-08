@@ -42,6 +42,13 @@
     <summary>Agents do not share understanding. They share binding artifacts, versions, and tests.</summary>
   </entry>
   <entry>
+    <title>What is Prompting: Operational Constraints</title>
+    <link href="https://stayfresh.dev/research/what-is-prompting/"/>
+    <id>https://stayfresh.dev/research/what-is-prompting/</id>
+    <updated>2026-04-07T00:00:00Z</updated>
+    <summary>Prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.</summary>
+  </entry>
+  <entry>
     <title>StayFresh Thesis</title>
     <link href="https://stayfresh.dev/thesis/"/>
     <id>https://stayfresh.dev/thesis/</id>

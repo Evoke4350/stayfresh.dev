@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.">
+  <link rel="canonical" href="https://stayfresh.dev/research/what-is-prompting/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <title>What is Prompting - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">April 2026</p>
+    <h2>What is Prompting: Operational Constraints</h2>
+
+    <p>Prompting is not abstract instruction-writing. Prompting is a constrained pipeline where tokenization mechanics, token budgets, and control structures form the actual boundaries within which agent behavior operates.</p>
+
+    <p>Agents do not see "prompts." They see token sequences. Understanding prompting means understanding the mechanics that govern those sequences.</p>
+
+    <h3>The Pipeline</h3>
+
+    <p>Prompts follow a deterministic 7-stage process:</p>
+
+    <ol>
+      <li><strong>Human input</strong> — Raw text (words, images, other media)</li>
+      <li><strong>Tokenization</strong> — Conversion to numerical token IDs (model-specific)</li>
+      <li><strong>Token IDs</strong> — Numerical representation ready for processing</li>
+      <li><strong>LLM processing</strong> — Core computation phase</li>
+      <li><strong>Output token IDs</strong> — Numerical response</li>
+      <li><strong>Detokenization</strong> — Conversion back to text tokens</li>
+      <li><strong>Human-readable output</strong> — Final agent response</li>
+    </ol>
+
+    <p>This pipeline is not a convenience. It is the mechanism. Everything that happens to the prompt happens within this process.</p>
+
+    <h3>Three Hard Constraints</h3>
+
+    <h4>1. Tokenization (The Conversion Constraint)</h4>
+
+    <p>Tokenization is the compilation step. Just as code must be compiled to machine instructions, prompts must be tokenized to numerical sequences.</p>
+
+    <p>This has three practical implications:</p>
+
+    <ul>
+      <li><strong>Token count varies by provider.</strong> The same text tokenizes differently in GPT-3, GPT-4, and Gemini due to different tokenization algorithms.</li>
+      <li><strong>Token counting is budgetable.</strong> You can measure token usage with libraries (tiktoken for OpenAI) or API feedback (Gemini).</li>
+      <li><strong>Token efficiency matters.</strong> More concise prompts leave room for agent responses without hitting max token limits.</li>
+    </ul>
+
+    <p>For agent specification: tokenization means agents do not see structural hints in formatting. They see token sequences. Decomposing specifications into structured sequences—not prose—respects how agents actually process input.</p>
+
+    <h4>2. Max Tokens (The Working Memory Constraint)</h4>
+
+    <p>Every LLM has a context window limit: the maximum tokens it can process in a single interaction. This is a fixed architectural constraint, not a soft preference.</p>
+
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li>GPT-3: 4,096 tokens</li>
+      <li>GPT-4: 8,192 or 32,768 tokens (version-dependent)</li>
+      <li>Gemini 3: 1,048,576 tokens</li>
+    </ul>
+
+    <p>How it constrains agents: if max_tokens = 8,192 and your prompt uses 1,000 tokens, only 7,192 tokens remain for reasoning and output. Agents cannot reason deeper than the token budget allows. Token limits force agents to compress reasoning or fail requests that exceed capacity.</p>
+
+    <p>From a cost perspective: token limits directly translate to billing. Most LLM services charge (input_tokens + output_tokens) × price_per_token. Larger context windows mean higher costs if fully used.</p>
+
+    <p>The real insight: the context window is the agent's working memory. A 4K token limit is fundamentally more constrained than a 1M token limit. This affects what agents can hold in mind, what context they can reference, what reasoning chains they can execute.</p>
+
+    <h4>3. Control Tokens (The Structure Constraint)</h4>
+
+    <p>Control tokens are special tokens that organize prompt regions and guide LLM processing phases.</p>
+
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li><code>&lt;|startoftext|&gt;</code> — Begin sequence</li>
+      <li><code>&lt;|endoftext|&gt;</code> — End sequence</li>
+      <li><code>&lt;|user|&gt;</code> — Mark user message</li>
+      <li><code>&lt;|assistant|&gt;</code> — Mark assistant message</li>
+    </ul>
+
+    <p>These tokens are handled internally by modern APIs (you don't write them explicitly in OpenAI), but understanding them shows how prompts are actually structured. Control tokens segment reasoning phases. They tell the LLM where one phase ends and another begins. This explains why conversation state is preserved in message-based prompts but not in basic text prompts.</p>
+
+    <h3>Prompt Types as Architectural Choices</h3>
+
+    <p>The choice of how to structure prompts directly affects agent capability.</p>
+
+    <h4>Basic Text Prompts</h4>
+    <pre><code>"Translate 'Hello' to French"</code></pre>
+    <ul>
+      <li>Single-turn only</li>
+      <li>No conversation state</li>
+      <li>No access to prior messages</li>
+      <li>Best for: one-off queries</li>
+    </ul>
+
+    <h4>Messages Prompts</h4>
+    <pre><code>[
+  { role: "user", content: "Translate 'Hello' to French" },
+  { role: "assistant", content: "Bonjour" },
+  { role: "user", content: "And 'goodbye'?" }
+]</code></pre>
+    <ul>
+      <li>Multi-turn with state</li>
+      <li>Prior messages available for context</li>
+      <li>More token-expensive (full history included)</li>
+      <li>Best for: conversation, agents with memory</li>
+    </ul>
+
+    <h4>System Prompts</h4>
+    <pre><code>system: "You are a French translator. Be concise."
+user: "Translate 'Hello'"</code></pre>
+    <ul>
+      <li>Sets operational boundaries</li>
+      <li>Persists across conversation</li>
+      <li>Defines agent persona and constraints</li>
+      <li>Best for: defining agent behavior globally</li>
+    </ul>
+
+    <p>The choice between basic and message-based prompts determines whether an agent can maintain reasoning continuity across multiple requests. This is not a minor implementation detail. It is a fundamental architectural constraint.</p>
+
+    <h3>Prompt Management (Version Control for Behavior)</h3>
+
+    <p>As prompts evolve, they need versioning:</p>
+
+    <pre><code>translation_openai_v1.0.0  # Initial version
+translation_openai_v1.1.0  # Enhancement (minor version)
+translation_openai_v2.0.0  # Major refactor (major version)</code></pre>
+
+    <p>Why versioning matters:</p>
+    <ul>
+      <li><strong>A/B testing</strong> — Run different prompt versions against same LLM to measure effectiveness</li>
+      <li><strong>Rollback</strong> — Revert to previous version if new version underperforms</li>
+      <li><strong>Provider-specific optimization</strong> — Same task may need different prompts for GPT-4 vs Gemini</li>
+      <li><strong>Performance tracking</strong> — Measure how changes affect output quality and token efficiency</li>
+    </ul>
+
+    <h3>The Design Implication</h3>
+
+    <p>Agents cannot be understood independently of their prompting mechanism. The tokenization pipeline, token limits, and control structures are not implementation details. They are the operational constraints that determine what agents can do.</p>
+
+    <p><strong>When designing agent specifications:</strong></p>
+    <ol>
+      <li>Respect tokenization — Structure specs as token sequences, not prose</li>
+      <li>Budget tokens — Reserve output space within context window limits</li>
+      <li>Use system prompts — Define agent boundaries globally, not per-request</li>
+      <li>Choose prompt type carefully — Messages-based for agents with memory, basic for stateless operations</li>
+      <li>Version prompts — Track which prompt versions produce which behaviors</li>
+    </ol>
+
+    <p>Agents do not follow instructions abstractly. They operate within tokenized, token-budgeted, control-structured pipelines. Understanding prompting means understanding these constraints as first-class design elements.</p>
+
+    <h3>Related Principles</h3>
+    <ul>
+      <li><a href="/research/context-is-a-budget/">Context Is a Budget</a> — Token limits as cognitive constraint</li>
+      <li><a href="/research/specs-as-shared-reality/">Specs as Shared Reality</a> — How specification structure shapes agent behavior</li>
+      <li><a href="/research/protocol-before-personality/">Protocol Before Personality</a> — Structure precedes persona</li>
+    </ul>
+
+  </main>
+</body>
+</html>

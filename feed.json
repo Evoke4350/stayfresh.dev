@@ -52,6 +52,14 @@
       "date_modified": "2026-04-07T00:00:00Z"
     },
     {
+      "id": "https://stayfresh.dev/research/what-is-prompting/",
+      "url": "https://stayfresh.dev/research/what-is-prompting/",
+      "title": "What is Prompting: Operational Constraints",
+      "summary": "Prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
+    },
+    {
       "id": "https://stayfresh.dev/thesis/",
       "url": "https://stayfresh.dev/thesis/",
       "title": "StayFresh Thesis",
