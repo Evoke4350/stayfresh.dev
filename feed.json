@@ -12,6 +12,14 @@
   ],
   "items": [
     {
+      "id": "https://stayfresh.dev/workflows/claude-code-skills-stack/",
+      "url": "https://stayfresh.dev/workflows/claude-code-skills-stack/",
+      "title": "Claude Code Skills Stack",
+      "summary": "A practical three-layer stack for Claude Code: decision, context, and execution.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
+    },
+    {
       "id": "https://stayfresh.dev/workflows/modular-workflow-stack/",
       "url": "https://stayfresh.dev/workflows/modular-workflow-stack/",
       "title": "Modular Workflow Stack",

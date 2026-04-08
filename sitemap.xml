@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stayfresh.dev/</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-04-07</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/thesis/</loc>
@@ -10,11 +10,15 @@
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-04-07</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/</loc>
     <lastmod>2026-03-19</lastmod>
+  </url>
+  <url>
+    <loc>https://stayfresh.dev/workflows/claude-code-skills-stack/</loc>
+    <lastmod>2026-04-07</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/modular-workflow-stack/</loc>

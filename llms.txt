@@ -20,6 +20,7 @@ Use the thesis first for doctrine, then workflows for implementation patterns, t
 
 ## Agent Workflow Patterns
 
+- [Claude Code Skills Stack](https://stayfresh.dev/workflows/claude-code-skills-stack/): A practical three-layer Claude Code stack: decision, context, and execution.
 - [Modular Workflow Stack](https://stayfresh.dev/workflows/modular-workflow-stack/): Three-layer model for orchestration, context stability, and execution: role-based routing, human gates, parallelism, and loop patterns.
 - [Preference TOML](https://stayfresh.dev/workflows/preference-toml/): Simple config shape for critique, selection, and evaluation loops.
 - [Reward Rubric DSL](https://stayfresh.dev/workflows/reward-rubric-dsl/): Machine-readable rubric pattern for scoring agent output.

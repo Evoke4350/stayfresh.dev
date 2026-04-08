@@ -7,6 +7,13 @@
   <updated>2026-04-07T00:00:00Z</updated>
   <id>https://stayfresh.dev/</id>
   <entry>
+    <title>Claude Code Skills Stack</title>
+    <link href="https://stayfresh.dev/workflows/claude-code-skills-stack/"/>
+    <id>https://stayfresh.dev/workflows/claude-code-skills-stack/</id>
+    <updated>2026-04-07T00:00:00Z</updated>
+    <summary>A practical three-layer stack for Claude Code: decision, context, and execution.</summary>
+  </entry>
+  <entry>
     <title>Modular Workflow Stack</title>
     <link href="https://stayfresh.dev/workflows/modular-workflow-stack/"/>
     <id>https://stayfresh.dev/workflows/modular-workflow-stack/</id>

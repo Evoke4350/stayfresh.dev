@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A practical Claude Code skills stack: decision, context, execution. Install less, route harder, keep the workflow coherent.">
+  <link rel="canonical" href="https://stayfresh.dev/workflows/claude-code-skills-stack/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <title>Claude Code Skills Stack - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main>
+    <p class="date">April 2026</p>
+    <h2>Claude Code Skills Stack</h2>
+
+    <p>Installing every shiny skill pack is not a workflow. It is a haunted attic with autocomplete.</p>
+    <p>The stable stack is three layers: <strong>decision</strong>, <strong>context</strong>, and <strong>execution</strong>. Give each layer one clear job or the session turns into token confetti.</p>
+
+    <h3>The Take</h3>
+    <p>Use opinionated planning skills to decide what should happen. Use a small context system to keep state from rotting. Use execution skills to write, test, review, and close the loop.</p>
+    <p>Do not let all three layers talk at once on every task. That is how a two-line patch becomes a committee meeting.</p>
+
+    <h3>Default Stack</h3>
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Job</th><th>Keep</th><th>Do Not Let It Become</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Decision</td><td>Scope, tradeoffs, sequencing</td><td>one or two high-value planning skills</td><td>a permanent board of directors</td></tr>
+        <tr><td>Context</td><td>Goals, constraints, state, open questions</td><td>small durable files and summaries</td><td>a second codebase made of stale notes</td></tr>
+        <tr><td>Execution</td><td>Implementation, tests, verification, closeout</td><td>the strongest build-and-check loop</td><td>an excuse to skip judgment</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Routing Rule</h3>
+    <p>Route by task shape, not by framework fandom.</p>
+    <ul>
+      <li><strong>fuzzy requirement</strong> - run decision skills first</li>
+      <li><strong>long-running feature or multi-session work</strong> - update context before more coding</li>
+      <li><strong>clear scoped change</strong> - go straight to execution</li>
+      <li><strong>tiny fix</strong> - skip half the ceremony and ship the patch</li>
+    </ul>
+
+    <h3>Why This Structure Holds Up</h3>
+    <p>The late-2025 to early-2026 research is not subtle about it.</p>
+    <ul>
+      <li><strong>December 18, 2025:</strong> PAACE showed plan-aware context compression can improve correctness while cutting context load. Context quality matters more than context bulk.</li>
+      <li><strong>December 20, 2025:</strong> SWE-EVO showed software evolution tasks stay hard because agents still struggle with long-horizon, multi-file work in realistic repositories.</li>
+      <li><strong>January 8, 2026:</strong> IDE-Bench argued that real engineering work is collaborative, iterative, and tool-heavy, which is exactly where sloppy skill piles start wasting time.</li>
+      <li><strong>February 4, 2026:</strong> OmniCode showed agents that look decent on narrow patch benchmarks still fall apart across broader software tasks like test generation and review fixing.</li>
+      <li><strong>March 15, 2026:</strong> SWE-Skills-Bench found that most software-engineering skills had no measurable value and a lot of them imposed heavy token overhead. More skills was usually just more billable confusion.</li>
+    </ul>
+
+    <h3>Practical Policy</h3>
+    <ol>
+      <li>Pick one execution stack and make it the default.</li>
+      <li>Add one decision layer only for work that is still under-specified.</li>
+      <li>Keep context artifacts short enough to survive rereading.</li>
+      <li>Retire overlapping skills. Duplicate roles are just prompt inflation wearing a fake mustache.</li>
+      <li>Review token cost the same way review time gets reviewed. Waste is still waste when it looks intelligent.</li>
+    </ol>
+
+    <h3>Minimal Operating Shape</h3>
+    <pre><code>1. decide:
+   - clarify goal
+   - reject bad scope
+   - lock success criteria
+2. stabilize context:
+   - project summary
+   - active constraints
+   - current decision log
+3. execute:
+   - implement
+   - test
+   - review
+   - verify
+4. compress:
+   - write back only what future work needs</code></pre>
+
+    <h3>What to Steal From the Current Claude Code Discourse</h3>
+    <p>The April 6, 2026 DEV article on combining Superpowers, gstack, and GSD got the broad framing right: decision, context, and execution are different jobs.</p>
+    <p>The stricter version here is simpler: keep the layer split, but stop pretending every task deserves the full stack. Most do not.</p>
+
+    <h3>Bottom Line</h3>
+    <p>The best Claude Code skills stack is not the biggest one.</p>
+    <p>One decision layer, one context layer, one execution layer. Anything beyond that needs to earn its keep or get cut.</p>
+
+    <h3>References</h3>
+    <ul>
+      <li><a href="https://dev.to/imaginex/a-claude-code-skills-stack-how-to-combine-superpowers-gstack-and-gsd-without-the-chaos-44b3">Yaohua Chen, "A Claude Code Skills Stack: How to Combine Superpowers, gstack, and GSD Without the Chaos"</a> (DEV Community, April 6, 2026)</li>
+      <li><a href="https://arxiv.org/abs/2603.11934">SWE-Skills-Bench: Evaluating Software Engineering Skills of Language Agents</a> (March 15, 2026)</li>
+      <li><a href="https://arxiv.org/abs/2602.02262">OmniCode: A Benchmark for Evaluating Software Engineering Agents</a> (February 4, 2026)</li>
+      <li><a href="https://arxiv.org/abs/2601.13102">IDE-Bench: A Benchmark for Software Engineering Agents in Integrated Development Environments</a> (January 21, 2026)</li>
+      <li><a href="https://arxiv.org/abs/2512.18241">SWE-EVO: Evolving the Evaluation of Language Model Software Engineering Agents</a> (December 20, 2025)</li>
+      <li><a href="https://arxiv.org/abs/2512.16970">PAACE: A Plan-Aware Automated Agent Context Engineering Framework</a> (December 18, 2025)</li>
+    </ul>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

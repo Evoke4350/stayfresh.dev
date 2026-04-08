@@ -15,7 +15,7 @@ const pages = [
     sourceFile: "index.html",
     title: "StayFresh",
     description: "Static archive of workflow research and patterns for AI-assisted development, with deployment notes for putting Anubis in front of a GitHub Pages site.",
-    updated: "2026-03-29",
+    updated: "2026-04-07",
     includeInFeed: false
   },
   {
@@ -31,7 +31,7 @@ const pages = [
     sourceFile: "workflows/index.html",
     title: "Workflows",
     description: "Practical patterns for AI-assisted development.",
-    updated: "2026-03-29",
+    updated: "2026-04-07",
     includeInFeed: false
   },
   {
@@ -41,6 +41,14 @@ const pages = [
     description: "Empirical findings on AI workflow effectiveness.",
     updated: "2026-03-19",
     includeInFeed: false
+  },
+  {
+    path: "/workflows/claude-code-skills-stack/",
+    sourceFile: "workflows/claude-code-skills-stack/index.html",
+    title: "Claude Code Skills Stack",
+    description: "A practical three-layer stack for Claude Code: decision, context, and execution.",
+    updated: "2026-04-07",
+    includeInFeed: true
   },
   {
     path: "/workflows/modular-workflow-stack/",
@@ -316,6 +324,7 @@ const llms = [
   "",
   "## Agent Workflow Patterns",
   "",
+  llmsLink("/workflows/claude-code-skills-stack/", "A practical three-layer Claude Code stack: decision, context, and execution."),
   llmsLink("/workflows/modular-workflow-stack/", "Three-layer model for orchestration, context stability, and execution: role-based routing, human gates, parallelism, and loop patterns."),
   llmsLink("/workflows/preference-toml/", "Simple config shape for critique, selection, and evaluation loops."),
   llmsLink("/workflows/reward-rubric-dsl/", "Machine-readable rubric pattern for scoring agent output."),
