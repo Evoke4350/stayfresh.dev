@@ -38,16 +38,16 @@
     <p>Prompts follow a deterministic 7-stage process:</p>
 
     <ol>
-      <li><strong>Human input</strong> — Raw text (words, images, other media)</li>
-      <li><strong>Tokenization</strong> — Conversion to numerical token IDs (model-specific)</li>
-      <li><strong>Token IDs</strong> — Numerical representation ready for processing</li>
-      <li><strong>LLM processing</strong> — Core computation phase</li>
-      <li><strong>Output token IDs</strong> — Numerical response</li>
-      <li><strong>Detokenization</strong> — Conversion back to text tokens</li>
-      <li><strong>Human-readable output</strong> — Final agent response</li>
+      <li><strong>Human input</strong>: raw text (words, images, other media)</li>
+      <li><strong>Tokenization</strong>: conversion to numerical token IDs (model-specific)</li>
+      <li><strong>Token IDs</strong>: numerical representation ready for processing</li>
+      <li><strong>LLM processing</strong>: core computation phase</li>
+      <li><strong>Output token IDs</strong>: numerical response</li>
+      <li><strong>Detokenization</strong>: conversion back to text tokens</li>
+      <li><strong>Human-readable output</strong>: final agent response</li>
     </ol>
 
-    <p>This pipeline is not a convenience. It is the mechanism. Everything that happens to the prompt happens within this process.</p>
+    <p>This pipeline is the mechanism. Everything that happens to the prompt happens within this process.</p>
 
     <h3>Three Hard Constraints</h3>
 
@@ -63,7 +63,7 @@
       <li><strong>Token efficiency matters.</strong> More concise prompts leave room for agent responses without hitting max token limits.</li>
     </ul>
 
-    <p>For agent specification: tokenization means agents do not see structural hints in formatting. They see token sequences. Decomposing specifications into structured sequences—not prose—respects how agents actually process input.</p>
+    <p>For agent specification: tokenization means agents do not see structural hints in formatting. They see token sequences. Decomposing specifications into structured sequences, not prose, respects how agents actually process input.</p>
 
     <h4>2. Max Tokens (The Working Memory Constraint)</h4>
 
@@ -88,10 +88,10 @@
 
     <p><strong>Examples:</strong></p>
     <ul>
-      <li><code>&lt;|startoftext|&gt;</code> — Begin sequence</li>
-      <li><code>&lt;|endoftext|&gt;</code> — End sequence</li>
-      <li><code>&lt;|user|&gt;</code> — Mark user message</li>
-      <li><code>&lt;|assistant|&gt;</code> — Mark assistant message</li>
+      <li><code>&lt;|startoftext|&gt;</code>: begin sequence</li>
+      <li><code>&lt;|endoftext|&gt;</code>: end sequence</li>
+      <li><code>&lt;|user|&gt;</code>: mark user message</li>
+      <li><code>&lt;|assistant|&gt;</code>: mark assistant message</li>
     </ul>
 
     <p>These tokens are handled internally by modern APIs (you don't write them explicitly in OpenAI), but understanding them shows how prompts are actually structured. Control tokens segment reasoning phases. They tell the LLM where one phase ends and another begins. This explains why conversation state is preserved in message-based prompts but not in basic text prompts.</p>
@@ -132,7 +132,7 @@ user: "Translate 'Hello'"</code></pre>
       <li>Best for: defining agent behavior globally</li>
     </ul>
 
-    <p>The choice between basic and message-based prompts determines whether an agent can maintain reasoning continuity across multiple requests. This is not a minor implementation detail. It is a fundamental architectural constraint.</p>
+    <p>The choice between basic and message-based prompts determines whether an agent can maintain reasoning continuity across multiple requests. It is a fundamental architectural constraint, not a minor implementation detail.</p>
 
     <h3>Prompt Management (Version Control for Behavior)</h3>
 
@@ -144,10 +144,10 @@ translation_openai_v2.0.0  # Major refactor (major version)</code></pre>
 
     <p>Why versioning matters:</p>
     <ul>
-      <li><strong>A/B testing</strong> — Run different prompt versions against same LLM to measure effectiveness</li>
-      <li><strong>Rollback</strong> — Revert to previous version if new version underperforms</li>
-      <li><strong>Provider-specific optimization</strong> — Same task may need different prompts for GPT-4 vs Gemini</li>
-      <li><strong>Performance tracking</strong> — Measure how changes affect output quality and token efficiency</li>
+      <li><strong>A/B testing</strong>: run different prompt versions against same LLM to measure effectiveness</li>
+      <li><strong>Rollback</strong>: revert to previous version if new version underperforms</li>
+      <li><strong>Provider-specific optimization</strong>: same task may need different prompts for GPT-4 vs Gemini</li>
+      <li><strong>Performance tracking</strong>: measure how changes affect output quality and token efficiency</li>
     </ul>
 
     <h3>The Design Implication</h3>
@@ -156,20 +156,20 @@ translation_openai_v2.0.0  # Major refactor (major version)</code></pre>
 
     <p><strong>When designing agent specifications:</strong></p>
     <ol>
-      <li>Respect tokenization — Structure specs as token sequences, not prose</li>
-      <li>Budget tokens — Reserve output space within context window limits</li>
-      <li>Use system prompts — Define agent boundaries globally, not per-request</li>
-      <li>Choose prompt type carefully — Messages-based for agents with memory, basic for stateless operations</li>
-      <li>Version prompts — Track which prompt versions produce which behaviors</li>
+      <li>Respect tokenization: structure specs as token sequences, not prose</li>
+      <li>Budget tokens: reserve output space within context window limits</li>
+      <li>Use system prompts: define agent boundaries globally, not per-request</li>
+      <li>Choose prompt type carefully: messages-based for agents with memory, basic for stateless operations</li>
+      <li>Version prompts: track which prompt versions produce which behaviors</li>
     </ol>
 
     <p>Agents do not follow instructions abstractly. They operate within tokenized, token-budgeted, control-structured pipelines. Understanding prompting means understanding these constraints as first-class design elements.</p>
 
     <h3>Related Principles</h3>
     <ul>
-      <li><a href="/research/context-is-a-budget/">Context Is a Budget</a> — Token limits as cognitive constraint</li>
-      <li><a href="/research/specs-as-shared-reality/">Specs as Shared Reality</a> — How specification structure shapes agent behavior</li>
-      <li><a href="/research/protocol-before-personality/">Protocol Before Personality</a> — Structure precedes persona</li>
+      <li><a href="/research/context-is-a-budget/">Context Is a Budget</a>: token limits as cognitive constraint</li>
+      <li><a href="/research/specs-as-shared-reality/">Specs as Shared Reality</a>: how specification structure shapes agent behavior</li>
+      <li><a href="/research/protocol-before-personality/">Protocol Before Personality</a>: structure precedes persona</li>
     </ul>
 
   </main>

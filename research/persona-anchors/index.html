@@ -27,7 +27,7 @@
     <p><strong>Pattern:</strong> Direct agents to emulate specific engineering styles and values by anchoring to recognized names in the field.</p>
 
     <h3>The Core Insight</h3>
-    <p>LLMs have absorbed the public writing, talks, and code of well-known engineers. This knowledge can be probed and leveraged—without web access—to shape agent behavior toward specific styles and quality standards.</p>
+    <p>LLMs have absorbed the public writing, talks, and code of well-known engineers. This knowledge can be probed and leveraged, without web access, to shape agent behavior toward specific styles and quality standards.</p>
 
     <h3>How It Works</h3>
     <ol>
@@ -35,7 +35,7 @@
       <li><strong>Tell the agent to emulate their values and craft</strong></li>
       <li><strong>The agent draws on training data</strong> to approximate that style</li>
     </ol>
-    <p>This works because LLMs encode patterns from public artifacts—blog posts, conference talks, open-source contributions—associated with named individuals.</p>
+    <p>This works because LLMs encode patterns from public artifacts (blog posts, conference talks, open-source contributions) associated with named individuals.</p>
 
     <h3>Pattern: Domain-Specific Anchors</h3>
 
@@ -85,8 +85,8 @@ associated with [Name]. What patterns would you expect in their work?</code></pr
     </ul>
 
     <h3>The "Lie" Is the Feature</h3>
-    <p>Persona anchors are a controlled hallucination. The model isn't actually those engineers—but it produces better output when directed toward a coherent style.</p>
-    <p>This is the same principle as "act as a senior engineer"—except specific names carry more signal because they encode real patterns from training data.</p>
+    <p>Persona anchors are a controlled hallucination. The model isn't actually those engineers, but it produces better output when directed toward a coherent style.</p>
+    <p>Specific names carry more signal than "act as a senior engineer" because they encode real patterns from training data.</p>
 
     <h3>Practical Template</h3>
     <pre><code>## Style Anchor

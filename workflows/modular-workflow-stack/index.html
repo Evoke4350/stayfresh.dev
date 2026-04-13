@@ -29,11 +29,11 @@
     <p class="date">April 2026</p>
     <h2>Modular Workflow Stack</h2>
 
-    <p>The right tool for the right job at the right time. Not all at once — in sequence, with deliberate hand-offs and human checkpoints between layers.</p>
+    <p>The right tool for the right job at the right time. In sequence, with deliberate hand-offs and human checkpoints between layers.</p>
 
-    <blockquote><p>A modular workflow is not a pipeline. It is a decision surface with execution attached.</p></blockquote>
+    <blockquote><p>A modular workflow is a decision surface with execution attached.</p></blockquote>
 
-    <p>The Skills Stack pattern — pairing role-based orchestration (gstack), context stability (GSD), and execution skills (Superpowers) — makes this concrete. Each layer has a job. Each layer hands off cleanly. None of them run simultaneously from a single monolithic prompt.</p>
+    <p>The Skills Stack pattern (role-based orchestration via gstack, context stability via GSD, execution via Superpowers) makes this concrete. Each layer has a job. Each layer hands off cleanly. None of them run simultaneously from a single monolithic prompt.</p>
 
     <h3>The Three Layers</h3>
 
@@ -45,7 +45,7 @@
       </thead>
       <tbody>
         <tr><td>Orchestration</td><td>Decide what to do next, route to the right agent, gate on human input</td><td>Agents start work before the goal is clear; you debug outputs instead of inputs</td></tr>
-        <tr><td>Context</td><td>Keep specifications stable across a long chain of steps</td><td>Context drift — later steps contradict earlier decisions; agents re-argue closed questions</td></tr>
+        <tr><td>Context</td><td>Keep specifications stable across a long chain of steps</td><td>Context drift: later steps contradict earlier decisions; agents re-argue closed questions</td></tr>
         <tr><td>Execution</td><td>Do one narrow task well with minimal context</td><td>Bloated prompts, multi-objective confusion, unpredictable output</td></tr>
       </tbody>
     </table>
@@ -92,7 +92,7 @@
 
     <h4>What Context Stability Requires</h4>
     <ul>
-      <li>A written, versioned spec that agents load — not reconstruct from history</li>
+      <li>A written, versioned spec that agents load, not reconstruct from history</li>
       <li>Explicit update steps when the spec changes (not implicit drift)</li>
       <li>A human gate before the spec changes mid-chain</li>
       <li>Agents that confirm spec alignment before proceeding</li>
@@ -139,12 +139,12 @@ it matches the design. Be thorough.</code></pre>
         <tr><td>Before spec is finalized</td><td>Approval</td><td>Does this spec match your intent?</td></tr>
         <tr><td>After architecture decision</td><td>Approval</td><td>Does this design fit constraints we haven't told the agent?</td></tr>
         <tr><td>After QA report</td><td>Triage</td><td>Which findings are blockers vs. accepted risk?</td></tr>
-        <tr><td>Before any push/deploy</td><td>Hard gate</td><td>Explicit approval — no default proceed</td></tr>
+        <tr><td>Before any push/deploy</td><td>Hard gate</td><td>Explicit approval; no default proceed</td></tr>
         <tr><td>When agent signals uncertainty</td><td>Escalation</td><td>Agent surfaces ambiguity; human resolves it</td></tr>
       </tbody>
     </table>
 
-    <p>Gates must be explicit in the workflow definition. An implicit assumption that the human will "just notice" when to intervene is not a gate — it is an absence of architecture.</p>
+    <p>Gates must be explicit in the workflow definition. An implicit assumption that the human will "just notice" when to intervene is an absence of architecture, not a gate.</p>
 
     <h4>Designing for Interruption</h4>
     <p>A workflow that cannot be interrupted mid-chain is fragile. Every long chain should support:</p>
@@ -159,11 +159,11 @@ it matches the design. Be thorough.</code></pre>
     <p>Independent tasks should not run sequentially. The constraint is dependency, not caution.</p>
 
     <h4>When to Parallelize</h4>
-    <pre><code># Sequential (correct — B depends on A's output)
+    <pre><code># Sequential (correct: B depends on A's output)
 A: Finalize spec
 B: Implement auth module per spec
 
-# Parallel (correct — no dependency between B and C)
+# Parallel (correct: no dependency between B and C)
 A: Finalize spec
 B: Implement auth module per spec     ← launch together
 C: Write E2E test scaffold per spec   ← launch together
@@ -184,7 +184,7 @@ E: Merge B+C+D results, resolve conflicts</code></pre>
       </tbody>
     </table>
 
-    <p>Parallelism multiplies throughput only when the merge step is cheap. If parallel outputs require substantial reconciliation, the cost is hidden, not eliminated. Design merge steps explicitly — they are not free.</p>
+    <p>Parallelism multiplies throughput only when the merge step is cheap. If parallel outputs require substantial reconciliation, the cost is hidden, not eliminated. Design merge steps explicitly; they are not free.</p>
 
     <h3>Loops</h3>
 
@@ -267,7 +267,7 @@ steps:
   - id: release
     agent: release
     input: qa.output
-    gate: human_approval  # hard gate — no default proceed</code></pre>
+    gate: human_approval  # hard gate; no default proceed</code></pre>
 
     <p>This is not a prompt. It is a schema. The prompts are inside the agent definitions, kept separate from the workflow graph. When a step fails, you debug the step definition, not the entire chain.</p>
 
@@ -280,13 +280,13 @@ steps:
       <li>Pass the spec by reference (path + version), not by value (full text), except at the context layer</li>
       <li>Execution agents get the minimum context required for their single task</li>
       <li>Orchestration agents get workflow state, not file contents</li>
-      <li>Human gates are the correct place to surface summaries — not inside agent prompts</li>
+      <li>Human gates are the correct place to surface summaries, not inside agent prompts</li>
     </ul>
 
     <h3>Anti-Patterns</h3>
 
     <h4>The Monolith Prompt</h4>
-    <p>A single prompt that asks an agent to plan, implement, review, and ship. All three layers collapsed into one. When it fails — and it will — there is nowhere to debug.</p>
+    <p>A single prompt that asks an agent to plan, implement, review, and ship. All three layers collapsed into one. When it fails (and it will), there is nowhere to debug.</p>
 
     <h4>Implicit Sequencing</h4>
     <p>Running steps in order without documenting why. When a step needs to move or be parallelized, the dependency is unknown. The sequence breaks silently.</p>
@@ -295,17 +295,17 @@ steps:
     <p>Loops without maximum iterations or without escalation on failure. The agent retries indefinitely. The human discovers it hours later.</p>
 
     <h4>Framework Stacking Without Layer Separation</h4>
-    <p>Using gstack, GSD, and Skills all in the same prompt is not a Skills Stack — it is noise. The frameworks are complements because they operate at different layers. Running them in parallel from one context collapses the layers and eliminates the benefit of any of them.</p>
+    <p>Running gstack, GSD, and Skills from a single prompt collapses all three layers into one context. The frameworks are complements because they operate at different layers; running them in parallel from one context eliminates the benefit of any of them.</p>
 
     <h4>Parallelism Without Merge Design</h4>
     <p>Launching parallel agents without planning how their outputs reconcile. Merge conflicts in parallel agent output are harder to resolve than sequential conflicts because neither agent knows about the other's decisions.</p>
 
     <h4>Missing Human Gates</h4>
-    <p>Automating past a decision point that requires human judgment. The workflow moves fast and lands in the wrong place. Speed is not the issue — irreversibility is.</p>
+    <p>Automating past a decision point that requires human judgment. The workflow moves fast and lands in the wrong place. The issue is irreversibility, not speed.</p>
 
     <h3>The Compounding Effect</h3>
 
-    <p>Garry Tan's reported output — 10,000 lines of code and 100 pull requests per week over 50 days — is not the product of any single tool or prompt. It is the compounding product of clean layer separation applied consistently.</p>
+    <p>Garry Tan's reported output (10,000 lines of code and 100 pull requests per week over 50 days) is the compounding product of clean layer separation applied consistently, not any single tool or prompt.</p>
 
     <p>Each layer running at its level of abstraction means:</p>
     <ul>
@@ -319,11 +319,11 @@ steps:
 
     <h3>Related Workflows</h3>
     <ul>
-      <li><a href="/workflows/ci-automation/">CI Automation</a> — Loop patterns, halting conditions, and CI integration</li>
-      <li><a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a> — Machine-verifiable halting conditions for refinement loops</li>
-      <li><a href="/workflows/prompt-patterns/">Prompt Patterns</a> — Single-objective execution prompt structure</li>
-      <li><a href="/workflows/agent-psychology/">Agent Psychology</a> — How agents reason within a step; why narrow context wins</li>
-      <li><a href="/research/enterprise-agent-design/">Enterprise Agent Design</a> — Production-grade agent architecture patterns</li>
+      <li><a href="/workflows/ci-automation/">CI Automation</a>: loop patterns, halting conditions, and CI integration</li>
+      <li><a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a>: machine-verifiable halting conditions for refinement loops</li>
+      <li><a href="/workflows/prompt-patterns/">Prompt Patterns</a>: single-objective execution prompt structure</li>
+      <li><a href="/workflows/agent-psychology/">Agent Psychology</a>: how agents reason within a step; why narrow context wins</li>
+      <li><a href="/research/enterprise-agent-design/">Enterprise Agent Design</a>: production-grade agent architecture patterns</li>
     </ul>
   </main>
 

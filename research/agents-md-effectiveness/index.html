@@ -49,7 +49,7 @@
     <blockquote><p>Context files are mostly redundant with what's already in the repository.</p></blockquote>
 
     <h4>2. No Effective Overview</h4>
-    <p>One recommended use of context files is providing a codebase overview. But agents with context files don't find relevant files faster—they often take more steps because they:</p>
+    <p>One recommended use of context files is providing a codebase overview. But agents with context files don't find relevant files faster; they often take more steps because they:</p>
     <ol>
       <li>Issue multiple commands to find the context file</li>
       <li>Read it multiple times despite it being in context</li>
@@ -57,7 +57,7 @@
     </ol>
 
     <h4>3. Unnecessary Requirements Make Tasks Harder</h4>
-    <p>Context files add instructions. Agents follow them. But additional requirements—even well-intentioned ones—increase cognitive load and reasoning tokens (14-22% more reasoning with context files).</p>
+    <p>Context files add instructions. Agents follow them. But additional requirements, even well-intentioned ones, increase cognitive load and reasoning tokens (14-22% more reasoning with context files).</p>
     <p><strong>More instructions does not equal better outcomes.</strong></p>
 
     <h3>What Context Files Do Well</h3>
@@ -68,7 +68,7 @@
       <li><code>uv</code>: 1.6 uses/instance when mentioned vs. &lt;0.01 when not</li>
       <li>Repository-specific tools: 2.5 uses/instance when mentioned vs. &lt;0.05 when not</li>
     </ul>
-    <p>This isn't an instruction-following problem. Agents comply—they're just not being helped by what they're told.</p>
+    <p>Agents follow instructions reliably. The problem is that the instructions do not help.</p>
 
     <h4>More Exploration, More Testing</h4>
     <p>Context files increase:</p>
@@ -113,7 +113,7 @@
     </ul>
 
     <h3>The "Surprising Behavior" Pattern</h3>
-    <p>When agents encounter something unexpected, that's signal—not noise.</p>
+    <p>When agents encounter something unexpected, that's signal, not noise.</p>
     <blockquote><p>When agents fail, fix the code, not the prompt. Surprising behavior reveals architectural friction.</p></blockquote>
     <p>Instead of adding more instructions to <code>AGENTS.md</code>, consider:</p>
     <ol>
@@ -128,7 +128,7 @@
     <ul>
       <li>Agents reason forward from instructions</li>
       <li>Changing the target reframes the problem</li>
-      <li>"Lie" is the feature—controlled misdirection for better outcomes</li>
+      <li>"Lie" is the feature; controlled misdirection for better outcomes</li>
     </ul>
 
     <h3>Token Economics</h3>
