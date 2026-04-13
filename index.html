@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="StayFresh is a static archive of workflow research and patterns for AI-assisted development, with deployment notes for putting Anubis in front of a GitHub Pages site.">
+  <meta name="description" content="Static archive of workflow research and patterns for AI-assisted development.">
   <link rel="canonical" href="https://stayfresh.dev/">
   <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
   <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
@@ -26,31 +26,8 @@
   </nav>
 
   <main>
-    <h2>Overview</h2>
-    <p>
-      StayFresh is a static archive of workflow research and patterns for
-      AI-assisted development. Content is organized into workflows
-      (practical patterns) and research (empirical findings).
-    </p>
-    <p>
-      The immediate job is straightforward: keep the site static, keep GitHub
-      Pages publishing it, and put Anubis in front so scrapers do not get a free buffet.
-    </p>
-
     <h2>Thesis</h2>
-    <p><a href="/thesis/">StayFresh Thesis</a> is the site's center of gravity: the hard position, the named frameworks, and the shortest path through the archive.</p>
-    <p>Core rule: tools should reduce comprehension debt. Auditory cues are one practical way to improve recall when attention is split across terminals, editors, and agent loops.</p>
-
-    <section class="callout">
-      <h2>GitHub Pages + Anubis</h2>
-      <p>GitHub Pages cannot run Anubis. It serves files. That is the whole deal.</p>
-      <p>The sane setup is: keep Pages as the static origin, put a real reverse proxy in front of your custom domain, and point that proxy at the GitHub Pages origin instead of back at yourself.</p>
-      <pre><code>visitor
-  -> caddy or nginx on your server
-  -> anubis
-  -> https://your-user.github.io or https://your-org.github.io/your-repo</code></pre>
-      <p><a href="/workflows/anubis-github-pages/">Full setup notes for Anubis in front of GitHub Pages</a>.</p>
-    </section>
+    <p><a href="/thesis/">StayFresh Thesis</a> — the hard position, the named frameworks, and the shortest path through the archive. Start here.</p>
 
     <h2>Workflows</h2>
     <p>Practical patterns for AI-assisted development.</p>
@@ -59,6 +36,11 @@
         <span class="date">2026-04</span>
         <a class="title" href="/workflows/claude-code-skills-stack/">Claude Code Skills Stack</a>
         <p>Decision, context, execution. Install less, route harder, keep the workflow coherent.</p>
+      </li>
+      <li>
+        <span class="date">2026-04</span>
+        <a class="title" href="/workflows/modular-workflow-stack/">Modular Workflow Stack</a>
+        <p>Right tool, right job, right time: layered orchestration, typed agent delegation, human gates, parallelism, and loops that halt.</p>
       </li>
       <li>
         <span class="date">2026-03</span>
@@ -106,10 +88,6 @@
         <p>Integrating AI agents with continuous integration workflows.</p>
       </li>
     </ul>
-
-    <h2>Notes</h2>
-    <p>Cloudflare is simpler for most people. Anubis is the move when you want the control and you are willing to own the box in front of the box.</p>
-    <p>If you point Anubis at your public custom domain instead of the GitHub Pages origin, you create a stupid proxy loop and buy yourself a bad evening.</p>
 
     <h2>Research</h2>
     <p>Empirical findings on AI workflow effectiveness.</p>
@@ -159,12 +137,12 @@
         <a class="title" href="/research/enterprise-agent-design/">Enterprise Agent Design</a>
         <p>BCG framework for production-grade agents.</p>
       </li>
+      <li>
+        <span class="date">2026-02</span>
+        <a class="title" href="/research/persona-anchors/">Persona Anchors</a>
+        <p>Character-based instruction patterns for consistent agent behavior.</p>
+      </li>
     </ul>
-
-    <h2>How This Site Is Managed</h2>
-    <p>content usually starts as dictated drafts, then gets cleaned into <strong>0person</strong> perspective.</p>
-    <p><strong>0person</strong> means no ego narrator and no personal-brand theater. first-person framing is stripped unless identity is the actual subject.</p>
-    <p>llm translation: rewrite for operator clarity, keep claims tied to evidence, prefer reusable workflow language, and cut filler that does not survive contact with implementation.</p>
   </main>
 
   <footer>

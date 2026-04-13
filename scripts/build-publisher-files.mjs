@@ -14,7 +14,7 @@ const pages = [
     path: "/",
     sourceFile: "index.html",
     title: "StayFresh",
-    description: "Static archive of workflow research and patterns for AI-assisted development, with deployment notes for putting Anubis in front of a GitHub Pages site.",
+    description: "Static archive of workflow research and patterns for AI-assisted development.",
     updated: "2026-04-07",
     includeInFeed: false
   },
