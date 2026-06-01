@@ -195,6 +195,14 @@ const pages = [
     description: "Prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.",
     updated: "2026-04-07",
     includeInFeed: true
+  },
+  {
+    path: "/research/techno-alexithymia/",
+    sourceFile: "research/techno-alexithymia/index.html",
+    title: "Techno-Alexithymia: De-Skilling Introspection",
+    description: "Delegating emotional self-naming to a language model is the same de-skilling mechanism as offloading judgment to a coding agent, applied to the most interior faculty there is.",
+    updated: "2026-05-31",
+    includeInFeed: true
   }
 ];
 

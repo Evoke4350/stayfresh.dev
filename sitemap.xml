@@ -30,35 +30,35 @@
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/instant-project-sync/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/psay-agent-notify/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/project-ai-philosophy/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/preference-toml/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/reward-rubric-dsl/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/prompt-patterns/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/agent-psychology/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/workflows/ci-automation/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/context-is-a-budget/</loc>
@@ -74,30 +74,34 @@
   </url>
   <url>
     <loc>https://stayfresh.dev/research/reward-engineering/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/reward-hacking/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/agents-md-effectiveness/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/formal-verification-agents/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/enterprise-agent-design/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/persona-anchors/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-04-13</lastmod>
   </url>
   <url>
     <loc>https://stayfresh.dev/research/what-is-prompting/</loc>
     <lastmod>2026-04-07</lastmod>
+  </url>
+  <url>
+    <loc>https://stayfresh.dev/research/techno-alexithymia/</loc>
+    <lastmod>2026-05-31</lastmod>
   </url>
 </urlset>
