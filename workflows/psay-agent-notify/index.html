@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://stayfresh.dev/workflows/psay-agent-notify/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
+  <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
   <title>psay Agent Notifications - StayFresh</title>
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -20,9 +26,11 @@
     <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
   </nav>
 
-  <main>
-    <p class="date">March 2026</p>
-    <h2>psay Agent Notifications</h2>
+  <main class="h-entry">
+    <p class="date"><time class="dt-published" datetime="2026-03">March 2026</time></p>
+    <h2 class="p-name">psay Agent Notifications</h2>
+
+    <div class="e-content">
 
     <p>Initial reconnaissance started with KittenTTS and <code>purr</code>.</p>
     <p>Execution moved to Piper because the Python toolchain was cleaner for local automation, scripting, and reproducible agent setup.</p>
@@ -69,6 +77,9 @@ scripts/psay-notify.sh --no-speak --threshold 5 -- pnpm build</code></pre>
     <h3>Why This Enhancement Wins</h3>
     <p>It solves the real bottleneck first: delayed awareness of completion and failure.</p>
     <p>No retraining, no custom voice dataset, no external infra. Just faster operator feedback loops with local-only primitives.</p>
+    </div>
+
+    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/workflows/psay-agent-notify/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
   </main>
 
   <footer>

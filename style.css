@@ -163,6 +163,24 @@ main li {
   font-weight: normal;
 }
 
+/* Shares the footer's muted look; layout props stay separate below */
+footer,
+.entry-meta {
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+footer a,
+.entry-meta a {
+  color: var(--muted);
+}
+
+.entry-meta {
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
 .callout {
   margin: 1.5rem 0 2rem;
   padding: 1rem 1.25rem;
@@ -195,18 +213,11 @@ pre {
   margin: 1rem 0;
 }
 
-/* Footer */
+/* Footer (muted look shared with .entry-meta above) */
 footer {
   max-width: 720px;
   margin: 2rem auto;
   padding: 1rem 2rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-
-footer a {
-  color: var(--muted);
 }
 
 /* Tables */
