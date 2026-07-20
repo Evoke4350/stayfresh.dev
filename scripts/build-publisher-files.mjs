@@ -316,7 +316,7 @@ const jsonFeed = {
   feed_url: siteUrl + "/feed.json",
   description: "Static archive of workflow research and patterns for AI-assisted development.",
   language: "en-US",
-  authors: [{ name: "StayFresh" }],
+  authors: [{ name: "StayFresh", url: siteUrl + "/" }],
   items: feedItems.map((item) => ({
     id: absoluteUrl(item.path),
     url: absoluteUrl(item.path),
@@ -374,6 +374,7 @@ const llms = [
   "",
   "## Research",
   "",
+  llmsLink("/research/techno-alexithymia/", "De-skilling by delegation applied to emotional self-naming; the same failure mode as comprehension debt, at its most interior."),
   llmsLink("/research/context-is-a-budget/", "Why agent context should be treated as a scarce budget rather than an everything bucket."),
   llmsLink("/research/protocol-before-personality/", "Why multi-agent coordination depends more on handoff rules than on persona prompts."),
   llmsLink("/research/specs-as-shared-reality/", "How specs become the closest thing agent workflows have to a common truth."),

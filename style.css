@@ -163,6 +163,18 @@ main li {
   font-weight: normal;
 }
 
+.entry-meta {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.entry-meta a {
+  color: var(--muted);
+}
+
 .callout {
   margin: 1.5rem 0 2rem;
   padding: 1rem 1.25rem;
