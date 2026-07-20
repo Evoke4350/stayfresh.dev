@@ -71,6 +71,7 @@ const pages = [
     sourceFile: "workflows/instant-project-sync/index.html",
     title: "Instant Project Sync",
     description: "Synchronize ticket queues against contract dates and repository evidence, with requirement reconstruction when docs are missing.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -78,6 +79,7 @@ const pages = [
     sourceFile: "workflows/psay-agent-notify/index.html",
     title: "psay Agent Notifications",
     description: "Local voice and Notification Center loops for agent completion, handoff, and operator recall.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -85,6 +87,7 @@ const pages = [
     sourceFile: "workflows/project-ai-philosophy/index.html",
     title: "Project AI Philosophy",
     description: "A written position for bounded, evidence-backed AI use in delivery.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -92,6 +95,7 @@ const pages = [
     sourceFile: "workflows/preference-toml/index.html",
     title: "Preference TOML",
     description: "Use RLHF-shaped semantics in a simple config DSL for agent evaluation loops.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -99,6 +103,7 @@ const pages = [
     sourceFile: "workflows/reward-rubric-dsl/index.html",
     title: "Reward Rubric DSL",
     description: "A small machine-readable format for scoring coding agent output.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -106,6 +111,7 @@ const pages = [
     sourceFile: "workflows/prompt-patterns/index.html",
     title: "Prompt Patterns",
     description: "Common prompt structures for reliable agent behavior.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -113,6 +119,7 @@ const pages = [
     sourceFile: "workflows/agent-psychology/index.html",
     title: "Agent Psychology",
     description: "Understanding how agents reason and respond to instructions.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -120,6 +127,7 @@ const pages = [
     sourceFile: "workflows/ci-automation/index.html",
     title: "CI Automation with AI Agents",
     description: "Integrating AI agents with continuous integration workflows.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -151,6 +159,7 @@ const pages = [
     sourceFile: "research/reward-engineering/index.html",
     title: "Reward Engineering for Coding Agents",
     description: "Why coding agents optimize the rubric more than the prompt.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -158,6 +167,7 @@ const pages = [
     sourceFile: "research/reward-hacking/index.html",
     title: "Reward Hacking in Coding Agents",
     description: "How poorly designed metrics produce plausible but unstable code.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -165,6 +175,7 @@ const pages = [
     sourceFile: "research/agents-md-effectiveness/index.html",
     title: "AGENTS.md Effectiveness",
     description: "Evaluating repository-level context files for coding agents.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -172,6 +183,7 @@ const pages = [
     sourceFile: "research/formal-verification-agents/index.html",
     title: "Formal Verification with Agents",
     description: "Property-based testing and specification generation.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -179,6 +191,7 @@ const pages = [
     sourceFile: "research/enterprise-agent-design/index.html",
     title: "Enterprise Agent Design",
     description: "BCG framework for production-grade agents.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {
@@ -186,6 +199,7 @@ const pages = [
     sourceFile: "research/persona-anchors/index.html",
     title: "Persona Anchors",
     description: "Character-based instruction patterns for consistent agent behavior.",
+    updated: "2026-04-13",
     includeInFeed: true
   },
   {

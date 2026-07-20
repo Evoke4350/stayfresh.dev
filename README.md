@@ -19,9 +19,9 @@ The site participates in the [IndieWeb](https://indieweb.org):
 - **Microformats2**: index pages are [h-feed](https://indieweb.org/h-feed)s of
   `h-entry` items; every article is an [h-entry](https://indieweb.org/h-entry)
   with `p-name`, `dt-published`, `e-content`, `u-url`, and `p-author`.
-- **Webmentions**: every page advertises a
-  [Webmention](https://indieweb.org/Webmention) endpoint hosted by
-  [webmention.io](https://webmention.io).
+- **Webmentions**: every content page (home, indexes, thesis, workflows,
+  research) advertises a [Webmention](https://indieweb.org/Webmention)
+  endpoint hosted by [webmention.io](https://webmention.io).
 
 One-time account setup (requires being logged in as the site owner):
 
