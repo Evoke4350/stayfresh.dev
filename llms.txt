@@ -30,6 +30,7 @@ Use the thesis first for doctrine, then workflows for implementation patterns, t
 
 ## Research
 
+- [Sleepcast: Bedtime Audio with an Inverted Rubric](https://stayfresh.dev/research/sleepcast/): A shipped bedtime-audio product as a live demonstration that the rubric, not the generator, decides what content optimizes for.
 - [Techno-Alexithymia: De-Skilling Introspection](https://stayfresh.dev/research/techno-alexithymia/): De-skilling by delegation applied to emotional self-naming; the same failure mode as comprehension debt, at its most interior.
 - [Context Is a Budget](https://stayfresh.dev/research/context-is-a-budget/): Why agent context should be treated as a scarce budget rather than an everything bucket.
 - [Protocol Before Personality](https://stayfresh.dev/research/protocol-before-personality/): Why multi-agent coordination depends more on handoff rules than on persona prompts.

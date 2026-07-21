@@ -211,6 +211,14 @@ const pages = [
     includeInFeed: true
   },
   {
+    path: "/research/sleepcast/",
+    sourceFile: "research/sleepcast/index.html",
+    title: "Sleepcast: Bedtime Audio with an Inverted Rubric",
+    description: "A bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.",
+    updated: "2026-07-21",
+    includeInFeed: true
+  },
+  {
     path: "/research/techno-alexithymia/",
     sourceFile: "research/techno-alexithymia/index.html",
     title: "Techno-Alexithymia: De-Skilling Introspection",
@@ -388,6 +396,7 @@ const llms = [
   "",
   "## Research",
   "",
+  llmsLink("/research/sleepcast/", "A shipped bedtime-audio product as a live demonstration that the rubric, not the generator, decides what content optimizes for."),
   llmsLink("/research/techno-alexithymia/", "De-skilling by delegation applied to emotional self-naming; the same failure mode as comprehension debt, at its most interior."),
   llmsLink("/research/context-is-a-budget/", "Why agent context should be treated as a scarce budget rather than an everything bucket."),
   llmsLink("/research/protocol-before-personality/", "Why multi-agent coordination depends more on handoff rules than on persona prompts."),
