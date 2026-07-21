@@ -13,6 +13,14 @@
   ],
   "items": [
     {
+      "id": "https://stayfresh.dev/research/sleepcast/",
+      "url": "https://stayfresh.dev/research/sleepcast/",
+      "title": "Sleepcast: Bedtime Audio with an Inverted Rubric",
+      "summary": "A bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.",
+      "date_published": "2026-07-21T00:00:00Z",
+      "date_modified": "2026-07-21T00:00:00Z"
+    },
+    {
       "id": "https://stayfresh.dev/research/techno-alexithymia/",
       "url": "https://stayfresh.dev/research/techno-alexithymia/",
       "title": "Techno-Alexithymia: De-Skilling Introspection",

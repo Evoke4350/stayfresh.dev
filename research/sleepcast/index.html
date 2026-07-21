@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.">
+  <link rel="canonical" href="https://stayfresh.dev/research/sleepcast/">
+  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
+  <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
+  <title>Sleepcast: Bedtime Audio with an Inverted Rubric - StayFresh</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>StayFresh</h1>
+    <p>Static archive of workflow research and patterns</p>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/thesis/">Thesis</a>
+    <a href="/workflows/">Workflows</a>
+    <a href="/research/">Research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+  </nav>
+
+  <main class="h-entry">
+    <p class="date"><time class="dt-published" datetime="2026-07">July 2026</time></p>
+    <h2 class="p-name">Sleepcast: Bedtime Audio with an Inverted Rubric</h2>
+
+    <div class="e-content">
+
+    <p><a href="https://sleepcast.pro">Sleepcast</a> is a small web product that serves bedtime audio: boring stories, sleep hypnosis, dull lectures, read slowly over synthesized noise. Every content system this archive examines is optimized to hold attention. This one is optimized to lose it. That inversion is the reason the product earns a research note.</p>
+
+    <p>One calibration up front, because the rest depends on it. Sleepcast is a working prototype, built out of one specific insomnia, with the agent workflows this archive documents. It has been validated on exactly one sleeper. Nothing in the pipeline measures whether a listener actually falls asleep. What follows describes a mechanism and states a hypothesis about what the mechanism produces. It is not a success claim.</p>
+
+    <h3>The Rubric Is Upside Down</h3>
+
+    <p>The generation prompt is short, and the load-bearing line is shorter: "Repetition is good. Drift is good. Resolution is bad."</p>
+
+    <p>Content rubrics normally reward the opposite. Hooks early, stakes rising, payoff withheld until the end, because retention is the metric and the metric is fed by tension. Sleepcast's rules ban the entire toolkit: no cliffhangers, no loud action verbs, no excitement, sentences of eight to fourteen words, plots that "dissolve rather than concluding." The lecture category is instructed that the listener should lose the thread within minutes, and that this is the point.</p>
+
+    <p>Success for a sleepcast track is a listener who stops listening. Hold that sentence. It breaks every measurement instinct the attention economy has installed, and the breakage propagates through the whole stack, from the script rules down to the analytics that do not exist yet.</p>
+
+    <h3>The Scripts Are Handmade</h3>
+
+    <p>The honest correction, kept visible on purpose: the LLM script path exists and the current library does not use it. All fifteen tracks were written by hand and fed through the same synthesis pipeline via a seed script. The generator sits wired, tested, and idle. An AI audio product whose entire catalog is artisanal is funnier than it is damning, but it is both, and skipping it would make this note a press release.</p>
+
+    <p>The handwritten scripts carry their own evidence of the rubric fighting convention. The first versions were clean prose, and clean prose read as literary performance. A later commit rewrote every script in a rambling register: filler words, lists built and abandoned, tangents that drift and return. The style rule that survived is blunt: the goal is "friend rambling," not "literary prose." Polish itself turned out to be a wakeful property.</p>
+
+    <h3>The Voice Kept Performing</h3>
+
+    <p>The documented failure of the build is the voice. Text-to-speech defaults are tuned for the same economy the script rules reject, and the first synthesis pass proved it: default model, default settings, and the output sounded like a podcaster. Polished, energetic, performing. Technically flawless and completely wrong.</p>
+
+    <p>The fixes escalated through three levels. First, the numeric knobs: playback slowed to 0.85x, stability raised, style zeroed, pause tags injected at paragraph boundaries. The pauses met an immediate ceiling, because the provider documents that too many break tags destabilize the model. Silence, the one thing sleep audio wants most, had to be rationed. Second, the scripts themselves were rewritten, as above, because no knob setting makes clean prose sound tired. Third, the provider was swapped, and the trigger was not quality but a quota: the free tier ran below the cost of a single new track. The replacement model accepts natural-language voice direction where the incumbent offered only numbers, and the direction now in production reads like the product's thesis compressed to four lines. The voice is told to sound like "a tired friend telling a bedtime story at the end of a long day," to voice the scripted filler words rather than smooth them over, and finally: "Do not: enunciate dramatically, raise pitch for emphasis, sound like a podcaster, perform."</p>
+
+    <p>A synthesized voice has to be explicitly instructed not to perform. Default TTS encodes performance the way default content rubrics encode retention. The instruction against performing is the same move as "resolution is bad," applied one level down the stack. Still open, and stated plainly: long scripts synthesize as independent chunks concatenated raw, with nothing smoothing the seam, and no audio passes any quality check before shipping.</p>
+
+    <h3>The Mix Refuses Drama</h3>
+
+    <p>The ambient beds under the narration are not field recordings. They are shaped noise generated by ffmpeg, and the generation script says so in its own comment: "they sound like noise because they are noise." The narration is not ducked dynamically over them, because sidechain ducking pumps, and pumping grabs attention. A fixed gain offset holds the bed quietly under the voice instead. The final mix is loudness-normalized to a broadcast target and ends in a six-second fade, so a track closes in silence rather than with an ending. Every engineering choice in the mix is a subtraction.</p>
+
+    <h3>Open Loop, No Gate</h3>
+
+    <p>Nothing evaluates a track before it ships. The pipeline's only check is that the script is not empty; the finished row is inserted as published. No draft state, no review, no banned-word pass, no length reconciliation against the requested duration. By this archive's own doctrine, explicit multi-axis evaluation or it did not happen, sleepcast is an unscored pipeline, and this note says so rather than implying otherwise.</p>
+
+    <p>The outcome measurement exists only as a fossil. The database schema includes a completed flag on every play, anticipating exactly the signal that would score the product. Nothing ever sets it. The player reports the start of playback and never the end. Even the privacy policy promises completion tracking the code does not perform. And when the flag does get wired, it will invert like everything else here: a completed play is evidence of failure, because the listener who heard the fade-out was awake for it. Mid-track abandonment is the success signal, currently indistinguishable from a closed tab. The product's central metric does not just go unmeasured. It points backwards.</p>
+
+    <h3>The Exit Is Documented</h3>
+
+    <p>The site ships a page addressed to the listener it failed. It recommends leaving, names the human-hosted podcast the product openly imitates, a show running since 2013, and says to start there instead, free, with two further human alternatives listed after it. A product that routes dissatisfied users to its own inspiration is publishing its failure condition in production. Exit conditions are doctrine in this archive. This one is deployed.</p>
+
+    <h3>Slop Is a Rubric Property</h3>
+
+    <p>This archive rejects AI content sludge, and sleepcast generates AI content. The resolution is not a carve-out. Slop is generated content optimized to capture attention it has not earned. Sleepcast's rubric optimizes the surrender of attention, which is why the same generator that produces sludge elsewhere produces something else here. The generator never decides whether output is slop. The rubric decides. That said, the calibration cuts both ways: with no outcome measurement, "boring on purpose" is a design property, not a demonstrated result. A track can satisfy every rule and still leave someone staring at the ceiling.</p>
+
+    <h3>The Hypothesis</h3>
+
+    <p>Stated falsifiably: audio generated under an attention-inverting rubric puts listeners to sleep at rates comparable to the human-made genre it imitates. Current evidence: one insomniac. Validation would take wiring the completion flag, treating completion as failure and abandonment as provisional success, and correlating with return listening. Until then, sleepcast demonstrates that the rubric can be inverted, not that the inversion works.</p>
+
+    <p class="date">The prototype is live at <a href="https://sleepcast.pro">sleepcast.pro</a>. If a track wakes someone up, that is more interesting than agreement. Send the failure.</p>
+    </div>
+
+    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/research/sleepcast/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+  </main>
+
+  <footer>
+    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+    &middot;
+    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    &middot;
+    MIT License
+  </footer>
+</body>
+</html>

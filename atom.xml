@@ -4,8 +4,15 @@
   <subtitle>Static archive of workflow research and patterns for AI-assisted development.</subtitle>
   <link href="https://stayfresh.dev/atom.xml" rel="self"/>
   <link href="https://stayfresh.dev/"/>
-  <updated>2026-05-31T00:00:00Z</updated>
+  <updated>2026-07-21T00:00:00Z</updated>
   <id>https://stayfresh.dev/</id>
+  <entry>
+    <title>Sleepcast: Bedtime Audio with an Inverted Rubric</title>
+    <link href="https://stayfresh.dev/research/sleepcast/"/>
+    <id>https://stayfresh.dev/research/sleepcast/</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <summary>A bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.</summary>
+  </entry>
   <entry>
     <title>Techno-Alexithymia: De-Skilling Introspection</title>
     <link href="https://stayfresh.dev/research/techno-alexithymia/"/>

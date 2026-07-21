@@ -5,7 +5,14 @@
     <link>https://stayfresh.dev/</link>
     <description>Static archive of workflow research and patterns for AI-assisted development.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Sleepcast: Bedtime Audio with an Inverted Rubric</title>
+      <link>https://stayfresh.dev/research/sleepcast/</link>
+      <guid>https://stayfresh.dev/research/sleepcast/</guid>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
+      <description>A bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.</description>
+    </item>
     <item>
       <title>Techno-Alexithymia: De-Skilling Introspection</title>
       <link>https://stayfresh.dev/research/techno-alexithymia/</link>
