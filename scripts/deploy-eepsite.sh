@@ -23,5 +23,8 @@ cp "$ROOT_DIR/style.css" "$STAGE_DIR/"
 cp -R "$ROOT_DIR/fonts" "$STAGE_DIR/fonts"
 cp -R "$ROOT_DIR/research" "$STAGE_DIR/research"
 cp -R "$ROOT_DIR/workflows" "$STAGE_DIR/workflows"
+cp -R "$ROOT_DIR/home" "$STAGE_DIR/home"
+cp -R "$ROOT_DIR/blog" "$STAGE_DIR/blog"
+cp -R "$ROOT_DIR/tags" "$STAGE_DIR/tags"
 
 rsync -a --delete "$STAGE_DIR"/ "$DOCROOT"/

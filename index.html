@@ -1,175 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Static archive of workflow research and patterns for AI-assisted development.">
-  <link rel="canonical" href="https://stayfresh.dev/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
-  <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
-  <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <link rel="me" href="https://github.com/Evoke4350">
-  <link rel="me" href="mailto:nathanib@pm.me">
-  <title>StayFresh</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="stayfresh: field notes on ai-assisted development.">
+<link rel="canonical" href="https://stayfresh.dev/">
+<link rel="me" href="https://github.com/Evoke4350">
+<link rel="me" href="mailto:nathanib@pm.me">
+<title>stayfresh</title>
+<style>
+  :root {
+    --void: #04050a;
+    --void2: #070912;
+    --amber: #ffb000;
+    --amber-dim: #7a5510;
+    --cyan: #29ffe3;
+    --magenta: #ff3d81;
+    --star: #f2efe6;
+    --mono: "SFMono-Regular", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: var(--void);
+    color: var(--amber);
+    font-family: var(--mono);
+    overflow: hidden;
+  }
+
+  #stage {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 120% 90% at 50% 46%, #0a1424 0%, #05070e 55%, #020308 100%);
+  }
+
+  #gl {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ---- CRT overlays ---- */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.28) 3px,
+      rgba(0,0,0,0.28) 3px
+    );
+    mix-blend-mode: multiply;
+    z-index: 5;
+  }
+  .vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 48%, rgba(0,0,0,0.72) 100%);
+    z-index: 6;
+  }
+  .flicker {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(10,20,30,0.03);
+    z-index: 7;
+    animation: flick 5.5s steps(60) infinite;
+  }
+  .rollbar {
+    position: fixed;
+    left: 0; right: 0;
+    height: 22vh;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(120,200,255,0.035) 50%, rgba(255,255,255,0) 100%);
+    z-index: 6;
+    animation: roll 7s linear infinite;
+  }
+  @keyframes flick { 0%,97%{opacity:.5} 98%{opacity:.9} 99%{opacity:.35} 100%{opacity:.5} }
+  @keyframes roll { 0%{ transform: translateY(-30vh);} 100%{ transform: translateY(130vh);} }
+
+  /* ---- overlay content ---- */
+  .hud {
+    position: fixed;
+    inset: 0;
+    z-index: 8;
+    pointer-events: none;
+    display: grid;
+    place-items: center;
+  }
+  .hud a, .hud button { pointer-events: auto; }
+
+  .center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(26px, 6vh, 58px);
+    padding: 0 20px;
+  }
+
+  .title {
+    position: relative;
+    font-weight: 700;
+    font-size: clamp(46px, 13vw, 168px);
+    line-height: 0.92;
+    letter-spacing: 0.06em;
+    text-wrap: balance;
+    background: linear-gradient(180deg,
+      #ffffff 0%, #d7f6ff 16%, #86d8ff 38%,
+      #2b6f8f 52%, #eafcff 63%, #a7ecff 82%, #4f9fc0 100%);
+    background-size: 100% 220%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 24px rgba(41,255,227,0.28));
+    animation: shimmer 6s ease-in-out infinite;
+  }
+  .title::before, .title::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    mix-blend-mode: screen;
+    z-index: -1;
+  }
+  .title::before { color: var(--cyan); transform: translateX(-3px); opacity: 0.55; }
+  .title::after  { color: var(--magenta); transform: translateX(3px); opacity: 0.55; }
+  @keyframes shimmer { 0%,100%{ background-position: 0 0; } 50%{ background-position: 0 100%; } }
+
+  .enter {
+    margin-top: clamp(8px, 2vh, 20px);
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: clamp(13px, 1.7vw, 19px);
+    letter-spacing: 0.42em;
+    text-indent: 0.42em;
+    color: var(--magenta);
+    padding: clamp(11px,1.6vh,16px) clamp(24px,3vw,40px);
+    border: 1px solid rgba(255,61,129,0.5);
+    background: rgba(255,61,129,0.04);
+    box-shadow: 0 0 22px rgba(255,61,129,0.18), inset 0 0 18px rgba(255,61,129,0.06);
+    transition: color .18s, border-color .18s, box-shadow .18s, background .18s;
+    animation: enterpulse 2.6s ease-in-out infinite;
+  }
+  .enter:hover, .enter:focus-visible {
+    color: #fff;
+    border-color: var(--magenta);
+    background: rgba(255,61,129,0.16);
+    box-shadow: 0 0 34px rgba(255,61,129,0.5), inset 0 0 22px rgba(255,61,129,0.18);
+    outline: none;
+  }
+  .enter:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+  @keyframes enterpulse {
+    0%,100%{ box-shadow: 0 0 18px rgba(255,61,129,0.14), inset 0 0 14px rgba(255,61,129,0.05); }
+    50%{ box-shadow: 0 0 30px rgba(255,61,129,0.34), inset 0 0 20px rgba(255,61,129,0.12); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flicker, .rollbar, .title, .enter { animation: none !important; }
+    .title { background-position: 0 0; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
-  </header>
+  <div id="stage"></div>
+  <canvas id="gl"></canvas>
 
-  <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
-  </nav>
+  <div class="scanlines"></div>
+  <div class="rollbar"></div>
+  <div class="vignette"></div>
+  <div class="flicker"></div>
 
-  <main class="h-feed">
-    <a class="p-author h-card" href="https://stayfresh.dev/" hidden>StayFresh</a>
-    <h2>Thesis</h2>
-    <p><a href="/thesis/">StayFresh Thesis</a>: the hard position, the named frameworks, and the shortest path through the archive. Start here.</p>
+  <div class="hud">
+    <div class="center">
+      <h1 class="title" data-text="STAYFRESH">STAYFRESH</h1>
+      <a class="enter" href="/home/" aria-label="enter the archive">[ ENTER ]</a>
+    </div>
+  </div>
 
-    <h2>Workflows</h2>
-    <p>Practical patterns for AI-assisted development.</p>
-    <ul class="article-list">
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-04">2026-04</time></span>
-        <a class="title u-url p-name" href="/workflows/claude-code-skills-stack/">Claude Code Skills Stack</a>
-        <p class="p-summary">Decision, context, execution. Install less, route harder, keep the workflow coherent.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-04">2026-04</time></span>
-        <a class="title u-url p-name" href="/workflows/modular-workflow-stack/">Modular Workflow Stack</a>
-        <p class="p-summary">Right tool, right job, right time: layered orchestration, typed agent delegation, human gates, parallelism, and loops that halt.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/workflows/anubis-github-pages/">Anubis in Front of GitHub Pages</a>
-        <p class="p-summary">Static site on Pages, scraper gate on your own box, no fake magic.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/workflows/instant-project-sync/">Instant Project Sync</a>
-        <p class="p-summary">Synchronize ticket queues against contract dates and agentic evidence, with no-doc requirement reconstruction fallback.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/workflows/psay-agent-notify/">psay Agent Notifications</a>
-        <p class="p-summary">Local voice plus Notification Center patterns for agent completion and handoff loops.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/workflows/project-ai-philosophy/">Project AI Philosophy</a>
-        <p class="p-summary">A project-level position on bounded, evidence-backed AI use.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/workflows/preference-toml/">Preference TOML</a>
-        <p class="p-summary">Use RLHF-shaped semantics in a simple config DSL for agent evaluation loops.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a>
-        <p class="p-summary">A small machine-readable format for scoring coding agent output.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-02">2026-02</time></span>
-        <a class="title u-url p-name" href="/workflows/prompt-patterns/">Prompt Patterns</a>
-        <p class="p-summary">Common prompt structures for reliable agent behavior.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-02">2026-02</time></span>
-        <a class="title u-url p-name" href="/workflows/agent-psychology/">Agent Psychology</a>
-        <p class="p-summary">Understanding how agents reason and respond to instructions.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-02">2026-02</time></span>
-        <a class="title u-url p-name" href="/workflows/ci-automation/">CI Automation</a>
-        <p class="p-summary">Integrating AI agents with continuous integration workflows.</p>
-      </li>
-    </ul>
-
-    <h2>Research</h2>
-    <p>Empirical findings on AI workflow effectiveness.</p>
-    <ul class="article-list">
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-07">2026-07</time></span>
-        <a class="title u-url p-name" href="/research/sleepcast/">Sleepcast: Bedtime Audio with an Inverted Rubric</a>
-        <p class="p-summary">A shipped product whose generation rubric inverts every content incentive: repetition is good, drift is good, and a completed play is a failure signal.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-05">2026-05</time></span>
-        <a class="title u-url p-name" href="/research/techno-alexithymia/">Techno-Alexithymia: De-Skilling Introspection</a>
-        <p class="p-summary">Delegating emotional self-naming to a language model is the same de-skilling mechanism as offloading judgment to a coding agent.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-04">2026-04</time></span>
-        <a class="title u-url p-name" href="/research/what-is-prompting/">What is Prompting: Operational Constraints</a>
-        <p class="p-summary">Prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-04">2026-04</time></span>
-        <a class="title u-url p-name" href="/research/context-is-a-budget/">Context Is a Budget</a>
-        <p class="p-summary">More tokens do not create more truth. Context should be spent where it changes the next decision.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-04">2026-04</time></span>
-        <a class="title u-url p-name" href="/research/protocol-before-personality/">Protocol Before Personality</a>
-        <p class="p-summary">Shared artifacts and exit conditions beat charisma, cosplay, and fake seniority.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-04">2026-04</time></span>
-        <a class="title u-url p-name" href="/research/specs-as-shared-reality/">Specs as Shared Reality</a>
-        <p class="p-summary">Agents do not share understanding. They share binding artifacts, versions, and tests.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/research/reward-engineering/">Reward Engineering for Coding Agents</a>
-        <p class="p-summary">Why coding agents optimize the rubric more than the prompt.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-03">2026-03</time></span>
-        <a class="title u-url p-name" href="/research/reward-hacking/">Reward Hacking in Coding Agents</a>
-        <p class="p-summary">How poorly designed metrics produce plausible but unstable code.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-02">2026-02</time></span>
-        <a class="title u-url p-name" href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a>
-        <p class="p-summary">Evaluating repository-level context files for coding agents.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-02">2026-02</time></span>
-        <a class="title u-url p-name" href="/research/formal-verification-agents/">Formal Verification with Agents</a>
-        <p class="p-summary">Property-based testing and specification generation.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-02">2026-02</time></span>
-        <a class="title u-url p-name" href="/research/enterprise-agent-design/">Enterprise Agent Design</a>
-        <p class="p-summary">BCG framework for production-grade agents.</p>
-      </li>
-      <li class="h-entry">
-        <span class="date"><time class="dt-published" datetime="2026-02">2026-02</time></span>
-        <a class="title u-url p-name" href="/research/persona-anchors/">Persona Anchors</a>
-        <p class="p-summary">Character-based instruction patterns for consistent agent behavior.</p>
-      </li>
-    </ul>
-  </main>
-
-  <footer class="h-card">
-    <a class="p-name u-url" href="https://stayfresh.dev/">StayFresh</a>
-    &middot;
+  <!-- representative h-card: identifies this page (https://stayfresh.dev/) as
+       the canonical home of the rel=me identities declared in <head>, for
+       indieauth / indiewebify-style web sign-in checks. -->
+  <div class="h-card" hidden>
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     <a class="u-email" rel="me" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
-    &middot;
-    <a rel="me" href="https://github.com/Evoke4350">GitHub</a>
-    &middot;
-    MIT License
-    <br>
-    <a href="https://native-land.ca/listings/territories/puyallup">The author of this blog acknowledges that they are on the traditional territory of spuyaləpabš (Puyallup) Tribe.</a>
-  </footer>
+    <a rel="me" href="https://github.com/Evoke4350">github</a>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+    var canvas = document.getElementById("gl");
+    var gl = canvas.getContext("webgl", { antialias: true, alpha: true, premultipliedAlpha: false });
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!gl) { return; } // graceful: styled HTML splash remains on black
+
+    // ---------- shaders ----------
+    function sh(type, src) {
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error(gl.getShaderInfoLog(s)); }
+      return s;
+    }
+    function prog(vs, fs) {
+      var p = gl.createProgram();
+      gl.attachShader(p, sh(gl.VERTEX_SHADER, vs));
+      gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(p);
+      if (!gl.getProgramParameter(p, gl.LINK_STATUS)) { console.error(gl.getProgramInfoLog(p)); }
+      return p;
+    }
+
+    var lineProg = prog(
+      "attribute vec3 aPos; uniform mat4 uMVP; void main(){ gl_Position = uMVP*vec4(aPos,1.0); }",
+      "precision mediump float; uniform vec3 uColor; uniform float uAlpha; void main(){ gl_FragColor = vec4(uColor,uAlpha); }"
+    );
+    var starProg = prog(
+      "attribute vec3 aPos; uniform mat4 uMVP; uniform float uScale; varying float vB;" +
+      "void main(){ gl_Position = uMVP*vec4(aPos,1.0); float w=gl_Position.w; gl_PointSize=clamp(uScale/w,1.0,5.5); vB=clamp(2.4/w,0.05,1.0); }",
+      "precision mediump float; varying float vB; void main(){ vec2 d=gl_PointCoord-0.5; float r=dot(d,d); float a=smoothstep(0.25,0.0,r); gl_FragColor=vec4(vec3(1.0,0.95,0.86)*vB, a*vB); }"
+    );
+
+    var L = {
+      mvp: gl.getUniformLocation(lineProg, "uMVP"),
+      color: gl.getUniformLocation(lineProg, "uColor"),
+      alpha: gl.getUniformLocation(lineProg, "uAlpha"),
+      pos: gl.getAttribLocation(lineProg, "aPos")
+    };
+    var S = {
+      mvp: gl.getUniformLocation(starProg, "uMVP"),
+      scale: gl.getUniformLocation(starProg, "uScale"),
+      pos: gl.getAttribLocation(starProg, "aPos")
+    };
+
+    // ---------- geometry: wireframe torus ----------
+    function torus(R, r, nu, nv) {
+      var v = [];
+      function P(i, j) {
+        var u = (i % nu) / nu * Math.PI * 2, w = (j % nv) / nv * Math.PI * 2;
+        var cu = Math.cos(u), su = Math.sin(u), cw = Math.cos(w), sw = Math.sin(w);
+        return [(R + r * cw) * cu, (R + r * cw) * su, r * sw];
+      }
+      for (var i = 0; i < nu; i++) for (var j = 0; j < nv; j++) {
+        var a = P(i, j), b = P(i + 1, j), c = P(i, j + 1);
+        v.push(a[0], a[1], a[2], b[0], b[1], b[2]);   // major edge
+        v.push(a[0], a[1], a[2], c[0], c[1], c[2]);   // minor edge
+      }
+      return new Float32Array(v);
+    }
+    var torusData = torus(1.15, 0.4, 40, 20);
+    var torusN = torusData.length / 3;
+    var torusBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, torusBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, torusData, gl.STATIC_DRAW);
+
+    // ---------- geometry: warp starfield ----------
+    var NSTAR = 520, ZNEAR = -1.6, ZFAR = -56, SPREAD = 7.5;
+    var stars = new Float32Array(NSTAR * 3);
+    function seedStar(k, freshZ) {
+      stars[k*3]   = (Math.random()*2-1) * SPREAD;
+      stars[k*3+1] = (Math.random()*2-1) * SPREAD;
+      stars[k*3+2] = freshZ ? ZFAR : (ZNEAR + Math.random()*(ZFAR-ZNEAR));
+    }
+    for (var k = 0; k < NSTAR; k++) seedStar(k, false);
+    var starBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, starBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, stars, gl.DYNAMIC_DRAW);
+
+    // ---------- mat4 ----------
+    function mult(a, b) {
+      var o = new Float32Array(16);
+      for (var c = 0; c < 4; c++) for (var r = 0; r < 4; r++) {
+        var s = 0; for (var k = 0; k < 4; k++) s += a[k*4+r]*b[c*4+k];
+        o[c*4+r] = s;
+      }
+      return o;
+    }
+    function perspective(fovy, asp, n, f) {
+      var t = 1 / Math.tan(fovy/2);
+      return new Float32Array([ t/asp,0,0,0, 0,t,0,0, 0,0,(f+n)/(n-f),-1, 0,0,(2*f*n)/(n-f),0 ]);
+    }
+    function rotX(a){ var c=Math.cos(a),s=Math.sin(a); return new Float32Array([1,0,0,0, 0,c,s,0, 0,-s,c,0, 0,0,0,1]); }
+    function rotY(a){ var c=Math.cos(a),s=Math.sin(a); return new Float32Array([c,0,-s,0, 0,1,0,0, s,0,c,0, 0,0,0,1]); }
+    function translate(x,y,z){ return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1]); }
+
+    var CAM = 3.5;
+    var view = translate(0, 0, -CAM);
+    var proj;
+
+    // ---------- resize ----------
+    var dpr = 1, W = 0, H = 0;
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = Math.floor(innerWidth * dpr); H = Math.floor(innerHeight * dpr);
+      canvas.width = W; canvas.height = H;
+      gl.viewport(0, 0, W, H);
+      proj = perspective(55 * Math.PI/180, W/H, 0.1, 100);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    // ---------- render ----------
+    gl.disable(gl.DEPTH_TEST);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE); // additive glow
+
+    var ay = 0, last = 0;
+
+    function frame(ts) {
+      var dt = last ? Math.min((ts - last) / 1000, 0.05) : 0.016;
+      last = ts;
+
+      gl.clearColor(0.012, 0.017, 0.032, 1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+
+      // stars
+      if (!reduce) {
+        for (var k = 0; k < NSTAR; k++) {
+          stars[k*3+2] += dt * 15.0;                 // warp toward camera
+          if (stars[k*3+2] > ZNEAR) seedStar(k, true);
+        }
+        gl.bindBuffer(gl.ARRAY_BUFFER, starBuf);
+        gl.bufferSubData(gl.ARRAY_BUFFER, 0, stars);
+      }
+      var starMVP = mult(proj, view);
+      gl.useProgram(starProg);
+      gl.bindBuffer(gl.ARRAY_BUFFER, starBuf);
+      gl.enableVertexAttribArray(S.pos);
+      gl.vertexAttribPointer(S.pos, 3, gl.FLOAT, false, 0, 0);
+      gl.uniformMatrix4fv(S.mvp, false, starMVP);
+      gl.uniform1f(S.scale, 90.0 * dpr);
+      gl.drawArrays(gl.POINTS, 0, NSTAR);
+
+      // torus
+      if (!reduce) ay += dt * 0.5;
+      var ax = 0.62 + (reduce ? 0 : 0.14 * Math.sin(ts * 0.0003));
+      var model = mult(rotY(ay), rotX(ax));
+      var mvp = mult(proj, mult(view, model));
+      gl.useProgram(lineProg);
+      gl.bindBuffer(gl.ARRAY_BUFFER, torusBuf);
+      gl.enableVertexAttribArray(L.pos);
+      gl.vertexAttribPointer(L.pos, 3, gl.FLOAT, false, 0, 0);
+      gl.uniformMatrix4fv(L.mvp, false, mvp);
+      gl.uniform3f(L.color, 0.16, 1.0, 0.89);
+      gl.uniform1f(L.alpha, 0.85);
+      gl.drawArrays(gl.LINES, 0, torusN);
+
+      if (!reduce) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+  </script>
 </body>
 </html>
