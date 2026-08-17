@@ -1,5 +1,5 @@
 ---
-title: what is prompting - operational constraints
+title: what is prompting: operational constraints
 description: prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.
 section: research
 date: 2026-04-07
