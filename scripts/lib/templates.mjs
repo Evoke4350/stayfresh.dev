@@ -121,7 +121,12 @@ ${bodyInner}
 
 function tagChips(tags) {
   if (!tags || tags.length === 0) return '';
-  const chips = tags.map((t) => `      <a href="/tags/${t}/">${t}</a>`).join('\n');
+  const chips = tags
+    .map((t) => {
+      const safe = escapeHtml(t);
+      return `      <a href="/tags/${safe}/">${safe}</a>`;
+    })
+    .join('\n');
   return `\n\n    <div class="tags">\n${chips}\n    </div>`;
 }
 
@@ -135,6 +140,8 @@ function articleListItem(post) {
       </li>`;
 }
 
+// Expects `posts` already sorted newest-first (by full ISO date); grouping
+// preserves that order within each year, and years are then sorted desc.
 function groupByYearDesc(posts) {
   const years = new Map();
   for (const post of posts) {
@@ -185,7 +192,7 @@ ${yearPosts.map(articleListItem).join('\n')}
 
   const bodyInner = `  <main class="h-feed">
 ${hiddenAuthor()}
-    <h2>${section}</h2>
+    <h2>${escapeHtml(section)}</h2>
 
 ${groups}
   </main>`;
@@ -200,11 +207,12 @@ ${groups}
 
 /** One tag's page: every post carrying that tag, newest first. */
 export function tagPage(tag, posts) {
-  const path = `/tags/${tag}/`;
+  const safeTag = escapeHtml(tag);
+  const path = `/tags/${safeTag}/`;
 
   const bodyInner = `  <main class="h-feed">
 ${hiddenAuthor()}
-    <h2>${tag}</h2>
+    <h2>${safeTag}</h2>
 
     <ul class="article-list">
 ${posts.map(articleListItem).join('\n')}
@@ -226,7 +234,10 @@ export function tagsIndex(tagCounts) {
     (a, b) => b[1] - a[1] || a[0].localeCompare(b[0])
   );
   const chips = entries
-    .map(([tag, count]) => `      <a href="/tags/${tag}/">${tag} (${count})</a>`)
+    .map(([tag, count]) => {
+      const safe = escapeHtml(tag);
+      return `      <a href="/tags/${safe}/">${safe} (${count})</a>`;
+    })
     .join('\n');
 
   const bodyInner = `  <main class="h-feed">
@@ -272,7 +283,7 @@ export function homePage(sections) {
 
   const blocks = sections
     .map(
-      (s) => `    <h2>${s.name}</h2>
+      (s) => `    <h2>${escapeHtml(s.name)}</h2>
     <p>${escapeHtml(s.intro)}</p>
     <ul class="article-list">
 ${s.posts.map(articleListItem).join('\n')}
