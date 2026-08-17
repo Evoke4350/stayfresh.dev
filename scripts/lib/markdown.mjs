@@ -26,25 +26,55 @@ export function escapeHtml(str) {
 }
 
 // Allow-list of characters permitted unescaped in a link URL.
-const URL_SAFE_RE = /^[A-Za-z0-9/:.\-_#?=&]*$/;
+const URL_SAFE_CHAR_RE = /[A-Za-z0-9/:.\-_#?=&]/;
 
-/** Escape a URL to a small allow-list of safe characters. */
+// Escape a URL for use inside `href="..."`. This *enforces* the allow-list
+// (rather than merely deciding whether to HTML-escape): any character
+// outside `A-Za-z0-9 / : . - _ # ? = &` is percent-encoded byte-by-byte
+// (UTF-8), not passed through -- so something like `**evil**`, a quote, or
+// an angle bracket in a URL can never break out of the attribute. Note:
+// this only sanitizes characters, not URL *scheme* -- e.g. `javascript:`
+// still passes the char allow-list. Scheme-filtering is intentionally out
+// of scope here (single-author site, per the task brief).
+//
+// The allow-list intentionally permits a literal `&` (needed for
+// multi-param query strings); it is HTML-escaped to `&amp;` in the final
+// step below so the attribute stays valid HTML. This function must be
+// called with the RAW (pre-escapeHtml) url -- see the extraction order in
+// renderInline -- otherwise a url's `&` would already be `&amp;` by the
+// time this runs and get double-escaped to `&amp;amp;`.
 function escapeUrl(url) {
-  return URL_SAFE_RE.test(url) ? url : escapeHtml(url);
+  let safe = '';
+  for (const ch of String(url)) {
+    if (URL_SAFE_CHAR_RE.test(ch)) {
+      safe += ch;
+    } else {
+      for (const byte of Buffer.from(ch, 'utf8')) {
+        safe += '%' + byte.toString(16).toUpperCase().padStart(2, '0');
+      }
+    }
+  }
+  return escapeHtml(safe);
 }
 
-// Sentinel used to stash `code` spans out of the way of the later
-// link/bold/italic passes, built via fromCharCode (rather than a literal
-// escape in source) to avoid any accidental mangling of a raw control
-// character. U+E000 is in the Unicode Private Use Area: it contains none
-// of the HTML-special, `*`, `[`, `]`, `(`, `)` characters that the passes
-// below look for, so it survives escapeHtml and every later regex
-// untouched, and it cannot occur in real Markdown source -- so the digits
-// wrapped between two sentinels can never collide with ordinary numbers
-// in the surrounding text.
+// Sentinels used to stash `code` spans and `[text](url)` links out of the
+// way of the later escapeHtml/bold/italic passes, built via fromCharCode
+// (rather than a literal escape in source) to avoid any accidental
+// mangling of a raw control character. U+E000/U+E001 are in the Unicode
+// Private Use Area: they contain none of the HTML-special, `*`, `[`, `]`,
+// `(`, `)` characters that the passes below look for, so they survive
+// escapeHtml and every later regex untouched, and they cannot occur in
+// real Markdown source -- so the digits wrapped between a pair of
+// sentinels can never collide with ordinary numbers in the surrounding
+// text.
 const CODE_PLACEHOLDER_MARK = String.fromCharCode(0xe000);
+const LINK_PLACEHOLDER_MARK = String.fromCharCode(0xe001);
 const CODE_PLACEHOLDER_RE = new RegExp(
   CODE_PLACEHOLDER_MARK + '(\\d+)' + CODE_PLACEHOLDER_MARK,
+  'g'
+);
+const LINK_PLACEHOLDER_RE = new RegExp(
+  LINK_PLACEHOLDER_MARK + '(\\d+)' + LINK_PLACEHOLDER_MARK,
   'g'
 );
 
@@ -53,30 +83,44 @@ const CODE_PLACEHOLDER_RE = new RegExp(
 // links, bold, italic -- always escaping surrounding text first so raw
 // HTML in the source can never leak through.
 //
-// Order matters: code spans are extracted to placeholders first (their
-// contents are escaped and never re-processed), then links, then bold,
-// then italic, then the code placeholders are restored. This keeps `code`
-// contents immune to the later passes and avoids ** / * inside link text
-// being mishandled before the link itself is recognized.
+// Order matters: code spans AND links are both extracted to placeholders
+// first, against the RAW (pre-escapeHtml) text -- their contents
+// (code) / text+url (links) are escaped right there and never
+// re-processed. Only after that does the generic escapeHtml pass run
+// over what's left, followed by bold, then italic, then both sets of
+// placeholders are restored (links first, then code -- order between
+// those two doesn't matter since neither's replacement text can contain
+// the other's sentinel).
+//
+// Links must be extracted from raw text (not after the generic
+// escapeHtml pass) for two reasons: (1) so a url's `&` isn't already
+// `&amp;` by the time escapeUrl sees it (which would double-escape to
+// `&amp;amp;`), and (2) so link text/url content is fully insulated from
+// the later bold/italic regexes the same way code spans are.
 function renderInline(text) {
   const codeSpans = [];
+  const linkSpans = [];
 
   // 1. Extract `code` spans into placeholders. Contents are escaped now
   // and never touched again by the passes below.
-  const withPlaceholders = String(text).replace(/`([^`]+)`/g, (_, code) => {
+  let withPlaceholders = String(text).replace(/`([^`]+)`/g, (_, code) => {
     const idx = codeSpans.push(escapeHtml(code)) - 1;
     return CODE_PLACEHOLDER_MARK + idx + CODE_PLACEHOLDER_MARK;
   });
 
-  // 2. Escape everything else (the surrounding text, including any
+  // 2. Extract [text](url) links into placeholders, still against raw
+  // text (code spans are already opaque placeholders at this point, but
+  // nothing else has been escaped yet). Both the link text and the url
+  // are finalized here.
+  withPlaceholders = withPlaceholders.replace(/\[([^\]]*)\]\(([^)]*)\)/g, (_, linkText, url) => {
+    const html = `<a href="${escapeUrl(url)}">${escapeHtml(linkText)}</a>`;
+    const idx = linkSpans.push(html) - 1;
+    return LINK_PLACEHOLDER_MARK + idx + LINK_PLACEHOLDER_MARK;
+  });
+
+  // 3. Escape everything else (the surrounding text, including any
   // literal HTML that was typed) before injecting any tags.
   let escaped = escapeHtml(withPlaceholders);
-
-  // 3. Links: [text](url). Text is already escaped (from step 2); url is
-  // escaped via a small allow-list of safe characters.
-  escaped = escaped.replace(/\[([^\]]*)\]\(([^)]*)\)/g, (_, linkText, url) => {
-    return `<a href="${escapeUrl(url)}">${linkText}</a>`;
-  });
 
   // 4. Bold: **text**
   escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -84,7 +128,10 @@ function renderInline(text) {
   // 5. Italic: *text*
   escaped = escaped.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
-  // 6. Restore code placeholders.
+  // 6. Restore link placeholders.
+  escaped = escaped.replace(LINK_PLACEHOLDER_RE, (_, idx) => linkSpans[Number(idx)]);
+
+  // 7. Restore code placeholders.
   escaped = escaped.replace(CODE_PLACEHOLDER_RE, (_, idx) => {
     return `<code>${codeSpans[Number(idx)]}</code>`;
   });

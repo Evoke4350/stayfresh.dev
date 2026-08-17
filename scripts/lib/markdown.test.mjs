@@ -69,3 +69,13 @@ test("inline bold/italic/code/link", () => {
 test("inline not applied inside fenced code", () => {
   assert.match(renderMarkdown("```\n**not bold**\n```"), /\*\*not bold\*\*/);
 });
+test("link url with multiple query params is not double-escaped", () => {
+  const out = renderMarkdown("[watch](https://youtu.be/x?v=abc&t=30s)");
+  assert.match(out, /href="https:\/\/youtu\.be\/x\?v=abc&amp;t=30s"/);
+  assert.doesNotMatch(out, /&amp;amp;/);
+});
+test("link url with disallowed characters cannot break out of the attribute", () => {
+  const out = renderMarkdown("[click](/x**evil**)");
+  assert.doesNotMatch(out, /<strong>evil<\/strong>/);
+  assert.doesNotMatch(out, /href="[^"]*"[^>]*evil/);
+});
