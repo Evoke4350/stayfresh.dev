@@ -18,7 +18,7 @@
 - **CRT identity.** Single dark theme (no light theme). Monospace stack `"SFMono-Regular","SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace`. Palette tokens: `--void #05070e`, `--void2 #080b14`, `--amber #ffb000`, `--text #c4d2ce`, `--muted #6f807a`, `--cyan #29ffe3`, `--magenta #ff3d81`, `--code #ffd08a`. Content pages carry no flicker/warp/aberration. All motion respects `prefers-reduced-motion`.
 - **Neutral voice (the de-preach rubric).** Field-notes tone: factual, understated, first-person-light ("here is what happened / what worked"). No "thesis / position / doctrine / belief / manifesto / strong take" framing. No grand claims. Keep technical accuracy, tables, and code intact.
 - **Sections.** Only `research` and `workflows`. Nav is `home / workflows / research / github`. No `thesis`.
-- **Analytics.** Every generated page and the splash carry the Google Analytics 4 `gtag.js` snippet and a Search Console `google-site-verification` meta, both sourced from `scripts/lib/config.mjs` (`ga4`, `searchConsole`). No "no tracking / no cookies" copy anywhere. Real ids are supplied by the author.
+- **Analytics.** Every generated page and the splash carry the Google Analytics 4 `gtag.js` snippet, measurement id `G-LWV58FCXB9`, sourced from `scripts/lib/config.mjs`. No "no tracking / no cookies" copy anywhere. Search Console ownership is verified via the linked GA property (the gtag is sitewide), so a separate `google-site-verification` meta is optional; `searchConsole` in config stays available but may be left empty.
 - **Post inventory (23):** research — agents-md-effectiveness, context-is-a-budget, enterprise-agent-design, formal-verification-agents, persona-anchors, protocol-before-personality, reward-engineering, reward-hacking, sleepcast, specs-as-shared-reality, techno-alexithymia, what-is-prompting. workflows — agent-psychology, anubis-github-pages, ci-automation, claude-code-skills-stack, instant-project-sync, modular-workflow-stack, preference-toml, project-ai-philosophy, prompt-patterns, psay-agent-notify, reward-rubric-dsl.
 
 ---
@@ -485,13 +485,13 @@ git commit -m "Document authoring workflow and add post template"
 - Test: `scripts/lib/templates.test.mjs` (extend)
 
 **Interfaces:**
-- Produces: `config.mjs` exports `{ siteUrl: "https://stayfresh.dev", ga4: "", searchConsole: "" }`. Author fills `ga4` (`G-XXXXXXX`) and `searchConsole` (verification token). `head()` emits the GA4 snippet only when `ga4` is non-empty, and the `<meta name="google-site-verification">` only when `searchConsole` is non-empty.
+- Produces: `config.mjs` exports `{ siteUrl: "https://stayfresh.dev", ga4: "G-LWV58FCXB9", searchConsole: "" }`. `head()` emits the GA4 snippet only when `ga4` is non-empty, and the `<meta name="google-site-verification">` only when `searchConsole` is non-empty (left empty here since Search Console verifies via the linked GA property).
 
 - [ ] **Step 1: Write the failing test** — with a stubbed config id set, `articlePage(post)` contains `gtag('config', 'G-TEST')` and `googletagmanager.com/gtag/js?id=G-TEST`; with a stubbed verification token, the head contains `<meta name="google-site-verification" content="tok123">`; with both empty, neither string appears. (Inject config via a small parameter or module override so the test is deterministic.)
 - [ ] **Step 2: Run test, verify it fails** — `node --test scripts/lib/templates.test.mjs` → FAIL.
 - [ ] **Step 3: Implement** — add `config.mjs`; in `head()`, conditionally emit the standard GA4 `gtag.js` async snippet and the verification meta. Add the same GA4 snippet + verification meta to the splash `index.html` head.
 - [ ] **Step 4: Run test, verify it passes** — PASS.
-- [ ] **Step 5: Manual (author, outside the build):** create the GA4 property + Search Console property for `stayfresh.dev`, paste the real `ga4` and `searchConsole` ids into `config.mjs`, regenerate, deploy, then submit `https://stayfresh.dev/sitemap.xml` in Search Console. Incoming search traffic appears in Search Console's Performance report; organic-search sessions appear in GA4.
+- [ ] **Step 5: Manual (author, outside the build):** GA4 id `G-LWV58FCXB9` is already in config. After deploy, add the `stayfresh.dev` property in Search Console and verify via the **Google Analytics** method (works because gtag is sitewide), then submit `https://stayfresh.dev/sitemap.xml`. Incoming search traffic appears in Search Console's Performance report; organic-search sessions appear in GA4.
 - [ ] **Step 6: Commit**
 
 ```bash
