@@ -1,11 +1,11 @@
 // Zero-dependency block-level Markdown -> HTML renderer.
 //
-// This module implements BLOCK constructs only: headings, paragraphs,
+// This module implements BLOCK constructs: headings, paragraphs,
 // unordered/ordered lists (one level of nesting), blockquotes, fenced code
-// blocks, and GFM tables. Inline spans (emphasis, links, etc.) are left as
-// escaped raw text for now -- Task 3 extends `renderInline` below to add
-// that pass. All text-bearing constructs route through `renderInline` so
-// that extension is a single, well-contained change.
+// blocks, and GFM tables. `renderInline` (below) implements INLINE spans
+// (bold, italic, code, links) and is the single seam that every
+// text-bearing construct routes through -- except fenced code blocks,
+// which stay verbatim/escaped and are never inline-processed.
 
 const FENCE_RE = /^\s*```/;
 const HEADING_RE = /^(#{1,6})\s+(.*)$/;
@@ -25,12 +25,71 @@ export function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+// Allow-list of characters permitted unescaped in a link URL.
+const URL_SAFE_RE = /^[A-Za-z0-9/:.\-_#?=&]*$/;
+
+/** Escape a URL to a small allow-list of safe characters. */
+function escapeUrl(url) {
+  return URL_SAFE_RE.test(url) ? url : escapeHtml(url);
+}
+
+// Sentinel used to stash `code` spans out of the way of the later
+// link/bold/italic passes, built via fromCharCode (rather than a literal
+// escape in source) to avoid any accidental mangling of a raw control
+// character. U+E000 is in the Unicode Private Use Area: it contains none
+// of the HTML-special, `*`, `[`, `]`, `(`, `)` characters that the passes
+// below look for, so it survives escapeHtml and every later regex
+// untouched, and it cannot occur in real Markdown source -- so the digits
+// wrapped between two sentinels can never collide with ordinary numbers
+// in the surrounding text.
+const CODE_PLACEHOLDER_MARK = String.fromCharCode(0xe000);
+const CODE_PLACEHOLDER_RE = new RegExp(
+  CODE_PLACEHOLDER_MARK + '(\\d+)' + CODE_PLACEHOLDER_MARK,
+  'g'
+);
+
 // Single seam for text-bearing constructs (headings, paragraphs, list
-// items, blockquote text, table cells). Task 3 will extend this to also
-// handle emphasis/links, but it must always escape first -- and it must
-// never introduce em/en dashes.
+// items, blockquote text, table cells). Applies inline spans -- code,
+// links, bold, italic -- always escaping surrounding text first so raw
+// HTML in the source can never leak through.
+//
+// Order matters: code spans are extracted to placeholders first (their
+// contents are escaped and never re-processed), then links, then bold,
+// then italic, then the code placeholders are restored. This keeps `code`
+// contents immune to the later passes and avoids ** / * inside link text
+// being mishandled before the link itself is recognized.
 function renderInline(text) {
-  return escapeHtml(text);
+  const codeSpans = [];
+
+  // 1. Extract `code` spans into placeholders. Contents are escaped now
+  // and never touched again by the passes below.
+  const withPlaceholders = String(text).replace(/`([^`]+)`/g, (_, code) => {
+    const idx = codeSpans.push(escapeHtml(code)) - 1;
+    return CODE_PLACEHOLDER_MARK + idx + CODE_PLACEHOLDER_MARK;
+  });
+
+  // 2. Escape everything else (the surrounding text, including any
+  // literal HTML that was typed) before injecting any tags.
+  let escaped = escapeHtml(withPlaceholders);
+
+  // 3. Links: [text](url). Text is already escaped (from step 2); url is
+  // escaped via a small allow-list of safe characters.
+  escaped = escaped.replace(/\[([^\]]*)\]\(([^)]*)\)/g, (_, linkText, url) => {
+    return `<a href="${escapeUrl(url)}">${linkText}</a>`;
+  });
+
+  // 4. Bold: **text**
+  escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+  // 5. Italic: *text*
+  escaped = escaped.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  // 6. Restore code placeholders.
+  escaped = escaped.replace(CODE_PLACEHOLDER_RE, (_, idx) => {
+    return `<code>${codeSpans[Number(idx)]}</code>`;
+  });
+
+  return escaped;
 }
 
 function splitTableRow(line) {

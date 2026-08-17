@@ -60,3 +60,12 @@ test("gfm table with header + delimiter but no body rows", () => {
     "<table><thead><tr><th>a</th><th>b</th></tr></thead><tbody></tbody></table>"
   );
 });
+test("inline bold/italic/code/link", () => {
+  assert.equal(renderMarkdown("a **b** c").trim(), "<p>a <strong>b</strong> c</p>");
+  assert.equal(renderMarkdown("a *b* c").trim(), "<p>a <em>b</em> c</p>");
+  assert.equal(renderMarkdown("a `x<y` c").trim(), "<p>a <code>x&lt;y</code> c</p>");
+  assert.equal(renderMarkdown("see [docs](/x)").trim(), '<p>see <a href="/x">docs</a></p>');
+});
+test("inline not applied inside fenced code", () => {
+  assert.match(renderMarkdown("```\n**not bold**\n```"), /\*\*not bold\*\*/);
+});
