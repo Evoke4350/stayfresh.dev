@@ -97,6 +97,13 @@ All output is committed; GitHub Pages serves static files; the build runs locall
 6. **Chronological blog index (new)** — `blog/index.html`, all non-draft posts across sections, newest first.
 7. **Discovery** — `rss.xml`, `atom.xml`, `feed.json`, `sitemap.xml`, `llms.txt`, regenerated from scanned posts (folding in the current `build-publisher-files.mjs` XML/JSON logic), with the thesis removed and copy de-preached.
 
+## Analytics and search
+
+The site now measures traffic (reversing the earlier "no tracking" stance; drop all "no cookies / no tracking" copy):
+- **Google Analytics 4** (`gtag.js`) on every generated page and the splash, injected by the shared `head()` helper from a single config value (measurement id `G-XXXXXXX`). This is a third-party runtime script and sets cookies.
+- **Google Search Console** to see incoming search traffic (queries, impressions, clicks): a `google-site-verification` meta tag on `/` (and `/home/`), plus submitting the generated `sitemap.xml`.
+- Config lives in `scripts/lib/config.mjs` (`ga4`, `searchConsole` tokens); real values supplied by the author. A short privacy note is a reasonable follow-up since GA sets cookies, but is not blocking.
+
 ## Architecture
 
 ```
@@ -104,6 +111,7 @@ content/<section>/<slug>.md      authored posts (source of truth)
 style.css                        the CRT reading theme (rewritten)
 index.html                       splash (generated or static, from prototype)
 scripts/build.mjs                entry: scan, parse, render, write
+scripts/lib/config.mjs           site + analytics config (ga4, search-console)
 scripts/lib/frontmatter.mjs      front-matter -> object
 scripts/lib/markdown.mjs         Markdown subset -> HTML
 scripts/lib/templates.mjs        page/index/tag templates (house style + CRT)
