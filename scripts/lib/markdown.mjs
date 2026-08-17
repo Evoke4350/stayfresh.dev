@@ -92,6 +92,8 @@ function parseBlocks(lines) {
     }
 
     // Fenced code block: verbatim content, HTML-escaped, no inline pass.
+    // Any language hint after the opening ``` (e.g. ```js) is intentionally
+    // dropped for now -- no <code class="language-..."> is emitted.
     if (FENCE_RE.test(line)) {
       i++;
       const codeLines = [];

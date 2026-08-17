@@ -34,3 +34,29 @@ test("no em-dash emitted from double hyphen", () => {
   assert.equal(renderMarkdown("a -- b").includes("—"), false);
   assert.match(renderMarkdown("a -- b"), /a -- b/);
 });
+test("unordered list nesting (2-space indent)", () => {
+  assert.equal(
+    renderMarkdown("- a\n  - b\n- c").replace(/\s+/g, " ").trim(),
+    "<ul> <li>a <ul> <li>b</li> </ul></li> <li>c</li> </ul>"
+  );
+});
+test("ordered list nesting (2-space indent)", () => {
+  assert.equal(
+    renderMarkdown("1. a\n  1. b\n2. c").replace(/\s+/g, " ").trim(),
+    "<ol> <li>a <ol> <li>b</li> </ol></li> <li>c</li> </ol>"
+  );
+});
+test("empty input", () => {
+  assert.equal(renderMarkdown("").trim(), "");
+});
+test("blank-line-separated multi-block doc", () => {
+  const out = renderMarkdown("hello\n\n- a\n- b").replace(/\s+/g, " ").trim();
+  assert.equal(out, "<p>hello</p> <ul> <li>a</li> <li>b</li> </ul>");
+});
+test("gfm table with header + delimiter but no body rows", () => {
+  const out = renderMarkdown("| a | b |\n| --- | --- |").replace(/\s+/g, " ").trim();
+  assert.equal(
+    out,
+    "<table><thead><tr><th>a</th><th>b</th></tr></thead><tbody></tbody></table>"
+  );
+});
