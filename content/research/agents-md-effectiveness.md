@@ -84,7 +84,7 @@ based on this research, a context file works best with minimal requirements:
 
 it's better not to include long codebase overviews, information already in the readme, or style rules the model already knows.
 
-### the "surprising behavior" pattern
+### the unexpected-behavior pattern
 
 when agents hit something unexpected, that's worth treating as signal.
 

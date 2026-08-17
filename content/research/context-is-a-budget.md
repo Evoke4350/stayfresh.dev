@@ -26,7 +26,7 @@ if a block of text didn't help with one of those four jobs, it was usually there
 
 most agent setups ran into one of two problems: dumping in everything "just in case," or stacking summaries of summaries until the system could no longer tell current truth from yesterday's interpretation of it.
 
-the result looked thorough. it usually wasn't. wide context often made agents more responsive to whatever was easiest to quote, not whatever was most relevant to the live decision.
+the result looked thorough and felt intelligent. it was usually neither. wide context often made agents more responsive to whatever was easiest to quote, not whatever was most relevant to the live decision.
 
 ### why more context didn't mean more truth
 
@@ -125,7 +125,7 @@ cheap cached context is still context. a lower price doesn't turn fluff into sig
 
 ### heartbeats and checkpoints
 
-long-running agent work benefits from small recurring checks, but the heartbeat should ask whether reality changed, not restate the entire state. a simple heartbeat pattern:
+long-running agent work benefited from small recurring checks. the useful heartbeats asked whether reality had changed, not restated the entire state. a simple heartbeat pattern:
 
 ```
 if nothing_changed:
@@ -143,15 +143,15 @@ the point is to surface deltas. a heartbeat that rehydrates the full workflow st
 
 ### the rule that held up
 
-pass full context mainly at real boundaries: a new task class, a new artifact surface, a spec revision, or a handoff between roles. inside a narrow loop, context should shrink, not grow.
+full context got passed mainly at real boundaries: a new task class, a new artifact surface, a spec revision, or a handoff between roles. inside a narrow loop, context shrank instead of growing.
 
 ### practical consequences
 
-1. prefer references to artifacts over pasting entire artifacts.
-2. store state in versioned files, not only in conversation history.
-3. expire summaries when the underlying truth changes.
-4. make authority explicit: spec beats note, test beats plan, operator correction beats both.
-5. measure context by decision value, not token count alone.
+1. references to artifacts worked better than pasting entire artifacts.
+2. state lived in versioned files, not only in conversation history.
+3. summaries expired when the underlying truth changed.
+4. authority stayed explicit: spec beat note, test beat plan, operator correction beat both.
+5. context got measured by decision value, not token count alone.
 
 context is a spending decision. the useful move was spending it on facts that changed the next move and cutting the rest before it started pretending to be knowledge.
 
