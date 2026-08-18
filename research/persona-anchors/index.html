@@ -3,101 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="character-based instruction patterns for consistent agent behavior.">
   <link rel="canonical" href="https://stayfresh.dev/research/persona-anchors/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="alternate" type="application/rss+xml" title="stayfresh rss" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="stayfresh atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="stayfresh json feed" href="https://stayfresh.dev/feed.json">
   <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
   <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <title>Persona Anchors - StayFresh</title>
+  <title>persona anchors - stayfresh</title>
   <link rel="stylesheet" href="/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWV58FCXB9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LWV58FCXB9');</script>
 </head>
 <body>
   <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
+    <div class="brand">stayfresh<span class="cur"></span></div>
+    <div class="tag">field notes // workflows // research</div>
   </header>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a href="/home/">home</a>
+    <a href="/workflows/">workflows</a>
+    <a href="/research/">research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">github</a>
   </nav>
 
   <main class="h-entry">
-    <p class="date"><time class="dt-published" datetime="2026-02">February 2026</time></p>
-    <h2 class="p-name">Persona Anchors for Agent Styling</h2>
+    <p class="date"><time class="dt-published" datetime="2026-04-13">2026-04</time></p>
+    <h2 class="p-name">persona anchors</h2>
 
     <div class="e-content">
-
-    <p><strong>Pattern:</strong> Direct agents to emulate specific engineering styles and values by anchoring to recognized names in the field.</p>
-
-    <h3>The Core Insight</h3>
-    <p>LLMs have absorbed the public writing, talks, and code of well-known engineers. This knowledge can be probed and leveraged, without web access, to shape agent behavior toward specific styles and quality standards.</p>
-
-    <h3>How It Works</h3>
-    <ol>
-      <li><strong>Name a practitioner</strong> whose style matches the desired output</li>
-      <li><strong>Tell the agent to emulate their values and craft</strong></li>
-      <li><strong>The agent draws on training data</strong> to approximate that style</li>
-    </ol>
-    <p>This works because LLMs encode patterns from public artifacts (blog posts, conference talks, open-source contributions) associated with named individuals.</p>
-
-    <h3>Pattern: Domain-Specific Anchors</h3>
-
-    <h4>React Native Projects</h4>
-    <pre><code>Emulate the craft and values of React Native product engineers like
+<p><strong>pattern</strong>: agents were directed to emulate specific engineering styles and values by anchoring to recognized names in the field.</p>
+<h3>the core idea</h3>
+<p>llms had absorbed the public writing, talks, and code of well-known engineers. that training signal could be probed and used, without web access, to shape agent behavior toward specific styles and quality standards.</p>
+<h3>how it worked</h3>
+<ol>
+  <li><strong>a practitioner got named</strong> whose style matched the desired output.</li>
+  <li><strong>the agent got told to emulate their values and craft.</strong></li>
+  <li><strong>the agent drew on training data</strong> to approximate that style.</li>
+</ol>
+<p>this worked because llms encoded patterns from public artifacts (blog posts, conference talks, open-source contributions) associated with named individuals.</p>
+<h3>domain-specific anchors</h3>
+<h4>react native projects</h4>
+<pre><code>Emulate the craft and values of React Native product engineers like
 Evan Bacon and Fernando Rojo. Prioritize developer experience,
-practical abstractions, and polished user interactions.</code></pre>
-
-    <h4>Generic React Native (No Specific Product)</h4>
-    <pre><code>Emulate the taste and architectural decisions of the Callstack crew.
+practical abstractions, and polished user interactions.
+</code></pre>
+<h4>generic react native (no specific product)</h4>
+<pre><code>Emulate the taste and architectural decisions of the Callstack crew.
 Focus on maintainability, clear module boundaries, and patterns that
-scale across teams.</code></pre>
-
-    <h4>Backend Systems</h4>
-    <pre><code>Emulate the operational discipline of engineers like Kelsey Hightower.
-Infrastructure as code, explicit configuration, no snowflakes.</code></pre>
-
-    <h4>Distributed Systems</h4>
-    <pre><code>Emulate the rigor of the FoundationDB or CockroachDB teams. Correctness
-first, performance second, explicit handling of edge cases.</code></pre>
-
-    <h3>Probing for Recognition</h3>
-    <p>To discover which names an agent recognizes without web access:</p>
-    <pre><code>Without using web search, describe the engineering values and style
-associated with [Name]. What patterns would you expect in their work?</code></pre>
-    <p>If the agent produces a coherent description, that name is usable as an anchor. If the response is vague or generic, choose a different anchor.</p>
-
-    <h3>When to Use Persona Anchors</h3>
-    <table>
-      <thead>
-        <tr><th>Situation</th><th>Effectiveness</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Greenfield project, no established patterns</td><td>High - provides default direction</td></tr>
-        <tr><td>Codebase with strong existing conventions</td><td>Low - existing patterns dominate</td></tr>
-        <tr><td>Team with shared style idols</td><td>High - aligns agent with team taste</td></tr>
-        <tr><td>Generic/scaffold code</td><td>Medium - adds polish without over-engineering</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Anti-Patterns</h3>
-    <ul>
-      <li><strong>Over-specifying</strong> - Listing too many names creates confusion</li>
-      <li><strong>Contradictory anchors</strong> - "Like [minimalist] and [enterprise architect]" fights itself</li>
-      <li><strong>Unknown names</strong> - If the model doesn't know them, the anchor is noise</li>
-      <li><strong>Using for factual questions</strong> - Anchors shape style, not correctness</li>
-    </ul>
-
-    <h3>The "Lie" Is the Feature</h3>
-    <p>Persona anchors are a controlled hallucination. The model isn't actually those engineers, but it produces better output when directed toward a coherent style.</p>
-    <p>Specific names carry more signal than "act as a senior engineer" because they encode real patterns from training data.</p>
-
-    <h3>Practical Template</h3>
-    <pre><code>## Style Anchor
+scale across teams.
+</code></pre>
+<h4>backend systems</h4>
+<pre><code>Emulate the operational discipline of engineers like Kelsey Hightower.
+Infrastructure as code, explicit configuration, no snowflakes.
+</code></pre>
+<h4>distributed systems</h4>
+<pre><code>Emulate the rigor of the FoundationDB or CockroachDB teams. Correctness
+first, performance second, explicit handling of edge cases.
+</code></pre>
+<h3>checking for recognition</h3>
+<p>to check which names an agent recognized without web access:</p>
+<pre><code>Without using web search, describe the engineering values and style
+associated with [Name]. What patterns would you expect in their work?
+</code></pre>
+<p>if the agent produced a coherent description, that name was usable as an anchor. if the response stayed vague or generic, a different anchor worked better.</p>
+<h3>when persona anchors held up</h3>
+<table><thead><tr><th>situation</th><th>effectiveness</th></tr></thead><tbody><tr><td>greenfield project, no established patterns</td><td>high, provided default direction</td></tr><tr><td>codebase with strong existing conventions</td><td>low, existing patterns dominated</td></tr><tr><td>team with shared style idols</td><td>high, aligned agent with team taste</td></tr><tr><td>generic/scaffold code</td><td>medium, added polish without over-engineering</td></tr></tbody></table>
+<h3>failure modes</h3>
+<ul>
+  <li><strong>over-specifying</strong>: listing too many names created confusion.</li>
+  <li><strong>contradictory anchors</strong>: &quot;like [minimalist] and [enterprise architect]&quot; fought itself.</li>
+  <li><strong>unknown names</strong>: if the model didn't know them, the anchor was noise.</li>
+  <li><strong>using for factual questions</strong>: anchors shaped style, not correctness.</li>
+</ul>
+<h3>the trick underneath</h3>
+<p>persona anchors were a controlled hallucination. the model wasn't actually those engineers, but output improved when it was directed toward a coherent style. specific names carried more signal than &quot;act as a senior engineer&quot; because they encoded real patterns from training data.</p>
+<h3>template used</h3>
+<pre><code>## Style Anchor
 
 For this project, emulate the values and craft of [Domain] practitioners
 like [Name 1] and [Name 2].
@@ -107,18 +90,29 @@ Key characteristics:
 - [Value 2]
 - [Value 3]
 
-When in doubt, ask: "Would [Name] approach it this way?"</code></pre>
+When in doubt, ask: &quot;Would [Name] approach it this way?&quot;
+</code></pre>
+
     </div>
 
-    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/research/persona-anchors/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+    <div class="tags">
+      <a href="/tags/personas/">personas</a>
+      <a href="/tags/prompting/">prompting</a>
+      <a href="/tags/style/">style</a>
+      <a href="/tags/patterns/">patterns</a>
+    </div>
+
+    <a class="p-author h-card" href="https://stayfresh.dev/home/" hidden>stayfresh</a>
   </main>
 
-  <footer>
-    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+  <footer class="h-card">
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     &middot;
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a class="u-email" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
     &middot;
-    MIT License
+    <a href="https://github.com/Evoke4350">github</a>
+    &middot;
+    mit license
   </footer>
 </body>
 </html>

@@ -1,13 +1,13 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
-  "title": "StayFresh",
+  "title": "stayfresh",
   "home_page_url": "https://stayfresh.dev/",
   "feed_url": "https://stayfresh.dev/feed.json",
   "description": "Static archive of workflow research and patterns for AI-assisted development.",
   "language": "en-US",
   "authors": [
     {
-      "name": "StayFresh",
+      "name": "stayfresh",
       "url": "https://stayfresh.dev/"
     }
   ],
@@ -15,192 +15,184 @@
     {
       "id": "https://stayfresh.dev/research/sleepcast/",
       "url": "https://stayfresh.dev/research/sleepcast/",
-      "title": "Sleepcast: Bedtime Audio with an Inverted Rubric",
-      "summary": "A bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.",
+      "title": "sleepcast: bedtime audio with an inverted rubric",
+      "summary": "a bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.",
       "date_published": "2026-07-21T00:00:00Z",
       "date_modified": "2026-07-21T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/research/techno-alexithymia/",
       "url": "https://stayfresh.dev/research/techno-alexithymia/",
-      "title": "Techno-Alexithymia: De-Skilling Introspection",
-      "summary": "Delegating emotional self-naming to a language model is the same de-skilling mechanism as offloading judgment to a coding agent, applied to the most interior faculty there is.",
+      "title": "techno-alexithymia: de-skilling introspection",
+      "summary": "delegating emotional self-naming to a language model is the same de-skilling mechanism as offloading judgment to a coding agent, applied to the most interior faculty there is.",
       "date_published": "2026-05-31T00:00:00Z",
       "date_modified": "2026-05-31T00:00:00Z"
     },
     {
-      "id": "https://stayfresh.dev/workflows/instant-project-sync/",
-      "url": "https://stayfresh.dev/workflows/instant-project-sync/",
-      "title": "Instant Project Sync",
-      "summary": "Synchronize ticket queues against contract dates and repository evidence, with requirement reconstruction when docs are missing.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/workflows/psay-agent-notify/",
-      "url": "https://stayfresh.dev/workflows/psay-agent-notify/",
-      "title": "psay Agent Notifications",
-      "summary": "Local voice and Notification Center loops for agent completion, handoff, and operator recall.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/workflows/project-ai-philosophy/",
-      "url": "https://stayfresh.dev/workflows/project-ai-philosophy/",
-      "title": "Project AI Philosophy",
-      "summary": "A written position for bounded, evidence-backed AI use in delivery.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/workflows/preference-toml/",
-      "url": "https://stayfresh.dev/workflows/preference-toml/",
-      "title": "Preference TOML",
-      "summary": "Use RLHF-shaped semantics in a simple config DSL for agent evaluation loops.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/workflows/reward-rubric-dsl/",
-      "url": "https://stayfresh.dev/workflows/reward-rubric-dsl/",
-      "title": "Reward Rubric DSL",
-      "summary": "A small machine-readable format for scoring coding agent output.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/workflows/prompt-patterns/",
-      "url": "https://stayfresh.dev/workflows/prompt-patterns/",
-      "title": "Prompt Patterns",
-      "summary": "Common prompt structures for reliable agent behavior.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/workflows/agent-psychology/",
-      "url": "https://stayfresh.dev/workflows/agent-psychology/",
-      "title": "Agent Psychology",
-      "summary": "Understanding how agents reason and respond to instructions.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/workflows/ci-automation/",
-      "url": "https://stayfresh.dev/workflows/ci-automation/",
-      "title": "CI Automation with AI Agents",
-      "summary": "Integrating AI agents with continuous integration workflows.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/research/reward-engineering/",
-      "url": "https://stayfresh.dev/research/reward-engineering/",
-      "title": "Reward Engineering for Coding Agents",
-      "summary": "Why coding agents optimize the rubric more than the prompt.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/research/reward-hacking/",
-      "url": "https://stayfresh.dev/research/reward-hacking/",
-      "title": "Reward Hacking in Coding Agents",
-      "summary": "How poorly designed metrics produce plausible but unstable code.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
       "id": "https://stayfresh.dev/research/agents-md-effectiveness/",
       "url": "https://stayfresh.dev/research/agents-md-effectiveness/",
-      "title": "AGENTS.md Effectiveness",
-      "summary": "Evaluating repository-level context files for coding agents.",
-      "date_published": "2026-04-13T00:00:00Z",
-      "date_modified": "2026-04-13T00:00:00Z"
-    },
-    {
-      "id": "https://stayfresh.dev/research/formal-verification-agents/",
-      "url": "https://stayfresh.dev/research/formal-verification-agents/",
-      "title": "Formal Verification with Agents",
-      "summary": "Property-based testing and specification generation.",
+      "title": "agents.md effectiveness",
+      "summary": "evaluating repository-level context files for coding agents.",
       "date_published": "2026-04-13T00:00:00Z",
       "date_modified": "2026-04-13T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/research/enterprise-agent-design/",
       "url": "https://stayfresh.dev/research/enterprise-agent-design/",
-      "title": "Enterprise Agent Design",
-      "summary": "BCG framework for production-grade agents.",
+      "title": "enterprise agent design",
+      "summary": "bcg framework for production-grade agents.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/research/formal-verification-agents/",
+      "url": "https://stayfresh.dev/research/formal-verification-agents/",
+      "title": "formal verification with agents",
+      "summary": "property-based testing and specification generation.",
       "date_published": "2026-04-13T00:00:00Z",
       "date_modified": "2026-04-13T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/research/persona-anchors/",
       "url": "https://stayfresh.dev/research/persona-anchors/",
-      "title": "Persona Anchors",
-      "summary": "Character-based instruction patterns for consistent agent behavior.",
+      "title": "persona anchors",
+      "summary": "character-based instruction patterns for consistent agent behavior.",
       "date_published": "2026-04-13T00:00:00Z",
       "date_modified": "2026-04-13T00:00:00Z"
     },
     {
-      "id": "https://stayfresh.dev/workflows/claude-code-skills-stack/",
-      "url": "https://stayfresh.dev/workflows/claude-code-skills-stack/",
-      "title": "Claude Code Skills Stack",
-      "summary": "A practical three-layer stack for Claude Code: decision, context, and execution.",
-      "date_published": "2026-04-07T00:00:00Z",
-      "date_modified": "2026-04-07T00:00:00Z"
+      "id": "https://stayfresh.dev/research/reward-engineering/",
+      "url": "https://stayfresh.dev/research/reward-engineering/",
+      "title": "reward engineering for coding agents",
+      "summary": "why coding agents optimize the rubric more than the prompt.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
     },
     {
-      "id": "https://stayfresh.dev/workflows/modular-workflow-stack/",
-      "url": "https://stayfresh.dev/workflows/modular-workflow-stack/",
-      "title": "Modular Workflow Stack",
-      "summary": "Right tool, right job, right time: layered orchestration, typed agent delegation, human-in-the-loop gates, parallelism, and loops with real halting conditions.",
-      "date_published": "2026-04-07T00:00:00Z",
-      "date_modified": "2026-04-07T00:00:00Z"
+      "id": "https://stayfresh.dev/research/reward-hacking/",
+      "url": "https://stayfresh.dev/research/reward-hacking/",
+      "title": "reward hacking in coding agents",
+      "summary": "how poorly designed metrics produce plausible but unstable code.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/agent-psychology/",
+      "url": "https://stayfresh.dev/workflows/agent-psychology/",
+      "title": "agent psychology",
+      "summary": "understanding how agents reason and respond to instructions.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/ci-automation/",
+      "url": "https://stayfresh.dev/workflows/ci-automation/",
+      "title": "ci automation with ai agents",
+      "summary": "integrating ai agents with continuous integration workflows.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/instant-project-sync/",
+      "url": "https://stayfresh.dev/workflows/instant-project-sync/",
+      "title": "instant project sync",
+      "summary": "synchronize ticket queues against contract dates and repository evidence, with requirement reconstruction when docs are missing.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/preference-toml/",
+      "url": "https://stayfresh.dev/workflows/preference-toml/",
+      "title": "preference toml",
+      "summary": "use rlhf-shaped semantics in a simple config dsl for agent evaluation loops.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/project-ai-philosophy/",
+      "url": "https://stayfresh.dev/workflows/project-ai-philosophy/",
+      "title": "project ai philosophy",
+      "summary": "a written position for bounded, evidence-backed ai use in delivery.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/prompt-patterns/",
+      "url": "https://stayfresh.dev/workflows/prompt-patterns/",
+      "title": "prompt patterns",
+      "summary": "common prompt structures for reliable agent behavior.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/psay-agent-notify/",
+      "url": "https://stayfresh.dev/workflows/psay-agent-notify/",
+      "title": "psay agent notifications",
+      "summary": "local voice and notification center loops for agent completion, handoff, and operator recall.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/reward-rubric-dsl/",
+      "url": "https://stayfresh.dev/workflows/reward-rubric-dsl/",
+      "title": "reward rubric dsl",
+      "summary": "a small machine-readable format for scoring coding agent output.",
+      "date_published": "2026-04-13T00:00:00Z",
+      "date_modified": "2026-04-13T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/research/context-is-a-budget/",
       "url": "https://stayfresh.dev/research/context-is-a-budget/",
-      "title": "Context Is a Budget",
-      "summary": "More tokens do not create more truth. Context should be spent where it changes the next decision.",
+      "title": "context is a budget",
+      "summary": "more tokens do not create more truth; useful context is what changes the next decision.",
       "date_published": "2026-04-07T00:00:00Z",
       "date_modified": "2026-04-07T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/research/protocol-before-personality/",
       "url": "https://stayfresh.dev/research/protocol-before-personality/",
-      "title": "Protocol Before Personality",
-      "summary": "Shared artifacts and exit conditions beat charisma, cosplay, and fake seniority.",
+      "title": "protocol before personality",
+      "summary": "shared artifacts and exit conditions beat charisma, cosplay, and fake seniority.",
       "date_published": "2026-04-07T00:00:00Z",
       "date_modified": "2026-04-07T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/research/specs-as-shared-reality/",
       "url": "https://stayfresh.dev/research/specs-as-shared-reality/",
-      "title": "Specs as Shared Reality",
-      "summary": "Agents do not share understanding. They share binding artifacts, versions, and tests.",
+      "title": "specs as shared reality",
+      "summary": "agents do not share understanding. they share binding artifacts, versions, and tests.",
       "date_published": "2026-04-07T00:00:00Z",
       "date_modified": "2026-04-07T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/research/what-is-prompting/",
       "url": "https://stayfresh.dev/research/what-is-prompting/",
-      "title": "What is Prompting: Operational Constraints",
-      "summary": "Prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.",
+      "title": "what is prompting: operational constraints",
+      "summary": "prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.",
       "date_published": "2026-04-07T00:00:00Z",
       "date_modified": "2026-04-07T00:00:00Z"
     },
     {
-      "id": "https://stayfresh.dev/thesis/",
-      "url": "https://stayfresh.dev/thesis/",
-      "title": "StayFresh Thesis",
-      "summary": "The hard position behind the archive: reward surfaces, legible architecture, and tools that lower comprehension debt.",
-      "date_published": "2026-03-29T00:00:00Z",
-      "date_modified": "2026-03-29T00:00:00Z"
+      "id": "https://stayfresh.dev/workflows/claude-code-skills-stack/",
+      "url": "https://stayfresh.dev/workflows/claude-code-skills-stack/",
+      "title": "claude code skills stack",
+      "summary": "a practical three-layer stack for claude code: decision, context, and execution.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
+    },
+    {
+      "id": "https://stayfresh.dev/workflows/modular-workflow-stack/",
+      "url": "https://stayfresh.dev/workflows/modular-workflow-stack/",
+      "title": "modular workflow stack",
+      "summary": "right tool, right job, right time: layered orchestration, typed agent delegation, human-in-the-loop gates, parallelism, and loops with real halting conditions.",
+      "date_published": "2026-04-07T00:00:00Z",
+      "date_modified": "2026-04-07T00:00:00Z"
     },
     {
       "id": "https://stayfresh.dev/workflows/anubis-github-pages/",
       "url": "https://stayfresh.dev/workflows/anubis-github-pages/",
-      "title": "Anubis in Front of GitHub Pages",
-      "summary": "How to put Anubis in front of a GitHub Pages site with a real reverse proxy and no proxy-loop nonsense.",
+      "title": "anubis in front of github pages",
+      "summary": "how to put anubis in front of a github pages site with a real reverse proxy and no proxy-loop nonsense.",
       "date_published": "2026-03-29T00:00:00Z",
       "date_modified": "2026-03-29T00:00:00Z"
     }

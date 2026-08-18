@@ -17,11 +17,16 @@ if [[ ! -d "$DOCROOT" ]]; then
   exit 1
 fi
 
-# Publish only the static site assets, not the whole repository.
-cp "$ROOT_DIR/index.html" "$STAGE_DIR/"
-cp "$ROOT_DIR/style.css" "$STAGE_DIR/"
-cp -R "$ROOT_DIR/fonts" "$STAGE_DIR/fonts"
-cp -R "$ROOT_DIR/research" "$STAGE_DIR/research"
-cp -R "$ROOT_DIR/workflows" "$STAGE_DIR/workflows"
+# Publish only the static site assets, not the whole repository. Each
+# entry is guarded so a not-yet-generated surface (blog/, tags/, home/ --
+# or fonts/ once it's retired) is skipped rather than a hard failure under
+# set -euo pipefail.
+for asset in index.html style.css fonts research workflows home blog tags; do
+  if [[ -e "$ROOT_DIR/$asset" ]]; then
+    cp -R "$ROOT_DIR/$asset" "$STAGE_DIR/"
+  else
+    echo "skipping $asset (not present in $ROOT_DIR)" >&2
+  fi
+done
 
 rsync -a --delete "$STAGE_DIR"/ "$DOCROOT"/

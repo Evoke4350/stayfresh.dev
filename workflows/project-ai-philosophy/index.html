@@ -3,104 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="a written position for bounded, evidence-backed ai use in delivery.">
   <link rel="canonical" href="https://stayfresh.dev/workflows/project-ai-philosophy/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="alternate" type="application/rss+xml" title="stayfresh rss" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="stayfresh atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="stayfresh json feed" href="https://stayfresh.dev/feed.json">
   <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
   <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <title>Project AI Philosophy - StayFresh</title>
+  <title>project ai philosophy - stayfresh</title>
   <link rel="stylesheet" href="/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWV58FCXB9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LWV58FCXB9');</script>
 </head>
 <body>
   <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
+    <div class="brand">stayfresh<span class="cur"></span></div>
+    <div class="tag">field notes // workflows // research</div>
   </header>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a href="/home/">home</a>
+    <a href="/workflows/">workflows</a>
+    <a href="/research/">research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">github</a>
   </nav>
 
   <main class="h-entry">
-    <p class="date"><time class="dt-published" datetime="2026-03">March 2026</time></p>
-    <h2 class="p-name">Project AI Philosophy</h2>
+    <p class="date"><time class="dt-published" datetime="2026-04-13">2026-04</time></p>
+    <h2 class="p-name">project ai philosophy</h2>
 
     <div class="e-content">
+<p>this document is a written position for projects using generative systems.</p>
+<p>absent policy, default governance becomes novelty pressure, convenience, and untracked risk.</p>
+<h3>position</h3>
+<p>ai is used inside bounded workflows.</p>
+<p>acceptable roles: drafting, summarization, retrieval, code scaffolding, critique, evaluation, and repetitive local automation.</p>
+<p>unacceptable roles: hidden authority, unsupervised publication, irreversible state changes, invented expertise, and persuasion without evidence.</p>
+<h3>control surface</h3>
+<ul>
+  <li><strong>explicit scope</strong> - named task, named inputs, named completion condition</li>
+  <li><strong>evidence required</strong> - sources, tests, diffs, logs, screenshots, or reproducible traces</li>
+  <li><strong>human gate on irreversible actions</strong> - merge, deploy, publish, delete, charge, notify, or mutate production data</li>
+  <li><strong>reversibility first</strong> - rollback path before automation depth</li>
+  <li><strong>failure legibility</strong> - uncertainty, missing context, blocked tools, and assumption drift surfaced in plain language</li>
+  <li><strong>cost discipline</strong> - token spend, latency, and review burden treated as engineering costs</li>
+  <li><strong>local fit</strong> - repository conventions outrank model preferences</li>
+</ul>
+<h3>operational standard</h3>
+<p>best use cases share five properties: bounded context, available verification, low blast radius, clear ownership, and reversible outcome.</p>
+<p>worst use cases share the opposite pattern: vague goals, hidden dependencies, weak review, social pressure, and no rollback.</p>
+<h3>required questions</h3>
+<ol>
+  <li>task class</li>
+  <li>evidence source</li>
+  <li>approval gate</li>
+  <li>rollback method</li>
+  <li>maximum acceptable failure</li>
+</ol>
+<h3>anti-patterns</h3>
+<ul>
+  <li><strong>ai-first as strategy</strong> - slogan in place of a user problem</li>
+  <li><strong>assistant prose as evidence</strong> - polished language mistaken for verified fact</li>
+  <li><strong>autonomy by boredom</strong> - dangerous delegation justified by repetitive work</li>
+  <li><strong>evaluation theater</strong> - quality claims with no tests, no rubric, and no citations</li>
+  <li><strong>interface cosplay</strong> - chat wrapper added where a form, script, or search box would work better</li>
+</ul>
+<h3>minimum spec</h3>
+<pre><code>[ai]
+role = &quot;bounded assistant&quot;
+allowed = [&quot;drafting&quot;, &quot;retrieval&quot;, &quot;summarization&quot;, &quot;critique&quot;, &quot;code_scaffolding&quot;]
+forbidden = [&quot;unreviewed_publish&quot;, &quot;unreviewed_deploy&quot;, &quot;production_mutation&quot;, &quot;invented_citation&quot;]
+required = [&quot;task_scope&quot;, &quot;evidence&quot;, &quot;owner&quot;, &quot;approval_gate&quot;, &quot;rollback_path&quot;]
+success = [&quot;correctness&quot;, &quot;traceability&quot;, &quot;reversibility&quot;, &quot;review_cost&quot;]
+</code></pre>
+<h3>reference pattern</h3>
+<ul>
+  <li><a href="https://help.kagi.com/kagi/why-kagi/ai-philosophy.html">kagi ai philosophy</a> - product-level boundary setting with clear scope and limits</li>
+</ul>
+<h3>bottom line</h3>
+<p>good ai policy reduces ambiguity, not labor.</p>
+<p>good ai policy preserves judgment, surfaces evidence, and narrows blast radius.</p>
+<p>remaining variants reduce to marketing attached to tooling.</p>
 
-    <p>Every project using generative systems needs a written position.</p>
-    <p>Absent policy, default governance collapses into novelty pressure, convenience, and untracked risk.</p>
-
-    <h3>Position</h3>
-    <p>AI belongs inside bounded workflows.</p>
-    <p>Acceptable roles: drafting, summarization, retrieval, code scaffolding, critique, evaluation, and repetitive local automation.</p>
-    <p>Unacceptable roles: hidden authority, unsupervised publication, irreversible state changes, invented expertise, and persuasion without evidence.</p>
-
-    <h3>Control Surface</h3>
-    <ul>
-      <li><strong>explicit scope</strong> - named task, named inputs, named completion condition</li>
-      <li><strong>evidence required</strong> - sources, tests, diffs, logs, screenshots, or reproducible traces</li>
-      <li><strong>human gate on irreversible actions</strong> - merge, deploy, publish, delete, charge, notify, or mutate production data</li>
-      <li><strong>reversibility first</strong> - rollback path before automation depth</li>
-      <li><strong>failure legibility</strong> - uncertainty, missing context, blocked tools, and assumption drift surfaced in plain language</li>
-      <li><strong>cost discipline</strong> - token spend, latency, and review burden treated as engineering costs</li>
-      <li><strong>local fit</strong> - repository conventions outrank model preferences</li>
-    </ul>
-
-    <h3>Operational Standard</h3>
-    <p>Best use cases share five properties: bounded context, available verification, low blast radius, clear ownership, and reversible outcome.</p>
-    <p>Worst use cases share the opposite pattern: vague goals, hidden dependencies, weak review, social pressure, and no rollback.</p>
-
-    <h3>Required Questions</h3>
-    <ol>
-      <li>task class</li>
-      <li>evidence source</li>
-      <li>approval gate</li>
-      <li>rollback method</li>
-      <li>maximum acceptable failure</li>
-    </ol>
-
-    <h3>Anti-Patterns</h3>
-    <ul>
-      <li><strong>ai-first as strategy</strong> - slogan in place of a user problem</li>
-      <li><strong>assistant prose as evidence</strong> - polished language mistaken for verified fact</li>
-      <li><strong>autonomy by boredom</strong> - dangerous delegation justified by repetitive work</li>
-      <li><strong>evaluation theater</strong> - quality claims with no tests, no rubric, and no citations</li>
-      <li><strong>interface cosplay</strong> - chat wrapper added where a form, script, or search box would work better</li>
-    </ul>
-
-    <h3>Minimum Spec</h3>
-    <pre><code>[ai]
-role = "bounded assistant"
-allowed = ["drafting", "retrieval", "summarization", "critique", "code_scaffolding"]
-forbidden = ["unreviewed_publish", "unreviewed_deploy", "production_mutation", "invented_citation"]
-required = ["task_scope", "evidence", "owner", "approval_gate", "rollback_path"]
-success = ["correctness", "traceability", "reversibility", "review_cost"]</code></pre>
-
-    <h3>Reference Pattern</h3>
-    <ul>
-      <li><a href="https://help.kagi.com/kagi/why-kagi/ai-philosophy.html">Kagi AI Philosophy</a> - Product-level boundary setting with clear scope and limits</li>
-    </ul>
-
-    <h3>Bottom Line</h3>
-    <p>Good AI policy reduces ambiguity, not labor.</p>
-    <p>Good AI policy preserves judgment, surfaces evidence, and narrows blast radius.</p>
-    <p>Remaining variants reduce to marketing attached to tooling.</p>
     </div>
 
-    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/workflows/project-ai-philosophy/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+    <div class="tags">
+      <a href="/tags/policy/">policy</a>
+      <a href="/tags/governance/">governance</a>
+      <a href="/tags/delivery/">delivery</a>
+    </div>
+
+    <a class="p-author h-card" href="https://stayfresh.dev/home/" hidden>stayfresh</a>
   </main>
 
-  <footer>
-    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+  <footer class="h-card">
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     &middot;
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a class="u-email" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
     &middot;
-    MIT License
+    <a href="https://github.com/Evoke4350">github</a>
+    &middot;
+    mit license
   </footer>
 </body>
 </html>

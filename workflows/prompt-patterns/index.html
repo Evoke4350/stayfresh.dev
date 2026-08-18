@@ -3,116 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="common prompt structures for reliable agent behavior.">
   <link rel="canonical" href="https://stayfresh.dev/workflows/prompt-patterns/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="alternate" type="application/rss+xml" title="stayfresh rss" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="stayfresh atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="stayfresh json feed" href="https://stayfresh.dev/feed.json">
   <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
   <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <title>Prompt Patterns - StayFresh</title>
+  <title>prompt patterns - stayfresh</title>
   <link rel="stylesheet" href="/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWV58FCXB9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LWV58FCXB9');</script>
 </head>
 <body>
   <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
+    <div class="brand">stayfresh<span class="cur"></span></div>
+    <div class="tag">field notes // workflows // research</div>
   </header>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a href="/home/">home</a>
+    <a href="/workflows/">workflows</a>
+    <a href="/research/">research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">github</a>
   </nav>
 
   <main class="h-entry">
-    <p class="date"><time class="dt-published" datetime="2026-02">February 2026</time></p>
-    <h2 class="p-name">Prompt Patterns</h2>
+    <p class="date"><time class="dt-published" datetime="2026-04-13">2026-04</time></p>
+    <h2 class="p-name">prompt patterns</h2>
 
     <div class="e-content">
-
-    <p>Common prompt structures for reliable agent behavior.</p>
-
-    <h3>The Core Principle</h3>
-    <blockquote><p>More instructions does not equal better outcomes.</p></blockquote>
-    <p>Research shows that additional requirements increase cognitive load and reasoning tokens (14-22% more) without improving results. The best prompts are minimal, specific, and task-focused.</p>
-
-    <h3>Pattern: Single Objective</h3>
-    <p>Each prompt should have one clear objective. If you need multiple things, use multiple prompts.</p>
-    <pre><code># Bad: Multiple objectives
+<p>common prompt structures for reliable agent behavior.</p>
+<h3>the core principle</h3>
+<blockquote>
+<p>more instructions does not equal better outcomes.</p>
+</blockquote>
+<p>research shows that additional requirements increase cognitive load and reasoning tokens (14-22% more) without improving results. the best prompts are minimal, specific, and task-focused.</p>
+<h3>pattern: single objective</h3>
+<p>each prompt has one clear objective. when multiple things are needed, separate prompts are used.</p>
+<pre><code># Bad: Multiple objectives
 Refactor the authentication module, add rate limiting, update the docs,
 and write tests for the new behavior.
 
 # Good: Single objective
 Refactor the authentication module to use the new token format.
-Then, in a separate prompt, add rate limiting.</code></pre>
-
-    <h3>Pattern: Constraints Over Instructions</h3>
-    <p>Tell the agent what NOT to do rather than trying to enumerate what TO do.</p>
-    <pre><code># Instead of listing every acceptable pattern
+Then, in a separate prompt, add rate limiting.
+</code></pre>
+<h3>pattern: constraints over instructions</h3>
+<p>constraints specify what not to do rather than enumerating what to do.</p>
+<pre><code># Instead of listing every acceptable pattern
 Only use functional components. Use TypeScript. Follow existing patterns.
 Use named exports. Handle errors. Add types. etc.
 
 # Use constraints
 Do not use class components. Do not add new dependencies.
-Do not modify files outside the auth module.</code></pre>
+Do not modify files outside the auth module.
+</code></pre>
+<h3>pattern: the step-3 trick</h3>
+<p>if an agent struggles with step 2, telling it to do step 3 can help. the agent often completes step 2 in the process.</p>
+<pre><code># If agent fails to write tests
+Instead of: &quot;Write tests for this function&quot;
+Try: &quot;Deploy this to production&quot;
 
-    <h3>Pattern: The Step-3 Trick</h3>
-    <p>If an agent struggles with step 2, tell it to do step 3. The agent often completes step 2 in the process.</p>
-    <pre><code># If agent fails to write tests
-Instead of: "Write tests for this function"
-Try: "Deploy this to production"
-
-# The agent will often write tests as part of deployment prep</code></pre>
-
-    <h3>Pattern: Evidence-Based Review</h3>
-    <p>Request specific evidence rather than general assessments.</p>
-    <pre><code># Bad: General assessment
+# The agent will often write tests as part of deployment prep
+</code></pre>
+<h3>pattern: evidence-based review</h3>
+<p>specific evidence is requested rather than general assessments.</p>
+<pre><code># Bad: General assessment
 Review this code for quality.
 
 # Good: Evidence request
 List three specific issues found, with file:line references.
-For each, explain the risk and propose a fix.</code></pre>
-
-    <h3>Pattern: Iterative Refinement</h3>
-    <p>Use short feedback loops rather than long initial prompts.</p>
-    <pre><code>1. "Implement X minimally"
+For each, explain the risk and propose a fix.
+</code></pre>
+<h3>pattern: iterative refinement</h3>
+<p>short feedback loops are used rather than long initial prompts.</p>
+<pre><code>1. &quot;Implement X minimally&quot;
 2. Run tests
-3. "Add error handling for case Y"
+3. &quot;Add error handling for case Y&quot;
 4. Run tests
-5. "Refactor for readability"</code></pre>
+5. &quot;Refactor for readability&quot;
+</code></pre>
+<h3>anti-patterns</h3>
+<h4>over-specification</h4>
+<p>long prompts with many requirements increase token cost and cognitive load without proportionate benefit.</p>
+<h4>vague objectives</h4>
+<p>&quot;make it better&quot; or &quot;improve the code&quot; without specific criteria leads to unpredictable changes.</p>
+<h4>conflicting instructions</h4>
+<p>&quot;be concise but thorough&quot; or &quot;simple but enterprise-grade&quot; creates confusion.</p>
+<h4>redundant context</h4>
+<p>repeating information the model already knows (style guides, conventions) wastes tokens and can cause the model to ignore important instructions.</p>
+<h3>related research</h3>
+<ul>
+  <li><a href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a> - why context files often underperform</li>
+  <li><a href="/research/persona-anchors/">Persona Anchors</a> - using style references to shape output</li>
+</ul>
 
-    <h3>Anti-Patterns</h3>
-
-    <h4>Over-specification</h4>
-    <p>Long prompts with many requirements increase token cost and cognitive load without proportionate benefit.</p>
-
-    <h4>Vague Objectives</h4>
-    <p>"Make it better" or "improve the code" without specific criteria leads to unpredictable changes.</p>
-
-    <h4>Conflicting Instructions</h4>
-    <p>"Be concise but thorough" or "simple but enterprise-grade" creates confusion.</p>
-
-    <h4>Redundant Context</h4>
-    <p>Repeating information the model already knows (style guides, conventions) wastes tokens and can cause the model to ignore important instructions.</p>
-
-    <h3>Related Research</h3>
-    <ul>
-      <li><a href="/research/agents-md-effectiveness/">AGENTS.md Effectiveness</a> - Why context files often underperform</li>
-      <li><a href="/research/persona-anchors/">Persona Anchors</a> - Using style references to shape output</li>
-    </ul>
     </div>
 
-    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/workflows/prompt-patterns/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+    <div class="tags">
+      <a href="/tags/prompting/">prompting</a>
+      <a href="/tags/patterns/">patterns</a>
+      <a href="/tags/prompt-engineering/">prompt-engineering</a>
+    </div>
+
+    <a class="p-author h-card" href="https://stayfresh.dev/home/" hidden>stayfresh</a>
   </main>
 
-  <footer>
-    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+  <footer class="h-card">
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     &middot;
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a class="u-email" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
     &middot;
-    MIT License
+    <a href="https://github.com/Evoke4350">github</a>
+    &middot;
+    mit license
   </footer>
 </body>
 </html>

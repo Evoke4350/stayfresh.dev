@@ -3,91 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="integrating ai agents with continuous integration workflows.">
   <link rel="canonical" href="https://stayfresh.dev/workflows/ci-automation/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="alternate" type="application/rss+xml" title="stayfresh rss" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="stayfresh atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="stayfresh json feed" href="https://stayfresh.dev/feed.json">
   <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
   <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <title>CI Automation - StayFresh</title>
+  <title>ci automation with ai agents - stayfresh</title>
   <link rel="stylesheet" href="/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWV58FCXB9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LWV58FCXB9');</script>
 </head>
 <body>
   <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
+    <div class="brand">stayfresh<span class="cur"></span></div>
+    <div class="tag">field notes // workflows // research</div>
   </header>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a href="/home/">home</a>
+    <a href="/workflows/">workflows</a>
+    <a href="/research/">research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">github</a>
   </nav>
 
   <main class="h-entry">
-    <p class="date"><time class="dt-published" datetime="2026-02">February 2026</time></p>
-    <h2 class="p-name">CI Automation with AI Agents</h2>
+    <p class="date"><time class="dt-published" datetime="2026-04-13">2026-04</time></p>
+    <h2 class="p-name">ci automation with ai agents</h2>
 
     <div class="e-content">
-
-    <p>Integrating AI agents with continuous integration workflows.</p>
-
-    <h3>Core Patterns</h3>
-
-    <h4>Pattern: Looping on CI</h4>
-    <p>Let agents iterate until tests pass, with clear halting conditions.</p>
-    <pre><code># Good halting condition
-"Keep iterating until lint and tests pass"
+<p>integrating ai agents with continuous integration workflows.</p>
+<h3>core patterns</h3>
+<h4>pattern: looping on ci</h4>
+<p>agents iterate until tests pass, with clear halting conditions.</p>
+<pre><code># Good halting condition
+&quot;Keep iterating until lint and tests pass&quot;
 
 # Bad halting condition
-"Keep iterating until it's done"</code></pre>
-
-    <h4>Pattern: Fix-CI Workflow</h4>
-    <p>When CI fails, provide structured context for the agent to fix.</p>
-    <pre><code>1. Agent receives: failed test output + relevant file paths
+&quot;Keep iterating until it's done&quot;
+</code></pre>
+<h4>pattern: fix-ci workflow</h4>
+<p>when ci fails, the agent receives structured context for the fix.</p>
+<pre><code>1. Agent receives: failed test output + relevant file paths
 2. Agent diagnoses: root cause analysis
 3. Agent proposes: fix with explanation
 4. Agent verifies: run tests locally before push
-5. Human reviews: if complex changes</code></pre>
-
-    <h4>Pattern: Review-and-Ship</h4>
-    <p>For PRs that need minor fixes before merge.</p>
-    <pre><code>1. Agent reads PR comments
+5. Human reviews: if complex changes
+</code></pre>
+<h4>pattern: review-and-ship</h4>
+<p>for prs that need minor fixes before merge.</p>
+<pre><code>1. Agent reads PR comments
 2. Agent identifies required changes
 3. Agent makes minimal fixes
 4. Agent runs verification (tests, lint)
-5. Agent updates PR summary if needed</code></pre>
-
-    <h3>Halting Conditions</h3>
-    <p>Long-running agent loops need real halting conditions:</p>
-
-    <table>
-      <thead>
-        <tr><th>Good Halting Conditions</th><th>Bad Halting Conditions</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Lint/tests pass</td><td>"Until it's done"</td></tr>
-        <tr><td>PR summary matches contract</td><td>"Until it looks good"</td></tr>
-        <tr><td>All review comments addressed</td><td>"Until you're satisfied"</td></tr>
-        <tr><td>Typecheck passes</td><td>"Until it works"</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Oracles for Verification</h3>
-    <p>Upgrade your oracles for effective grind-mode:</p>
-    <ul>
-      <li><strong>Baseline</strong>: Typecheck and unit tests</li>
-      <li><strong>Better</strong>: Property-based tests for invariants</li>
-      <li><strong>Best</strong>: E2E + visual regression for UI changes</li>
-    </ul>
-
-    <h3>Subagent Patterns for CI</h3>
-
-    <h4>CI-Watcher Subagent</h4>
-    <p>A background subagent that monitors CI status and reports back.</p>
-    <pre><code>---
+5. Agent updates PR summary if needed
+</code></pre>
+<h3>halting conditions</h3>
+<p>long-running agent loops need real halting conditions:</p>
+<table><thead><tr><th>good halting conditions</th><th>bad halting conditions</th></tr></thead><tbody><tr><td>lint/tests pass</td><td>&quot;until it's done&quot;</td></tr><tr><td>pr summary matches contract</td><td>&quot;until it looks good&quot;</td></tr><tr><td>all review comments addressed</td><td>&quot;until you're satisfied&quot;</td></tr><tr><td>typecheck passes</td><td>&quot;until it works&quot;</td></tr></tbody></table>
+<h3>oracles for verification</h3>
+<p>effective grind-mode relies on progressively stronger oracles:</p>
+<ul>
+  <li><strong>baseline</strong>: typecheck and unit tests</li>
+  <li><strong>better</strong>: property-based tests for invariants</li>
+  <li><strong>best</strong>: e2e + visual regression for ui changes</li>
+</ul>
+<h3>subagent patterns for ci</h3>
+<h4>ci-watcher subagent</h4>
+<p>a background subagent that monitors ci status and reports back.</p>
+<pre><code>---
 name: ci-watcher
 description: Monitor CI status and report failures
 is_background: true
@@ -96,11 +81,11 @@ model: fast
 
 Watch the CI status for the current branch. When it completes:
 - If passed: Report success
-- If failed: Extract failure details and suggest fixes</code></pre>
-
-    <h4>Test-Runner Subagent</h4>
-    <p>A focused subagent for running and debugging tests.</p>
-    <pre><code>---
+- If failed: Extract failure details and suggest fixes
+</code></pre>
+<h4>test-runner subagent</h4>
+<p>a focused subagent for running and debugging tests.</p>
+<pre><code>---
 name: test-runner
 description: Run tests and diagnose failures
 readonly: true
@@ -110,51 +95,56 @@ model: inherit
 Run the specified tests. For failures:
 1. Show the failure output
 2. Identify likely root cause
-3. Suggest minimal fix</code></pre>
+3. Suggest minimal fix
+</code></pre>
+<h3>integration points</h3>
+<h4>github actions</h4>
+<p>cursor can interact with github actions through:</p>
+<ul>
+  <li><code>gh run list</code> - list recent runs</li>
+  <li><code>gh run view</code> - view run details</li>
+  <li><code>gh run watch</code> - watch live run</li>
+  <li><code>gh api</code> - direct api access</li>
+</ul>
+<h4>bugbot integration</h4>
+<p>cursor's bugbot provides automated pr review:</p>
+<ul>
+  <li>findings function as triage queues, not auto-fix mandates</li>
+  <li>dismissals occur only with explicit rationale</li>
+  <li>&quot;fix in web&quot; covers quick patches</li>
+  <li>reruns follow risky edits or rebases</li>
+</ul>
+<h3>anti-patterns</h3>
+<ul>
+  <li><strong>infinite loops</strong>: no halting condition leads to wasted compute</li>
+  <li><strong>over-trusting</strong>: agents can produce plausible-but-wrong fixes</li>
+  <li><strong>missing verification</strong>: skipping test runs before push</li>
+  <li><strong>context pollution</strong>: including entire ci logs instead of failures</li>
+</ul>
+<h3>related research</h3>
+<ul>
+  <li><a href="/research/formal-verification-agents/">Formal Verification with Agents</a> - property-based testing</li>
+</ul>
 
-    <h3>Integration Points</h3>
-
-    <h4>GitHub Actions</h4>
-    <p>Cursor can interact with GitHub Actions through:</p>
-    <ul>
-      <li><code>gh run list</code> - List recent runs</li>
-      <li><code>gh run view</code> - View run details</li>
-      <li><code>gh run watch</code> - Watch live run</li>
-      <li><code>gh api</code> - Direct API access</li>
-    </ul>
-
-    <h4>Bugbot Integration</h4>
-    <p>Cursor's Bugbot provides automated PR review:</p>
-    <ul>
-      <li>Treat findings as triage queues, not auto-fix mandates</li>
-      <li>Dismiss only with explicit rationale</li>
-      <li>Use "Fix in Web" for quick patches</li>
-      <li>Rerun after risky edits or rebases</li>
-    </ul>
-
-    <h3>Anti-Patterns</h3>
-    <ul>
-      <li><strong>Infinite loops</strong>: No halting condition leads to wasted compute</li>
-      <li><strong>Over-trusting</strong>: Agents can produce plausible-but-wrong fixes</li>
-      <li><strong>Missing verification</strong>: Skipping test runs before push</li>
-      <li><strong>Context pollution</strong>: Including entire CI logs instead of failures</li>
-    </ul>
-
-    <h3>Related Research</h3>
-    <ul>
-      <li><a href="/research/formal-verification-agents/">Formal Verification with Agents</a> - Property-based testing</li>
-    </ul>
     </div>
 
-    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/workflows/ci-automation/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+    <div class="tags">
+      <a href="/tags/ci/">ci</a>
+      <a href="/tags/automation/">automation</a>
+      <a href="/tags/agents/">agents</a>
+    </div>
+
+    <a class="p-author h-card" href="https://stayfresh.dev/home/" hidden>stayfresh</a>
   </main>
 
-  <footer>
-    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+  <footer class="h-card">
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     &middot;
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a class="u-email" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
     &middot;
-    MIT License
+    <a href="https://github.com/Evoke4350">github</a>
+    &middot;
+    mit license
   </footer>
 </body>
 </html>
