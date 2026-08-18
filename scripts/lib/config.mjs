@@ -7,5 +7,5 @@
 // tests stay clean until a real measurement id / verification token is
 // supplied (see docs/plans/2026-08-17-stayfresh-rebuild.md, Task 18).
 export const siteUrl = "https://stayfresh.dev";
-export const ga4 = "";
+export const ga4 = "G-LWV58FCXB9";
 export const searchConsole = "";
