@@ -3,167 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="evaluating repository-level context files for coding agents.">
   <link rel="canonical" href="https://stayfresh.dev/research/agents-md-effectiveness/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="alternate" type="application/rss+xml" title="stayfresh rss" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="stayfresh atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="stayfresh json feed" href="https://stayfresh.dev/feed.json">
   <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
   <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <title>AGENTS.md Effectiveness - StayFresh</title>
+  <title>agents.md effectiveness - stayfresh</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
+    <div class="brand">stayfresh<span class="cur"></span></div>
+    <div class="tag">field notes // workflows // research</div>
   </header>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a href="/home/">home</a>
+    <a href="/workflows/">workflows</a>
+    <a href="/research/">research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">github</a>
   </nav>
 
   <main class="h-entry">
-    <p class="date"><time class="dt-published" datetime="2026-02">February 2026</time></p>
-    <h2 class="p-name">AGENTS.md Effectiveness: What the Research Says</h2>
+    <p class="date"><time class="dt-published" datetime="2026-04-13">2026-04</time></p>
+    <h2 class="p-name">agents.md effectiveness</h2>
 
     <div class="e-content">
+<p><strong>reference:</strong> <a href="https://arxiv.org/pdf/2602.11988">evaluating agents.md: are repository-level context files helpful for coding agents?</a> (gloaguen et al., eth zurich / logicstar.ai, february 2026)</p>
+<h3>the finding</h3>
+<p>context files like <code>AGENTS.md</code> and <code>CLAUDE.md</code> are widely recommended, and over 60,000 repositories include them. the evaluation in this reference found:</p>
+<table><thead><tr><th>context type</th><th>success rate change</th><th>cost change</th></tr></thead><tbody><tr><td>none</td><td>baseline</td><td>baseline</td></tr><tr><td>llm-generated</td><td>-3%</td><td>+20%</td></tr><tr><td>developer-written</td><td>+4%</td><td>+19%</td></tr></tbody></table>
+<p>llm-generated context files made agents worse and more expensive in this evaluation.</p>
+<h3>why context files underperformed</h3>
+<h4>redundant documentation</h4>
+<p>when researchers removed all existing documentation (readmes, docs folders), llm-generated context files became useful (+2.7% improvement). that suggests the context files were mostly redundant with what was already in the repository.</p>
+<h4>no effective overview</h4>
+<p>one recommended use of context files is providing a codebase overview, but agents with context files didn't find relevant files faster. they often took more steps because they:</p>
+<ol>
+  <li>issued multiple commands to find the context file</li>
+  <li>read it multiple times despite it already being in context</li>
+  <li>explored more broadly without better targeting</li>
+</ol>
+<h4>unnecessary requirements make tasks harder</h4>
+<p>context files add instructions, and agents follow them. but additional requirements, even well-intentioned ones, increased cognitive load and reasoning tokens (14-22% more reasoning with context files). more instructions did not translate to better outcomes here.</p>
+<h3>what context files did well</h3>
+<h4>agents follow instructions</h4>
+<p>if a tool is mentioned in the context file, agents use it:</p>
+<ul>
+  <li><code>uv</code>: 1.6 uses/instance when mentioned vs. &lt;0.01 when not</li>
+  <li>repository-specific tools: 2.5 uses/instance when mentioned vs. &lt;0.05 when not</li>
+</ul>
+<p>agents followed instructions reliably. the problem was that the instructions often didn't help.</p>
+<h4>more exploration, more testing</h4>
+<p>context files increased test execution frequency, file traversal (grep, read, glob), and repository-specific tool usage. that's the &quot;thoroughness&quot; that drove up costs without improving outcomes.</p>
+<h3>practical recommendations</h3>
+<h4>when to skip agents.md</h4>
+<ul>
+  <li>well-documented repositories with readme, docs, examples</li>
+  <li>popular repositories with strong conventions the model already knows</li>
+  <li>simple tasks that don't require extra context</li>
+</ul>
+<h4>when agents.md helps</h4>
+<ul>
+  <li>niche repositories with no documentation</li>
+  <li>custom tooling that differs from standard conventions</li>
+  <li>team-specific patterns that aren't otherwise discoverable</li>
+</ul>
+<h4>what to include, if writing one</h4>
+<p>based on this research, a context file works best with minimal requirements:</p>
+<pre><code># build &amp; test
+- run tests: pytest tests/
+- lint: ruff check .
 
-    <p><strong>Reference:</strong> <a href="https://arxiv.org/pdf/2602.11988">Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?</a> (Gloaguen et al., ETH Zurich / LogicStar.ai, February 2026)</p>
+# conventions
+- use uv for dependency management
+- follow existing module patterns
+</code></pre>
+<p>it's better not to include long codebase overviews, information already in the readme, or style rules the model already knows.</p>
+<h3>the unexpected-behavior pattern</h3>
+<p>when agents hit something unexpected, that's worth treating as signal.</p>
+<blockquote>
+<p>when agents fail, fix the code, not the prompt. surprising behavior reveals architectural friction.</p>
+</blockquote>
+<p>instead of adding more instructions to <code>AGENTS.md</code>, it's worth asking:</p>
+<ol>
+  <li>is the codebase structure confusing? rename, reorganize, add comments.</li>
+  <li>are conventions unclear? add type hints, improve names, add docstrings.</li>
+  <li>is the task underspecified? improve the issue description, not the context file.</li>
+</ol>
+<h3>the step-3 trick</h3>
+<p>one counterintuitive but effective pattern: if an agent struggles with step 2, tell it to do step 3. the agent often completes step 2 in the process. this seems to work because agents reason forward from instructions, and changing the target reframes the problem, a small deliberate misdirection that produced better outcomes in practice.</p>
+<h3>token economics</h3>
+<p>context files consume tokens in every request. for a 600-word <code>AGENTS.md</code>, that's roughly 800 tokens of context per request, multiplied by every step in every task. it compounds quickly in long-running sessions.</p>
+<p>the open question is whether that token budget is better spent on task-specific context (the actual code being modified) or on generic repository context. the research here points toward task-specific context.</p>
+<h3>further reading</h3>
+<ul>
+  <li><a href="https://github.com/eth-sri/agentbench">agentbench harness</a>: benchmark used to evaluate context files</li>
+</ul>
 
-    <h3>The Surprising Finding</h3>
-    <p>Context files like <code>AGENTS.md</code> and <code>CLAUDE.md</code> are widely recommended. Over 60,000 repositories include them. But rigorous evaluation reveals:</p>
-
-    <table>
-      <thead>
-        <tr><th>Context Type</th><th>Success Rate Change</th><th>Cost Change</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>None</td><td>Baseline</td><td>Baseline</td></tr>
-        <tr><td>LLM-generated</td><td>-3%</td><td>+20%</td></tr>
-        <tr><td>Developer-written</td><td>+4%</td><td>+19%</td></tr>
-      </tbody>
-    </table>
-
-    <p><strong>LLM-generated context files make agents worse and more expensive.</strong></p>
-
-    <h3>Why Context Files Underperform</h3>
-
-    <h4>1. Redundant Documentation</h4>
-    <p>When researchers removed all existing documentation (READMEs, docs folders), LLM-generated context files suddenly became useful (+2.7% improvement). This suggests:</p>
-    <blockquote><p>Context files are mostly redundant with what's already in the repository.</p></blockquote>
-
-    <h4>2. No Effective Overview</h4>
-    <p>One recommended use of context files is providing a codebase overview. But agents with context files don't find relevant files faster; they often take more steps because they:</p>
-    <ol>
-      <li>Issue multiple commands to find the context file</li>
-      <li>Read it multiple times despite it being in context</li>
-      <li>Explore more broadly without better targeting</li>
-    </ol>
-
-    <h4>3. Unnecessary Requirements Make Tasks Harder</h4>
-    <p>Context files add instructions. Agents follow them. But additional requirements, even well-intentioned ones, increase cognitive load and reasoning tokens (14-22% more reasoning with context files).</p>
-    <p><strong>More instructions does not equal better outcomes.</strong></p>
-
-    <h3>What Context Files Do Well</h3>
-
-    <h4>Agents Follow Instructions</h4>
-    <p>If a tool is mentioned in the context file, agents use it:</p>
-    <ul>
-      <li><code>uv</code>: 1.6 uses/instance when mentioned vs. &lt;0.01 when not</li>
-      <li>Repository-specific tools: 2.5 uses/instance when mentioned vs. &lt;0.05 when not</li>
-    </ul>
-    <p>Agents follow instructions reliably. The problem is that the instructions do not help.</p>
-
-    <h4>More Exploration, More Testing</h4>
-    <p>Context files increase:</p>
-    <ul>
-      <li>Test execution frequency</li>
-      <li>File traversal (grep, read, glob)</li>
-      <li>Repository-specific tool usage</li>
-    </ul>
-    <p>This is the "thoroughness" that drives up costs without improving outcomes.</p>
-
-    <h3>Practical Recommendations</h3>
-
-    <h4>When to Skip AGENTS.md</h4>
-    <ul>
-      <li>Well-documented repositories with README, docs, examples</li>
-      <li>Popular repositories with strong conventions (models already know them)</li>
-      <li>Simple tasks that don't require context</li>
-    </ul>
-
-    <h4>When AGENTS.md Helps</h4>
-    <ul>
-      <li>Niche repositories with no documentation</li>
-      <li>Custom tooling that differs from standard conventions</li>
-      <li>Team-specific patterns that aren't discoverable</li>
-    </ul>
-
-    <h4>What to Include (If You Write One)</h4>
-    <p>Based on the research, context files should contain <strong>only minimal requirements</strong>:</p>
-    <pre><code># Build &amp; Test
-- Run tests: `pytest tests/`
-- Lint: `ruff check .`
-
-# Conventions
-- Use `uv` for dependency management
-- Follow existing module patterns</code></pre>
-
-    <p><strong>Not:</strong></p>
-    <ul>
-      <li>Long codebase overviews</li>
-      <li>Redundant information from READMEs</li>
-      <li>Style guides the model already knows</li>
-    </ul>
-
-    <h3>The "Surprising Behavior" Pattern</h3>
-    <p>When agents encounter something unexpected, that's signal, not noise.</p>
-    <blockquote><p>When agents fail, fix the code, not the prompt. Surprising behavior reveals architectural friction.</p></blockquote>
-    <p>Instead of adding more instructions to <code>AGENTS.md</code>, consider:</p>
-    <ol>
-      <li><strong>Is the codebase structure confusing?</strong> Rename, reorganize, add comments</li>
-      <li><strong>Are conventions unclear?</strong> Add type hints, improve names, add docstrings</li>
-      <li><strong>Is the task underspecified?</strong> Improve the issue description, not the context file</li>
-    </ol>
-
-    <h3>Agent Psychology: The Step-3 Trick</h3>
-    <p>Counterintuitive but effective: if an agent struggles with step 2, tell it to do step 3. The agent often completes step 2 in the process.</p>
-    <p>This works because:</p>
-    <ul>
-      <li>Agents reason forward from instructions</li>
-      <li>Changing the target reframes the problem</li>
-      <li>"Lie" is the feature; controlled misdirection for better outcomes</li>
-    </ul>
-
-    <h3>Token Economics</h3>
-    <p>Context files consume tokens in every request. For a 600-word <code>AGENTS.md</code>:</p>
-    <ul>
-      <li>~800 tokens of context per request</li>
-      <li>Multiplied by every step in every task</li>
-      <li>Compounds quickly in long-running sessions</li>
-    </ul>
-    <p><strong>Question:</strong> Is that token budget better spent on task-specific context (the actual code being modified) or on generic repository context?</p>
-    <p>The research suggests: task-specific context wins.</p>
-
-    <h3>Further Reading</h3>
-    <ul>
-      <li><a href="https://github.com/eth-sri/agentbench">AgentBench Harness</a> - Benchmark for evaluating context files</li>
-    </ul>
     </div>
 
-    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/research/agents-md-effectiveness/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+    <div class="tags">
+      <a href="/tags/context/">context</a>
+      <a href="/tags/evaluation/">evaluation</a>
+      <a href="/tags/benchmarks/">benchmarks</a>
+    </div>
+
+    <a class="p-author h-card" href="https://stayfresh.dev/home/" hidden>stayfresh</a>
   </main>
 
-  <footer>
-    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+  <footer class="h-card">
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     &middot;
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a class="u-email" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
     &middot;
-    MIT License
+    <a href="https://github.com/Evoke4350">github</a>
+    &middot;
+    mit license
   </footer>
 </body>
 </html>

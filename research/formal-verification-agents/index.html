@@ -3,124 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="property-based testing and specification generation.">
   <link rel="canonical" href="https://stayfresh.dev/research/formal-verification-agents/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="alternate" type="application/rss+xml" title="stayfresh rss" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="stayfresh atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="stayfresh json feed" href="https://stayfresh.dev/feed.json">
   <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
   <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <title>Formal Verification with Agents - StayFresh</title>
+  <title>formal verification with agents - stayfresh</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
+    <div class="brand">stayfresh<span class="cur"></span></div>
+    <div class="tag">field notes // workflows // research</div>
   </header>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a href="/home/">home</a>
+    <a href="/workflows/">workflows</a>
+    <a href="/research/">research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">github</a>
   </nav>
 
   <main class="h-entry">
-    <p class="date"><time class="dt-published" datetime="2026-02">February 2026</time></p>
-    <h2 class="p-name">Formal Verification and Property-Based Testing with AI Agents</h2>
+    <p class="date"><time class="dt-published" datetime="2026-04-13">2026-04</time></p>
+    <h2 class="p-name">formal verification with agents</h2>
 
     <div class="e-content">
-
-    <p><strong>References:</strong></p>
-    <ul>
-      <li><a href="https://martin.kleppmann.com/2025/12/08/ai-formal-verification.html">AI and the Future of Formal Verification</a> (Martin Kleppmann, December 2025)</li>
-      <li><a href="https://red.anthropic.com/2026/property-based-testing/">Property-Based Testing</a> (Anthropic Red, 2026)</li>
-      <li><a href="https://kiro.dev/blog/property-based-testing/">Property-Based Testing in Practice</a> (Kiro)</li>
-    </ul>
-
-    <h3>The Core Thesis</h3>
-    <p>Martin Kleppmann's argument is simple but profound:</p>
-    <blockquote><p><strong>LLMs are bad at formal verification, but they're excellent at writing specifications that humans can verify.</strong></p></blockquote>
-
-    <p>The economics of formal verification have always been brutal:</p>
-    <ul>
-      <li>seL4: ~23 lines of proof per line of code</li>
-      <li>CompCert: ~10+ years of effort for a verified C compiler</li>
-      <li>Most teams can't afford this</li>
-    </ul>
-
-    <p>But LLMs change the equation in a different way. They can:</p>
-    <ol>
-      <li><strong>Generate specifications</strong> - Natural language or semi-formal descriptions of intended behavior</li>
-      <li><strong>Suggest invariants</strong> - Properties that should always hold</li>
-      <li><strong>Write property tests</strong> - Executable checks that verify behavior</li>
-      <li><strong>Translate between levels</strong> - Informal to formal, code to spec, spec to test</li>
-    </ol>
-
-    <h3>Property-Based Testing: The Practical Middle Ground</h3>
-    <p>Formal verification proves correctness. Property-based testing (PBT) <em>finds incorrectness</em>.</p>
-
-    <h4>How PBT Works</h4>
-    <pre><code>// Example: fast-check property test
+<p><strong>references:</strong></p>
+<ul>
+  <li><a href="https://martin.kleppmann.com/2025/12/08/ai-formal-verification.html">ai and the future of formal verification</a> (martin kleppmann, december 2025)</li>
+  <li><a href="https://red.anthropic.com/2026/property-based-testing/">property-based testing</a> (anthropic red, 2026)</li>
+  <li><a href="https://kiro.dev/blog/property-based-testing/">property-based testing in practice</a> (kiro)</li>
+</ul>
+<h3>the core argument</h3>
+<p>kleppmann's argument:</p>
+<blockquote>
+<p>llms are bad at formal verification, but they're excellent at writing specifications that humans can verify.</p>
+</blockquote>
+<p>the economics of formal verification have always been brutal:</p>
+<ul>
+  <li>sel4: ~23 lines of proof per line of code</li>
+  <li>compcert: ~10+ years of effort for a verified c compiler</li>
+  <li>most teams can't afford this</li>
+</ul>
+<p>llms change the equation in a different way. they can:</p>
+<ol>
+  <li><strong>generate specifications</strong> - natural language or semi-formal descriptions of intended behavior</li>
+  <li><strong>suggest invariants</strong> - properties that should always hold</li>
+  <li><strong>write property tests</strong> - executable checks that verify behavior</li>
+  <li><strong>translate between levels</strong> - informal to formal, code to spec, spec to test</li>
+</ol>
+<h3>property-based testing: the practical middle ground</h3>
+<p>formal verification proves correctness. property-based testing (pbt) <em>finds incorrectness</em>.</p>
+<h4>how pbt works</h4>
+<pre><code>// Example: fast-check property test
 fc.assert(
   fc.property(
     fc.string(),                    // Any string as input
-    (s) => {
+    (s) =&gt; {
       const encoded = base64Encode(s);
       const decoded = base64Decode(encoded);
       return decoded === s;         // Round-trip invariant
     }
   )
-)</code></pre>
-    <p>The framework generates hundreds or thousands of random inputs automatically. You define <em>properties</em> (invariants), not specific test cases.</p>
-
-    <h4>Common Property Shapes</h4>
-    <table>
-      <thead>
-        <tr><th>Property Type</th><th>Description</th><th>Example</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Round-trip</td><td>Encode/decode returns original</td><td>JSON.parse(JSON.stringify(x))</td></tr>
-        <tr><td>Idempotence</td><td>f(f(x)) == f(x)</td><td>Math.abs(Math.abs(x))</td></tr>
-        <tr><td>Commutativity</td><td>f(a, b) == f(b, a)</td><td>a + b</td></tr>
-        <tr><td>Associativity</td><td>f(f(a, b), c) == f(a, f(b, c))</td><td>(a + b) + c</td></tr>
-        <tr><td>Identity</td><td>f(x, identity) == x</td><td>x + 0</td></tr>
-        <tr><td>Invariance</td><td>Property P holds before and after</td><td>List length after sort equals before</td></tr>
-        <tr><td>No exceptions</td><td>Never crashes on valid input</td><td>Parser handles any input</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Agent Patterns for Verification</h3>
-
-    <h4>Pattern 1: Specification Generation</h4>
-    <pre><code>Agent Task: Given this code, generate a specification
+)
+</code></pre>
+<p>the framework generates hundreds or thousands of random inputs automatically. properties (invariants) get defined, not specific test cases.</p>
+<h4>common property shapes</h4>
+<table><thead><tr><th>property type</th><th>description</th><th>example</th></tr></thead><tbody><tr><td>round-trip</td><td>encode/decode returns original</td><td><code>JSON.parse(JSON.stringify(x))</code></td></tr><tr><td>idempotence</td><td>f(f(x)) == f(x)</td><td><code>Math.abs(Math.abs(x))</code></td></tr><tr><td>commutativity</td><td>f(a, b) == f(b, a)</td><td><code>a + b</code></td></tr><tr><td>associativity</td><td>f(f(a, b), c) == f(a, f(b, c))</td><td><code>(a + b) + c</code></td></tr><tr><td>identity</td><td>f(x, identity) == x</td><td><code>x + 0</code></td></tr><tr><td>invariance</td><td>property p holds before and after</td><td>list length after sort equals before</td></tr><tr><td>no exceptions</td><td>never crashes on valid input</td><td>parser handles any input</td></tr></tbody></table>
+<h3>agent patterns for verification</h3>
+<h4>pattern 1: specification generation</h4>
+<pre><code>Agent Task: Given this code, generate a specification
 
 Input: Source code
 Output: Natural-language specification of behavior
 
-Use when: Code exists but documentation is missing</code></pre>
-
-    <h4>Pattern 2: Invariant Discovery</h4>
-    <pre><code>Agent Task: Identify invariants that should hold for this system
+Use when: Code exists but documentation is missing
+</code></pre>
+<h4>pattern 2: invariant discovery</h4>
+<pre><code>Agent Task: Identify invariants that should hold for this system
 
 Input: Code + specification
 Output: List of properties that should always be true
 
-Use when: You need to understand what to test</code></pre>
-
-    <h4>Pattern 3: Property Test Generation</h4>
-    <pre><code>Agent Task: Generate property-based tests from this specification
+Use when: You need to understand what to test
+</code></pre>
+<h4>pattern 3: property test generation</h4>
+<pre><code>Agent Task: Generate property-based tests from this specification
 
 Input: Specification
 Output: Executable property tests (fast-check, Hypothesis, etc.)
 
-Use when: You have a spec but no tests</code></pre>
-
-    <h3>The "Vericoding" Workflow</h3>
-    <p>Traditional development: Write code, write tests, hope it works.</p>
-    <p><strong>Vericoding</strong>: Write spec, generate properties, generate tests, write code, verify.</p>
-    <pre><code>Intention (What should this do?)
+Use when: You have a spec but no tests
+</code></pre>
+<h3>the &quot;vericoding&quot; workflow</h3>
+<p>traditional development: write code, write tests, hope it works.</p>
+<p><strong>vericoding</strong>: write spec, generate properties, generate tests, write code, verify.</p>
+<pre><code>Intention (What should this do?)
     |
     v
 Spec (Formal or semi-formal description)
@@ -135,59 +116,55 @@ Tests (PBT or example-based)
 Code (Implementation)
     |
     v
-Verify (Run tests, check properties)</code></pre>
+Verify (Run tests, check properties)
+</code></pre>
+<h3>tools and frameworks</h3>
+<h4>property-based testing</h4>
+<table><thead><tr><th>language</th><th>framework</th><th>link</th></tr></thead><tbody><tr><td>javascript/typescript</td><td>fast-check</td><td>github.com/dubzzz/fast-check</td></tr><tr><td>python</td><td>hypothesis</td><td>hypothesis.works</td></tr><tr><td>rust</td><td>proptest</td><td>github.com/altsysrq/proptest</td></tr><tr><td>go</td><td>gopter</td><td>github.com/leanovate/gopter</td></tr><tr><td>java</td><td>jqwik</td><td>jqwik.net</td></tr></tbody></table>
+<h3>what worked in practice</h3>
+<ul>
+  <li>pbt got prioritized over formal verification; the roi was higher</li>
+  <li>agents got used for spec generation rather than proof, which fit what they were better at</li>
+  <li>specs got human review before use, since agents could produce plausible-but-wrong specifications on their own</li>
+  <li>properties won out over examples; one well-chosen property covered more ground than a hundred example tests</li>
+  <li>round-trip tests caught a wide class of bugs on their own</li>
+</ul>
+<h3>the ceiling</h3>
+<p>current agents could not:</p>
+<ul>
+  <li>reliably prove mathematical theorems</li>
+  <li>verify concurrent systems without human guidance</li>
+  <li>replace formal methods for safety-critical systems</li>
+</ul>
+<p>they could:</p>
+<ul>
+  <li>generate specifications that humans could verify</li>
+  <li>write property tests that caught real bugs</li>
+  <li>explore state spaces faster than manual testing</li>
+  <li>act as semantic oracles for non-deterministic output</li>
+</ul>
+<p>human review, agent-generated specs, and property testing covered more ground together than any one of the three did alone.</p>
 
-    <h3>Tools and Frameworks</h3>
-
-    <h4>Property-Based Testing</h4>
-    <table>
-      <thead>
-        <tr><th>Language</th><th>Framework</th><th>Link</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>JavaScript/TypeScript</td><td>fast-check</td><td>github.com/dubzzz/fast-check</td></tr>
-        <tr><td>Python</td><td>Hypothesis</td><td>hypothesis.works</td></tr>
-        <tr><td>Rust</td><td>proptest</td><td>github.com/AltSysrq/proptest</td></tr>
-        <tr><td>Go</td><td>gopter</td><td>github.com/leanovate/gopter</td></tr>
-        <tr><td>Java</td><td>jqwik</td><td>jqwik.net</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Practical Recommendations</h3>
-    <ol>
-      <li><strong>Start with PBT, not formal verification</strong> - The ROI is much higher</li>
-      <li><strong>Use agents for spec generation, not proof</strong> - They're better at writing than proving</li>
-      <li><strong>Human review of specs is mandatory</strong> - Agents can produce plausible-but-wrong specifications</li>
-      <li><strong>Properties over examples</strong> - One well-chosen property is worth 100 example tests</li>
-      <li><strong>Round-trip tests are your friend</strong> - They catch an enormous class of bugs</li>
-    </ol>
-
-    <h3>The Ceiling</h3>
-    <p>Current AI agents cannot:</p>
-    <ul>
-      <li>Reliably prove mathematical theorems</li>
-      <li>Verify concurrent systems without human guidance</li>
-      <li>Replace formal methods for safety-critical systems</li>
-    </ul>
-    <p>But they <em>can</em>:</p>
-    <ul>
-      <li>Generate specifications that humans can verify</li>
-      <li>Write property tests that catch real bugs</li>
-      <li>Explore state spaces faster than manual testing</li>
-      <li>Act as semantic oracles for non-deterministic output</li>
-    </ul>
-    <p>The sweet spot is <strong>human + agent + property testing</strong>. Not agent alone. Not formal verification alone. The combination.</p>
     </div>
 
-    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/research/formal-verification-agents/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+    <div class="tags">
+      <a href="/tags/verification/">verification</a>
+      <a href="/tags/testing/">testing</a>
+      <a href="/tags/specifications/">specifications</a>
+      <a href="/tags/agent-design/">agent-design</a>
+    </div>
+
+    <a class="p-author h-card" href="https://stayfresh.dev/home/" hidden>stayfresh</a>
   </main>
 
-  <footer>
-    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+  <footer class="h-card">
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     &middot;
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a class="u-email" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
     &middot;
-    MIT License
+    <a href="https://github.com/Evoke4350">github</a>
+    &middot;
+    mit license
   </footer>
 </body>
 </html>

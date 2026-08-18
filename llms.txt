@@ -1,51 +1,36 @@
-# StayFresh
+# stayfresh
 
-> Static archive of workflow research and patterns for AI-assisted development, with practical notes for keeping static sites useful and less scrapeable.
+> Static archive of workflow research and patterns for AI-assisted development.
 
-Use the thesis first for doctrine, then workflows for implementation patterns, then research for supporting evidence. Canonical HTML pages are listed below. Markdown mirrors are not published yet.
+## Posts
 
-## Start Here
+- [sleepcast: bedtime audio with an inverted rubric](https://stayfresh.dev/research/sleepcast/): a bedtime audio product whose generation rubric inverts every content incentive: repetition is good, drift is good, resolution is bad, and a completed play is a failure signal.
+- [techno-alexithymia: de-skilling introspection](https://stayfresh.dev/research/techno-alexithymia/): delegating emotional self-naming to a language model is the same de-skilling mechanism as offloading judgment to a coding agent, applied to the most interior faculty there is.
+- [agents.md effectiveness](https://stayfresh.dev/research/agents-md-effectiveness/): evaluating repository-level context files for coding agents.
+- [enterprise agent design](https://stayfresh.dev/research/enterprise-agent-design/): bcg framework for production-grade agents.
+- [formal verification with agents](https://stayfresh.dev/research/formal-verification-agents/): property-based testing and specification generation.
+- [persona anchors](https://stayfresh.dev/research/persona-anchors/): character-based instruction patterns for consistent agent behavior.
+- [reward engineering for coding agents](https://stayfresh.dev/research/reward-engineering/): why coding agents optimize the rubric more than the prompt.
+- [reward hacking in coding agents](https://stayfresh.dev/research/reward-hacking/): how poorly designed metrics produce plausible but unstable code.
+- [agent psychology](https://stayfresh.dev/workflows/agent-psychology/): understanding how agents reason and respond to instructions.
+- [ci automation with ai agents](https://stayfresh.dev/workflows/ci-automation/): integrating ai agents with continuous integration workflows.
+- [instant project sync](https://stayfresh.dev/workflows/instant-project-sync/): synchronize ticket queues against contract dates and repository evidence, with requirement reconstruction when docs are missing.
+- [preference toml](https://stayfresh.dev/workflows/preference-toml/): use rlhf-shaped semantics in a simple config dsl for agent evaluation loops.
+- [project ai philosophy](https://stayfresh.dev/workflows/project-ai-philosophy/): a written position for bounded, evidence-backed ai use in delivery.
+- [prompt patterns](https://stayfresh.dev/workflows/prompt-patterns/): common prompt structures for reliable agent behavior.
+- [psay agent notifications](https://stayfresh.dev/workflows/psay-agent-notify/): local voice and notification center loops for agent completion, handoff, and operator recall.
+- [reward rubric dsl](https://stayfresh.dev/workflows/reward-rubric-dsl/): a small machine-readable format for scoring coding agent output.
+- [context is a budget](https://stayfresh.dev/research/context-is-a-budget/): more tokens do not create more truth; useful context is what changes the next decision.
+- [protocol before personality](https://stayfresh.dev/research/protocol-before-personality/): shared artifacts and exit conditions beat charisma, cosplay, and fake seniority.
+- [specs as shared reality](https://stayfresh.dev/research/specs-as-shared-reality/): agents do not share understanding. they share binding artifacts, versions, and tests.
+- [what is prompting: operational constraints](https://stayfresh.dev/research/what-is-prompting/): prompting is a constrained pipeline where tokenization, max tokens, and control tokens form the operational boundaries that determine agent behavior.
+- [claude code skills stack](https://stayfresh.dev/workflows/claude-code-skills-stack/): a practical three-layer stack for claude code: decision, context, and execution.
+- [modular workflow stack](https://stayfresh.dev/workflows/modular-workflow-stack/): right tool, right job, right time: layered orchestration, typed agent delegation, human-in-the-loop gates, parallelism, and loops with real halting conditions.
+- [anubis in front of github pages](https://stayfresh.dev/workflows/anubis-github-pages/): how to put anubis in front of a github pages site with a real reverse proxy and no proxy-loop nonsense.
 
-- [StayFresh](https://stayfresh.dev/): Homepage with the thesis, workflow index, and the GitHub Pages plus Anubis deployment pattern.
-- [StayFresh Thesis](https://stayfresh.dev/thesis/): Best single starting point. Explains the site's position on reward surfaces, architecture, and comprehension debt.
-- [Workflows](https://stayfresh.dev/workflows/): Index of practical workflow patterns.
-- [Research](https://stayfresh.dev/research/): Index of supporting research notes.
-
-## Site and Operations
-
-- [Anubis in Front of GitHub Pages](https://stayfresh.dev/workflows/anubis-github-pages/): How to front a GitHub Pages site with Anubis using Caddy or Nginx without creating a proxy loop.
-- [Instant Project Sync](https://stayfresh.dev/workflows/instant-project-sync/): Ticket-to-contract evidence sync for delivery operations.
-- [psay Agent Notifications](https://stayfresh.dev/workflows/psay-agent-notify/): Operator alerts via local voice and notifications for long-running agent work.
-- [Project AI Philosophy](https://stayfresh.dev/workflows/project-ai-philosophy/): How client AI policy gets translated into bounded operating rules.
-
-## Agent Workflow Patterns
-
-- [Claude Code Skills Stack](https://stayfresh.dev/workflows/claude-code-skills-stack/): A practical three-layer Claude Code stack: decision, context, and execution.
-- [Modular Workflow Stack](https://stayfresh.dev/workflows/modular-workflow-stack/): Three-layer model for orchestration, context stability, and execution: role-based routing, human gates, parallelism, and loop patterns.
-- [Preference TOML](https://stayfresh.dev/workflows/preference-toml/): Simple config shape for critique, selection, and evaluation loops.
-- [Reward Rubric DSL](https://stayfresh.dev/workflows/reward-rubric-dsl/): Machine-readable rubric pattern for scoring agent output.
-- [Prompt Patterns](https://stayfresh.dev/workflows/prompt-patterns/): Prompt structures that reduce token waste and instruction bloat.
-- [Agent Psychology](https://stayfresh.dev/workflows/agent-psychology/): Observed behavior patterns for coding agents and how to use them.
-- [CI Automation with AI Agents](https://stayfresh.dev/workflows/ci-automation/): Continuous integration patterns for agent loops, halting, and review.
-
-## Research
-
-- [Sleepcast: Bedtime Audio with an Inverted Rubric](https://stayfresh.dev/research/sleepcast/): A shipped bedtime-audio product as a live demonstration that the rubric, not the generator, decides what content optimizes for.
-- [Techno-Alexithymia: De-Skilling Introspection](https://stayfresh.dev/research/techno-alexithymia/): De-skilling by delegation applied to emotional self-naming; the same failure mode as comprehension debt, at its most interior.
-- [Context Is a Budget](https://stayfresh.dev/research/context-is-a-budget/): Why agent context should be treated as a scarce budget rather than an everything bucket.
-- [Protocol Before Personality](https://stayfresh.dev/research/protocol-before-personality/): Why multi-agent coordination depends more on handoff rules than on persona prompts.
-- [Specs as Shared Reality](https://stayfresh.dev/research/specs-as-shared-reality/): How specs become the closest thing agent workflows have to a common truth.
-- [Reward Engineering for Coding Agents](https://stayfresh.dev/research/reward-engineering/): Why rubrics shape agent behavior more than prompts.
-- [Reward Hacking in Coding Agents](https://stayfresh.dev/research/reward-hacking/): Failure modes caused by narrow or gameable evaluation.
-- [AGENTS.md Effectiveness](https://stayfresh.dev/research/agents-md-effectiveness/): Evidence on repository instruction files and why they often add cost without helping.
-- [Formal Verification with Agents](https://stayfresh.dev/research/formal-verification-agents/): Property-based testing and specification generation with agents.
-- [Enterprise Agent Design](https://stayfresh.dev/research/enterprise-agent-design/): Enterprise design patterns for production-grade agents.
-- [Persona Anchors](https://stayfresh.dev/research/persona-anchors/): How named styles and persona anchors change agent behavior.
-
-## Optional
+## Feeds
 
 - [RSS Feed](https://stayfresh.dev/rss.xml): Recent site updates in RSS 2.0 format.
 - [Atom Feed](https://stayfresh.dev/atom.xml): Recent site updates in Atom 1.0 format.
 - [JSON Feed](https://stayfresh.dev/feed.json): Machine-readable feed for applications that prefer JSON.
 - [XML Sitemap](https://stayfresh.dev/sitemap.xml): Full canonical URL inventory for crawlers.
-- [GitHub Repository](https://github.com/Evoke4350/stayfresh.dev): Source repository for the site.

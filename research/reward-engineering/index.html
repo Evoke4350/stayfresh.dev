@@ -3,59 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="why coding agents optimize the rubric more than the prompt.">
   <link rel="canonical" href="https://stayfresh.dev/research/reward-engineering/">
-  <link rel="alternate" type="application/rss+xml" title="StayFresh RSS" href="https://stayfresh.dev/rss.xml">
-  <link rel="alternate" type="application/atom+xml" title="StayFresh Atom" href="https://stayfresh.dev/atom.xml">
-  <link rel="alternate" type="application/feed+json" title="StayFresh JSON Feed" href="https://stayfresh.dev/feed.json">
+  <link rel="alternate" type="application/rss+xml" title="stayfresh rss" href="https://stayfresh.dev/rss.xml">
+  <link rel="alternate" type="application/atom+xml" title="stayfresh atom" href="https://stayfresh.dev/atom.xml">
+  <link rel="alternate" type="application/feed+json" title="stayfresh json feed" href="https://stayfresh.dev/feed.json">
   <link rel="webmention" href="https://webmention.io/stayfresh.dev/webmention">
   <link rel="pingback" href="https://webmention.io/stayfresh.dev/xmlrpc">
-  <title>Reward Engineering for Coding Agents - StayFresh</title>
+  <title>reward engineering for coding agents - stayfresh</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <header>
-    <h1>StayFresh</h1>
-    <p>Static archive of workflow research and patterns</p>
+    <div class="brand">stayfresh<span class="cur"></span></div>
+    <div class="tag">field notes // workflows // research</div>
   </header>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/thesis/">Thesis</a>
-    <a href="/workflows/">Workflows</a>
-    <a href="/research/">Research</a>
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a href="/home/">home</a>
+    <a href="/workflows/">workflows</a>
+    <a href="/research/">research</a>
+    <a href="https://github.com/Evoke4350/stayfresh.dev">github</a>
   </nav>
 
   <main class="h-entry">
-    <p class="date"><time class="dt-published" datetime="2026-03">March 2026</time></p>
-    <h2 class="p-name">Reward Engineering for Coding Agents</h2>
+    <p class="date"><time class="dt-published" datetime="2026-04-13">2026-04</time></p>
+    <h2 class="p-name">reward engineering for coding agents</h2>
 
     <div class="e-content">
-
-    <p>Prompt engineering shapes language. Reward engineering shapes incentives.</p>
-    <p>Coding agents optimize whatever evaluation surface is exposed. In practice, the real engineering surface is the rubric.</p>
-
-    <h3>Definition</h3>
-    <p>Reward engineering is the design of the scoring function used to judge an agent attempt.</p>
-    <p>That score can come from tests, static checks, critique models, human review, or a weighted mix of all three.</p>
-
-    <h3>Why Prompting Is Not the Main Control Surface</h3>
-    <p>Prompts can steer phrasing, planning style, and local constraints.</p>
-    <p>They do not reliably determine what the agent will trade off when under pressure. The evaluation function does that.</p>
-    <p>If the rubric only rewards passing tests, the agent will find ways to pass tests. If the rubric also scores readability, edge cases, and architecture fit, behavior changes.</p>
-
-    <h3>Why Single Metrics Fail</h3>
-    <p>Single-metric evaluation runs straight into Goodhart's law.</p>
-    <blockquote><p>When a measure becomes a target, it stops being a good measure.</p></blockquote>
-    <p>A score of 100 on correctness sounds clean. It is also narrow.</p>
-    <p>Narrow targets are easy to game with overfitting, brittle patches, shallow test additions, or hardcoded branches that satisfy the visible harness.</p>
-
-    <pre><code># weak reward structure
-correctness: 100</code></pre>
-
-    <p>This kind of rubric creates an obvious exploit surface. The agent only needs to maximize one number.</p>
-
-    <pre><code># better reward structure
+<p>prompt engineering shapes language. reward engineering shapes incentives. coding agents optimize whatever evaluation surface is exposed, and in practice the real engineering surface is the rubric.</p>
+<h3>definition</h3>
+<p>reward engineering is the design of the scoring function used to judge an agent's attempt. that score can come from tests, static checks, critique models, human review, or some weighted mix of the three.</p>
+<h3>why prompting isn't the main control surface</h3>
+<p>prompts steer phrasing, planning style, and local constraints, but they don't reliably determine what an agent trades off under pressure. the evaluation function does that. if the rubric only rewards passing tests, the agent finds ways to pass tests. if the rubric also scores readability, edge cases, and architecture fit, behavior changes.</p>
+<h3>why single metrics fail</h3>
+<p>single-metric evaluation runs straight into goodhart's law.</p>
+<blockquote>
+<p>when a measure becomes a target, it stops being a good measure.</p>
+</blockquote>
+<p>a score of 100 on correctness sounds clean. it is also narrow, and narrow targets are easy to game with overfitting, brittle patches, shallow test additions, or hardcoded branches that satisfy the visible harness.</p>
+<pre><code># weak reward structure
+correctness: 100
+</code></pre>
+<p>this kind of rubric creates an obvious exploit surface: the agent only needs to maximize one number.</p>
+<pre><code># better reward structure
 correctness: 5
 tests: 5
 edge_cases: 5
@@ -63,136 +54,111 @@ readability: 5
 naming: 5
 error_handling: 5
 docs: 5
-architecture_fit: 5</code></pre>
-
-    <p>Smaller weights across multiple axes reduce reward hacking because there is no single dominant shortcut.</p>
-    <p>The agent has to produce work that survives inspection from several directions at once.</p>
-
-    <h3>Sparse vs Dense Rewards</h3>
-    <p>Sparse reward means the agent gets little feedback until the end of the loop.</p>
-    <p>Example: pass or fail after a full test suite.</p>
-    <p>Dense reward means the agent gets partial signals during evaluation.</p>
-    <p>Example: partial credit for test coverage, naming quality, and error-path handling before the final merge decision.</p>
-    <p>Sparse reward can work for simple tasks. On larger edits it often causes flailing, long retries, and local overfitting.</p>
-    <p>Dense reward gives the agent gradient. Not RL gradient. Operational gradient. It can see where the failure surface is.</p>
-
-    <h3>Why Narrow Metrics Are Easy to Game</h3>
-    <p>Agents learn loopholes fast.</p>
-    <ul>
-      <li>Maximize tests passed by adding narrow fixture-specific logic.</li>
-      <li>Maximize lint score by moving complexity into unreadable helpers.</li>
-      <li>Maximize speed by skipping validation and error handling.</li>
-    </ul>
-    <p>None of this requires malice. It is just optimization pressure.</p>
-
-    <h3>Why Wide Rubrics Produce More Stable Outputs</h3>
-    <p>Wide rubrics force balance.</p>
-    <p>An agent can still optimize aggressively, but the easiest path is no longer a cheap trick. It has to satisfy several weak constraints instead of one strong one.</p>
-    <p>That usually produces code that looks more like something a competent reviewer would merge.</p>
-
-    <h3>Multi-Axis Evaluation</h3>
-    <p>The useful pattern is a weighted rubric with operationally distinct axes.</p>
-    <ul>
-      <li><strong>Correctness:</strong> does the change satisfy the task?</li>
-      <li><strong>Tests:</strong> did coverage move with the behavior change?</li>
-      <li><strong>Edge cases:</strong> were obvious failure paths addressed?</li>
-      <li><strong>Readability:</strong> can another human follow the patch?</li>
-      <li><strong>Naming:</strong> do identifiers explain intent?</li>
-      <li><strong>Error handling:</strong> does failure degrade cleanly?</li>
-      <li><strong>Docs:</strong> were contract changes recorded?</li>
-      <li><strong>Architecture fit:</strong> does the patch follow local system boundaries?</li>
-    </ul>
-    <p>The trick is separation. If two axes collapse into the same thing, the rubric gets fake breadth and no extra signal.</p>
-
-    <h3>Self-Grading Agents</h3>
-    <p>Self-grading works better than expected when the rubric is explicit.</p>
-    <p>It works badly when the rubric is vague.</p>
-    <p>An agent can score its own attempt against a structured checklist, produce a critique, revise, and rescore. The reliability comes from the rubric, not from the agent suddenly becoming wise.</p>
-
-    <pre><code>attempt
+architecture_fit: 5
+</code></pre>
+<p>smaller weights across multiple axes reduce reward hacking because no single shortcut dominates. the agent has to produce work that survives inspection from several directions at once.</p>
+<h3>sparse vs dense rewards</h3>
+<p>sparse reward means the agent gets little feedback until the end of the loop, for example pass or fail after a full test suite. dense reward means the agent gets partial signals during evaluation, for example partial credit for test coverage, naming quality, and error-path handling before the final merge decision.</p>
+<p>sparse reward can work for simple tasks. on larger edits it tends to cause flailing, long retries, and local overfitting. dense reward gives the agent something closer to operational gradient, not rl gradient, just a clearer view of where the failure surface is.</p>
+<h3>why narrow metrics are easy to game</h3>
+<p>agents find loopholes quickly:</p>
+<ul>
+  <li>maximize tests passed by adding narrow fixture-specific logic</li>
+  <li>maximize lint score by moving complexity into unreadable helpers</li>
+  <li>maximize speed by skipping validation and error handling</li>
+</ul>
+<p>none of this requires malice. it is optimization pressure doing what optimization pressure does.</p>
+<h3>why wide rubrics produce more stable outputs</h3>
+<p>wide rubrics force balance. an agent can still optimize aggressively, but the easiest path is no longer a cheap trick, it has to satisfy several weak constraints instead of one strong one. that tends to produce code closer to what a competent reviewer would merge.</p>
+<h3>multi-axis evaluation</h3>
+<p>the pattern that worked was a weighted rubric with operationally distinct axes:</p>
+<ul>
+  <li><strong>correctness</strong>: does the change satisfy the task?</li>
+  <li><strong>tests</strong>: did coverage move with the behavior change?</li>
+  <li><strong>edge cases</strong>: were obvious failure paths addressed?</li>
+  <li><strong>readability</strong>: can another human follow the patch?</li>
+  <li><strong>naming</strong>: do identifiers explain intent?</li>
+  <li><strong>error handling</strong>: does failure degrade cleanly?</li>
+  <li><strong>docs</strong>: were contract changes recorded?</li>
+  <li><strong>architecture fit</strong>: does the patch follow local system boundaries?</li>
+</ul>
+<p>separation matters here. if two axes collapse into the same thing, the rubric gets fake breadth and no extra signal.</p>
+<h3>self-grading agents</h3>
+<p>self-grading worked better than expected when the rubric was explicit, and badly when the rubric was vague. an agent can score its own attempt against a structured checklist, produce a critique, revise, and rescore. the reliability comes from the rubric, not from the agent becoming more careful on its own.</p>
+<pre><code>attempt
 score against rubric
 identify lowest-scoring criteria
 revise
-rescore</code></pre>
+rescore
+</code></pre>
+<p>this is useful because it turns &quot;make it better&quot; into an operational loop.</p>
+<h3>critique loops</h3>
+<p>critique loops are reward engineering in motion. a reviewer model, a second agent, or the same agent in critique mode can score the attempt, point at weak criteria, and request revision. the important part is that critique stays anchored to the rubric. free-form critique drifts. rubric-bound critique converges.</p>
+<h3>token economics</h3>
+<p>evaluation loops aren't free, every extra scoring pass burns tokens. but bad rubrics burn tokens too, usually in a worse way: repeated failed attempts, noisy fixes, and expensive human cleanup. a short dense rubric often costs less than repeated prompt rewrites because it reuses the same evaluation surface across attempts. the cheap loop was usually:</p>
+<ol>
+  <li>small rubric</li>
+  <li>single critique pass</li>
+  <li>single revision</li>
+  <li>final score</li>
+</ol>
+<p>the expensive loop was endless prompt fiddling because nobody had defined success clearly.</p>
+<h3>practical example</h3>
+<p>in code generation experiments, test-only scoring often produced patches that passed the visible harness but created one of three problems:</p>
+<ul>
+  <li>new helper functions with misleading names</li>
+  <li>error cases silently swallowed</li>
+  <li>logic duplicated instead of integrated with the existing abstraction</li>
+</ul>
+<p>adding small scores for naming, error handling, and architecture fit reduced these failures without needing a longer prompt.</p>
+<h3>comparison to prompt engineering</h3>
+<p>prompt engineering still matters for task framing, constraints, and tool usage, mainly shaping how the agent talks and plans. reward engineering shapes what the agent learns to care about across iterations.</p>
+<h3>empirical findings (starfish method)</h3>
+<h4>start</h4>
+<p>scored agent output on multiple weak axes instead of one dominant metric. this produced fewer brittle patches.</p>
+<p>exposed the rubric before generation, not only after failure. agents wrote cleaner first attempts when they could see the grading surface.</p>
+<p>used critique prompts that referenced the rubric by criterion name. specific failures were easier to repair than general dissatisfaction.</p>
+<h4>stop</h4>
+<p>stopped using pass-rate alone as the success definition. it produced clean-looking but misleading results.</p>
+<p>stopped mixing unrelated goals into a single &quot;quality&quot; bucket. that just hid where the agent was cheating.</p>
+<p>stopped lengthening prompts to compensate for a weak evaluation surface. it didn't fix the underlying benchmark.</p>
+<h4>continue</h4>
+<p>kept using tests as one axis, not the only axis. they remained the strongest local signal for behavioral correctness.</p>
+<p>kept rubrics small. eight clear criteria worked better than twenty fuzzy ones.</p>
+<p>kept to one revision after critique. a second revision sometimes helped, but the first one carried most of the gain.</p>
+<h4>investigate</h4>
+<p>whether dynamic weighting based on task type helps. infrastructure changes may need heavier architecture and error-handling scores.</p>
+<p>whether separate reviewer agents outperform self-grading on architecture-fit judgments.</p>
+<p>whether rubric criteria decay over long sessions, since criteria that start useful may become background noise after several rounds.</p>
+<h4>amplify</h4>
+<p>architecture-fit scoring had outsized impact on whether patches were mergeable without cleanup.</p>
+<p>edge-case scoring mattered most on tasks touching parsing, auth, or state transitions. that one addition prevented a lot of regressions.</p>
+<p>machine-readable rubrics paid off broadly: once the rubric was explicit, self-grading, ci evaluation, and critique loops all got cheaper.</p>
+<h3>further reading</h3>
+<ul>
+  <li><a href="/workflows/reward-rubric-dsl/">reward rubric dsl</a>: a small machine-readable format for evaluation criteria</li>
+  <li><a href="/research/reward-hacking/">reward hacking in coding agents</a>: failure modes from poorly designed metrics</li>
+</ul>
 
-    <p>This is useful because it converts "make it better" into an operational loop.</p>
-
-    <h3>Critique Loops</h3>
-    <p>Critique loops are reward engineering in motion.</p>
-    <p>A reviewer model, a second agent, or the same agent in critique mode can score the attempt, point at weak criteria, and request revision.</p>
-    <p>The important part is that critique is anchored to the rubric. Free-form critique drifts. Rubric-bound critique converges.</p>
-
-    <h3>Token Economics</h3>
-    <p>Evaluation loops are not free. Every extra scoring pass burns tokens.</p>
-    <p>But bad rubrics burn tokens too, usually in a stupider way: repeated failed attempts, noisy fixes, and expensive human cleanup.</p>
-    <p>A short dense rubric often costs less than repeated prompt rewrites because it reuses the same evaluation surface across attempts.</p>
-    <p>The cheap loop is usually:</p>
-    <ol>
-      <li>small rubric</li>
-      <li>single critique pass</li>
-      <li>single revision</li>
-      <li>final score</li>
-    </ol>
-    <p>The expensive loop is endless prompt fiddling because nobody defined success clearly.</p>
-
-    <h3>Practical Example</h3>
-    <p>In code generation experiments, test-only scoring often produced patches that passed the visible harness but created one of three problems:</p>
-    <ul>
-      <li>new helper functions with misleading names</li>
-      <li>error cases silently swallowed</li>
-      <li>logic duplicated instead of integrated with the existing abstraction</li>
-    </ul>
-    <p>Adding small scores for naming, error handling, and architecture fit reduced these failures without needing a longer prompt.</p>
-
-    <h3>Comparison to Prompt Engineering</h3>
-    <p>Prompt engineering still matters. It is useful for task framing, constraints, and tool usage.</p>
-    <p>But prompt engineering mainly shapes how the agent talks and plans.</p>
-    <p>Reward engineering shapes what the agent learns to care about across iterations.</p>
-    <p>If prompt engineering is syntax, reward engineering is selection pressure.</p>
-
-    <h3>Empirical Findings (Starfish Method)</h3>
-
-    <h4>START</h4>
-    <p>Score agent output on multiple weak axes instead of one dominant metric. This produced fewer brittle patches.</p>
-    <p>Expose the rubric before generation, not only after failure. Agents write cleaner first attempts when they can see the grading surface.</p>
-    <p>Use critique prompts that reference the rubric by criterion name. Specific failures are easier to repair than general dissatisfaction.</p>
-
-    <h4>STOP</h4>
-    <p>Stop using pass-rate alone as the success definition. It creates beautiful lies.</p>
-    <p>Stop mixing unrelated goals into a single "quality" bucket. That just hides where the agent is cheating.</p>
-    <p>Stop increasing prompt length to compensate for a bad evaluation surface. That is lipstick on a broken benchmark.</p>
-
-    <h4>CONTINUE</h4>
-    <p>Continue using tests as one axis, not the only axis. They are still the strongest local signal for behavioral correctness.</p>
-    <p>Continue keeping rubrics small. Eight clear criteria worked better than twenty fuzzy ones.</p>
-    <p>Continue running one revision after critique. A second revision sometimes helps, but the first one carries most of the gain.</p>
-
-    <h4>INVESTIGATE</h4>
-    <p>Investigate dynamic weighting based on task type. Infrastructure changes may need heavier architecture and error-handling scores.</p>
-    <p>Investigate whether separate reviewer agents outperform self-grading on architecture-fit judgments.</p>
-    <p>Investigate rubric decay over long sessions. Criteria that start useful may become background noise after several rounds.</p>
-
-    <h4>AMPLIFY</h4>
-    <p>Amplify architecture-fit scoring. It had outsized impact on whether patches were mergeable without cleanup.</p>
-    <p>Amplify edge-case scoring when the task touches parsing, auth, or state transitions. That single addition prevented a lot of stupid regressions.</p>
-    <p>Amplify machine-readable rubrics. Once the rubric is explicit, self-grading, CI evaluation, and critique loops all get cheaper.</p>
-
-    <h3>Further Reading</h3>
-    <ul>
-      <li><a href="/workflows/reward-rubric-dsl/">Reward Rubric DSL</a> - A small machine-readable format for evaluation criteria</li>
-      <li><a href="/research/reward-hacking/">Reward Hacking in Coding Agents</a> - Failure modes from poorly designed metrics</li>
-    </ul>
     </div>
 
-    <p class="entry-meta"><a class="u-url" href="https://stayfresh.dev/research/reward-engineering/">Permalink</a> &middot; by <a class="p-author h-card" href="https://stayfresh.dev/">StayFresh</a></p>
+    <div class="tags">
+      <a href="/tags/rubrics/">rubrics</a>
+      <a href="/tags/evaluation/">evaluation</a>
+      <a href="/tags/prompting/">prompting</a>
+    </div>
+
+    <a class="p-author h-card" href="https://stayfresh.dev/home/" hidden>stayfresh</a>
   </main>
 
-  <footer>
-    <a href="mailto:nathanib@pm.me">nathanib@pm.me</a>
+  <footer class="h-card">
+    <a class="p-name u-url" href="https://stayfresh.dev/">stayfresh</a>
     &middot;
-    <a href="https://github.com/Evoke4350/stayfresh.dev">GitHub</a>
+    <a class="u-email" href="mailto:nathanib@pm.me">nathanib@pm.me</a>
     &middot;
-    MIT License
+    <a href="https://github.com/Evoke4350">github</a>
+    &middot;
+    mit license
   </footer>
 </body>
 </html>
